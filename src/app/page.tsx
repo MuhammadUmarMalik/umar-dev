@@ -4,6 +4,8 @@ import { HeroSection } from "@/components/ui/hero-section";
 import { AboutSection } from "@/components/ui/about-section";
 import { ServicesSection } from "@/components/ui/services-section";
 import { ProjectsSection } from "@/components/ui/projects-section";
+import { TestimonialsSection } from "@/components/ui/testimonials-section";
+import { WorkProcessSection } from "@/components/ui/work-process-section";
 import { ContactSection } from "@/components/ui/contact-section";
 import { Home as HomeIcon, User, Briefcase, Mail } from "lucide-react";
 
@@ -33,8 +35,6 @@ const navItems = [
 export default function Home() {
   return (
     <main className="relative">
-      <FloatingNavbar />
-      
       <section id="hero">
         <HeroSection />
       </section>
@@ -49,6 +49,14 @@ export default function Home() {
       
       <section id="projects">
         <ProjectsSection />
+      </section>
+
+      <section id="testimonials">
+        <TestimonialsSection />
+      </section>
+
+      <section id="process">
+        <WorkProcessSection />
       </section>
       
       <section id="contact">
