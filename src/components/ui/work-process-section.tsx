@@ -144,7 +144,7 @@ export const WorkProcessSection = () => {
             Ready to Get Started?
           </h3>
           <p className="text-gray-300 text-lg mb-6 max-w-2xl mx-auto">
-            Let's discuss your project and kick off this proven process that has delivered success for countless clients.
+                            Let&apos;s discuss your project and kick off this proven process that has delivered success for countless clients.
           </p>
           
           <button

@@ -141,7 +141,7 @@ export const responsiveLayout = {
 
 // Helper function to get responsive classes
 export const getResponsiveClasses = (category: keyof typeof responsiveSpacing, type: string) => {
-  const categoryObj = responsiveSpacing[category] as any;
+  const categoryObj = responsiveSpacing[category] as Record<string, string>;
   return categoryObj[type] || '';
 };
 
@@ -163,7 +163,7 @@ export const responsiveAnimations = {
   }
 } as const;
 
-export default {
+const responsiveUtils = {
   breakpoints,
   responsiveSpacing,
   responsiveTypography,
@@ -177,4 +177,6 @@ export default {
   responsiveAnimations,
   getResponsiveClasses,
   getResponsiveContent
-}; 
+};
+
+export default responsiveUtils; 
