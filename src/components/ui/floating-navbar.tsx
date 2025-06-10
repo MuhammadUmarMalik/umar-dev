@@ -55,17 +55,22 @@ export const FloatingNavbar = () => {
   const scrollToSection = (href: string) => {
     const targetId = href.replace('#', '');
     const element = document.getElementById(targetId);
+    
     if (element) {
-      const offset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      // Close mobile menu immediately
+      setMobileMenuOpen(false);
       
+      // Calculate position with header offset
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      
+      // Smooth scroll to section
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth'
       });
     }
-    setMobileMenuOpen(false);
   };
 
   return (
@@ -128,7 +133,10 @@ export const FloatingNavbar = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 sm:hidden"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={(e) => {
+                e.preventDefault();
+                setMobileMenuOpen(false);
+              }}
             />
             
             <motion.div
@@ -147,7 +155,11 @@ export const FloatingNavbar = () => {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.1 }}
-                      onClick={() => scrollToSection(item.href)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        scrollToSection(item.href);
+                      }}
                       className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all duration-300 ${
                         isActive
                           ? "text-white bg-blue-500/20 border border-blue-500/30"
@@ -170,7 +182,11 @@ export const FloatingNavbar = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.4 }}
-                  onClick={() => scrollToSection('#contact')}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    scrollToSection('#contact');
+                  }}
                   className="w-full mt-4 px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300"
                 >
                   Let&apos;s Work Together
