@@ -29,7 +29,7 @@ interface NavItemsProps {
     link: string;
   }[];
   className?: string;
-  onItemClick?: () => void;
+  onItemClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
 interface MobileNavProps {
@@ -124,7 +124,12 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
       {items.map((item, idx) => (
         <a
           onMouseEnter={() => setHovered(idx)}
-          onClick={onItemClick}
+          onClick={(e) => {
+            e.preventDefault();
+            if (onItemClick) {
+              onItemClick(e);
+            }
+          }}
           className="relative px-3 xl:px-4 py-2 text-slate-300 hover:text-white transition-colors duration-200 text-sm xl:text-base"
           key={`link-${idx}`}
           href={item.link}
@@ -204,7 +209,7 @@ export const MobileNavMenu = ({
             className,
           )}
         >
-          <div className="flex w-full flex-col items-start justify-start gap-2 px-4 py-6">
+          <div className="flex w-full flex-col items-start justify-start gap-2 px-4 py-6" onClick={(e) => e.stopPropagation()}>
             {children}
           </div>
         </motion.div>
