@@ -5,16 +5,40 @@ import { Quote, Star } from "lucide-react";
 
 const testimonials = [
   {
-    quote: "Muhammad was a one-man army. He developed our app, designed the UI, and delivered everything before deadline. We couldn't be happier.",
-    author: "Tech Startup Founder",
+    quote: "We needed a backend that could handle traffic and process payments securely. Muhammad built ADHURI CART with Adonis.js and JWT, and it's been running flawlessly. His ability to combine performance with security is top-tier.",
+    author: "E-commerce Startup Founder",
     rating: 5,
-    project: "Mobile App Development"
+    project: "ADHURI CART"
   },
   {
-    quote: "He translated my rough idea into a polished product. Highly recommended for both development and design.",
-    author: "Freelance Client",
+    quote: "Muhammad turned our concept into a real academic exchange platform. He not only built the API but advised us on data structure, permissions, and user flows. His insight made a huge difference in user adoption.",
+    author: "EdTech Co-Founder", 
     rating: 5,
-    project: "Web Application"
+    project: "Knowledge Exchange API"
+  },
+  {
+    quote: "We had a vision to connect blood donors in emergencies—and Muhammad brought it to life. The integration of Google Maps, real-time chat, and seamless UX was exactly what we needed. He's a true full-stack problem solver.",
+    author: "NGO Project Coordinator",
+    rating: 5,
+    project: "Blood Stream App"
+  },
+  {
+    quote: "Muhammad built us a dynamic admin panel with user management, analytics, and secure login. What impressed me most was his attention to both backend efficiency and frontend usability. It's rare to find someone who codes and designs this well.",
+    author: "SaaS Product Manager",
+    rating: 5,
+    project: "Custom Dashboard & Admin Panel"
+  },
+  {
+    quote: "We needed a branded, simple, and accurate loan calculator for our website. Muhammad built a clean, responsive tool that helped us boost engagement and reduce support queries. Highly recommended!",
+    author: "Financial Consultant",
+    rating: 5,
+    project: "Loan Calculator Web App"
+  },
+  {
+    quote: "Muhammad delivered a functional, fast job scraper with filter, export, and real-time listing features. He even added resume optimization to our roadmap. His proactive approach sets him apart.",
+    author: "Tech Recruiter",
+    rating: 5,
+    project: "LinkedIn Job Scraper"
   }
 ];
 

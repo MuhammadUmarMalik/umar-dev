@@ -34,6 +34,13 @@ const skills = [
   { name: "React Native", level: 82 },
 ];
 
+const stats = [
+  { number: "1", label: "Year Experience", icon: "🚀" },
+  { number: "20+", label: "Projects Done", icon: "⚡" },
+  { number: "10+", label: "Technologies", icon: "🛠️" },
+  { number: "100%", label: "Client Satisfaction", icon: "❤️" },
+];
+
 export const AboutSection = () => {
   return (
     <section id="about" className="py-12 sm:py-16 md:py-20 px-3 sm:px-4 md:px-6 lg:px-8 relative bg-gradient-to-b from-slate-950/50 to-slate-900/30">
@@ -173,12 +180,7 @@ export const AboutSection = () => {
 
             {/* Stats */}
             <div className="grid grid-cols-2 gap-4">
-              {[
-                { number: "3+", label: "Years Experience", icon: "🚀" },
-                { number: "50+", label: "Projects Completed", icon: "⚡" },
-                { number: "15+", label: "Technologies", icon: "🛠️" },
-                { number: "100%", label: "Client Satisfaction", icon: "❤️" },
-              ].map((stat, index) => (
+              {stats.map((stat, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}

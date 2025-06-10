@@ -1,5 +1,4 @@
 "use client";
-import { FloatingNavbar } from "@/components/ui/floating-navbar";
 import { HeroSection } from "@/components/ui/hero-section";
 import { AboutSection } from "@/components/ui/about-section";
 import { ServicesSection } from "@/components/ui/services-section";

@@ -216,10 +216,10 @@ export const ContactSection = () => {
             {/* Quick Stats */}
             <div className="grid grid-cols-2 gap-3 sm:gap-4">
               {[
-                { number: "24h", label: "Response Time", icon: "⚡" },
-                { number: "100%", label: "Project Success", icon: "🎯" },
-                { number: "3+", label: "Years Experience", icon: "🚀" },
-                { number: "50+", label: "Happy Clients", icon: "❤️" },
+               { number: "1", label: "Year Experience", icon: "🚀" },
+               { number: "20+", label: "Projects Done", icon: "⚡" },
+               { number: "10+", label: "Technologies", icon: "🛠️" },
+               { number: "100%", label: "Client Satisfaction", icon: "❤️" },
               ].map((stat, index) => (
                 <motion.div
                   key={index}
