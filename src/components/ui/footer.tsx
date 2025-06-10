@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { FiMail, FiPhone, FiHeart } from "react-icons/fi";
+import { FiMail, FiPhone } from "react-icons/fi";
 import Image from "next/image";
 
 export const Footer = () => {

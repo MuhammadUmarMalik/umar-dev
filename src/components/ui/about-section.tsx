@@ -127,7 +127,7 @@ export const AboutSection = () => {
                 className="mt-8 p-6 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-xl border border-blue-500/20 text-center"
               >
                 <p className="text-lg font-semibold text-white">
-                  Let's create something your users will love.
+                  Let&apos;s create something your users will love.
                 </p>
               </motion.div>
             </div>

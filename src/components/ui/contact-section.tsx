@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Linkedin, Github, ExternalLink } from "lucide-react";
+import { Mail, Phone, Linkedin, Github, ExternalLink } from "lucide-react";
 
 export const ContactSection = () => {
   const contactInfo = [
@@ -48,12 +48,12 @@ export const ContactSection = () => {
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/20 rounded-full text-green-400 text-sm font-medium mb-6">
             <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-            Let's Connect
+            Let&apos;s Connect
           </div>
           
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
             <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-              Let's Work
+              Let&apos;s Work
             </span>
             <br />
             <span className="bg-gradient-to-r from-green-400 via-blue-400 to-green-400 bg-clip-text text-transparent">
@@ -63,11 +63,11 @@ export const ContactSection = () => {
           
           <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-6 sm:mb-8">
             I help startups, agencies, and entrepreneurs launch faster, scale smarter, and design better. 
-            Whether it's a brand new idea or an existing project that needs an upgrade, I'm here to help you win.
+            Whether it&apos;s a brand new idea or an existing project that needs an upgrade, I&apos;m here to help you win.
           </p>
 
           <p className="text-base sm:text-lg font-semibold text-white">
-            Let's bring your vision to life.
+            Let&apos;s bring your vision to life.
           </p>
         </motion.div>
 
@@ -159,7 +159,7 @@ export const ContactSection = () => {
               
               <p className="text-gray-300 leading-relaxed mb-6 sm:mb-8 text-center lg:text-left">
                 Ready to transform your ideas into reality? Whether you need a complete web application, 
-                mobile app, or stunning design work, I'm here to deliver exceptional results that exceed your expectations.
+                mobile app, or stunning design work, I&apos;m here to deliver exceptional results that exceed your expectations.
               </p>
 
               {/* CTA Buttons */}
@@ -171,7 +171,7 @@ export const ContactSection = () => {
                   className="w-full px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-green-600 to-blue-600 text-white font-semibold rounded-xl hover:from-green-700 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-3 text-sm sm:text-base"
                 >
                   <Mail className="w-5 h-5" />
-                  Let's Build Your Project
+                  Let&apos;s Build Your Project
                 </motion.button>
 
                 <motion.button

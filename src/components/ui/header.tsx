@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Home as HomeIcon, User, Briefcase, Mail, Palette, Wrench } from "lucide-react";
+
 import {
   Navbar,
   NavBody,

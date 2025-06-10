@@ -63,9 +63,9 @@ export const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 mb-6 sm:mb-8 leading-relaxed max-w-4xl mx-auto px-2"
           >
-            Need a web app that performs flawlessly or visuals that tell your brand's story? 
-            I'm <span className="text-blue-400 font-semibold">Muhammad Umar Malik</span>, a results-driven developer and designer 
-            who transforms ideas into seamless digital products. Let's turn your project into a reality—faster, better, smarter.
+                            Need a web app that performs flawlessly or visuals that tell your brand&apos;s story? 
+                          I&apos;m <span className="text-blue-400 font-semibold">Muhammad Umar Malik</span>, a results-driven developer and designer 
+              who transforms ideas into seamless digital products. Let&apos;s turn your project into a reality—faster, better, smarter.
           </motion.p>
 
           {/* Skills List */}
@@ -104,7 +104,7 @@ export const HeroSection = () => {
             className="mb-8 sm:mb-12"
           >
             <p className="text-sm sm:text-base md:text-lg font-semibold text-white mb-3 sm:mb-4 px-2">
-              <span className="hidden sm:inline">Let's Build Your Project Today</span>
+                              <span className="hidden sm:inline">Let&apos;s Build Your Project Today</span>
               <span className="sm:hidden">Ready to Start?</span>
             </p>
             

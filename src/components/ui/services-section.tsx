@@ -35,7 +35,7 @@ const services = [
   {
     icon: <Monitor className="w-6 h-6" />,
     title: "Frontend Development",
-    description: "Interactive and responsive user interfaces using React.js, HTML, CSS, and JavaScript. I create UI that's intuitive, clean, and conversion-optimized.",
+            description: "Interactive and responsive user interfaces using React.js, HTML, CSS, and JavaScript. I create UI that&apos;s intuitive, clean, and conversion-optimized.",
     technologies: ["React.js", "HTML", "CSS", "JavaScript", "Responsive Design"],
     color: "from-blue-500 to-blue-600"
   },
@@ -157,7 +157,7 @@ export const ServicesSection = () => {
             Ready to Transform Your Business?
           </h3>
           <p className="text-gray-300 text-lg mb-6 max-w-2xl mx-auto">
-            Let's discuss your project and create a custom solution that drives real results for your business.
+                            Let&apos;s discuss your project and create a custom solution that drives real results for your business.
           </p>
           
           <button

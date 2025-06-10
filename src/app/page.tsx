@@ -6,30 +6,7 @@ import { ProjectsSection } from "@/components/ui/projects-section";
 import { TestimonialsSection } from "@/components/ui/testimonials-section";
 import { WorkProcessSection } from "@/components/ui/work-process-section";
 import { ContactSection } from "@/components/ui/contact-section";
-import { Home as HomeIcon, User, Briefcase, Mail } from "lucide-react";
 
-const navItems = [
-  {
-    name: "Home",
-    link: "#home",
-    icon: <HomeIcon className="h-4 w-4" />,
-  },
-  {
-    name: "About",
-    link: "#about",
-    icon: <User className="h-4 w-4" />,
-  },
-  {
-    name: "Projects",
-    link: "#projects",
-    icon: <Briefcase className="h-4 w-4" />,
-  },
-  {
-    name: "Contact",
-    link: "#contact",
-    icon: <Mail className="h-4 w-4" />,
-  },
-];
 
 export default function Home() {
   return (
