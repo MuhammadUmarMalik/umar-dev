@@ -16,13 +16,65 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Umar - Full Stack Developer",
-  description: "Portfolio website of Umar - Full Stack Web Developer, Mobile App Developer, and Creative Designer building exceptional digital experiences",
+  title: {
+    default: "Muhammad Umar - Full Stack Developer & Designer",
+    template: "%s | Muhammad Umar"
+  },
+  description: "Professional Full Stack Developer & Creative Designer specializing in modern web applications, mobile development, and UI/UX design. Building exceptional digital experiences with React, Next.js, Node.js & more.",
+  keywords: [
+    "Full Stack Developer",
+    "Frontend Developer", 
+    "Backend Developer",
+    "React Developer",
+    "Next.js Developer",
+    "TypeScript Developer",
+    "UI/UX Designer",
+    "Web Developer",
+    "Muhammad Umar",
+    "Portfolio"
+  ],
+  authors: [{ name: "Muhammad Umar" }],
+  creator: "Muhammad Umar",
+  publisher: "Muhammad Umar",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: process.env.NEXT_PUBLIC_SITE_URL || "https://yourdomain.com",
+    title: "Muhammad Umar - Full Stack Developer & Designer",
+    description: "Professional Full Stack Developer & Creative Designer building exceptional digital experiences",
+    siteName: "Muhammad Umar Portfolio",
+    images: [
+      {
+        url: "/favicon.png",
+        width: 1200,
+        height: 630,
+        alt: "Muhammad Umar - Full Stack Developer"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Muhammad Umar - Full Stack Developer & Designer",
+    description: "Professional Full Stack Developer & Creative Designer building exceptional digital experiences",
+    images: ["/favicon.png"]
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   icons: {
     icon: '/favicon.png',
     shortcut: '/favicon.png',
     apple: '/favicon.png',
   },
+  manifest: '/manifest.json',
 };
 
 export default function RootLayout({

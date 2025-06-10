@@ -1,37 +1,101 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Move turbo config out of experimental since it's now stable
+  // Production optimization settings
+  output: 'standalone',
+  trailingSlash: false,
+  poweredByHeader: false,
+  
+  // Performance optimizations
+  experimental: {
+    optimizeCss: true,
+    optimizePackageImports: ['framer-motion', 'lucide-react', 'react-icons'],
+  },
+
+  // Image optimization
+  images: {
+    formats: ['image/webp', 'image/avif'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+  },
+
+  // Compression and caching
+  compress: true,
+  
+  // Move turbo config for development
   turbopack: {
     resolveExtensions: ['.tsx', '.ts', '.jsx', '.js', '.mjs', '.json'],
     resolveAlias: {
       // Configure any necessary aliases
     },
-    rules: {
-      '*.svg': {
-        loaders: ['@svgr/webpack'],
-        as: '*.js',
-      },
-    },
   },
-  experimental: {
-    // Enable CSS optimization for Tailwind CSS v4
-    optimizeCss: true,
-  },
-  // Webpack configuration for production builds only
-  webpack: (config, { dev }) => {
-    // Skip webpack config in development when using Turbopack
-    if (dev) {
-      return config;
+
+  // Webpack configuration for production builds
+  webpack: (config, { dev, isServer }) => {
+    // Production optimizations
+    if (!dev) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        net: false,
+        tls: false,
+      };
+
+      // Optimize bundle size
+      config.optimization = {
+        ...config.optimization,
+        splitChunks: {
+          chunks: 'all',
+          cacheGroups: {
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name: 'vendors',
+              chunks: 'all',
+            },
+            common: {
+              name: 'common',
+              minChunks: 2,
+              chunks: 'all',
+              enforce: true,
+            },
+          },
+        },
+      };
     }
 
-    // Apply webpack config only for production builds
-    config.resolve.fallback = {
-      ...config.resolve.fallback,
-      fs: false,
-    };
-
     return config;
+  },
+
+  // Headers for security and performance
+  headers: async () => {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin',
+          },
+        ],
+      },
+      {
+        source: '/favicon.ico',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+    ];
   },
 };
 
