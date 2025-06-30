@@ -32,6 +32,10 @@ export const Header = () => {
       link: "#projects",
     },
     {
+      name: "Blog",
+      link: "/blog",
+    },
+    {
       name: "Contact",
       link: "#contact",
     },
@@ -41,6 +45,14 @@ export const Header = () => {
 
   const scrollToSection = (href: string) => {
     console.log('🔍 Scrolling to:', href);
+    
+    // Check if it's an external link (starts with '/')
+    if (href.startsWith('/')) {
+      console.log('🌐 External link detected:', href);
+      window.location.href = href;
+      return;
+    }
+    
     const targetId = href.replace('#', '');
     const element = document.getElementById(targetId);
     
