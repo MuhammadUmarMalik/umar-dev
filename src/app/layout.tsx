@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Header } from "@/components/ui/header";
 import { Footer } from "@/components/ui/footer";
 import { ScrollToTop } from "@/components/ui/scroll-to-top";
@@ -111,6 +113,8 @@ export default function RootLayout({
           </main>
           <Footer />
           <ScrollToTop />
+          <Analytics />
+          <SpeedInsights />
         </div>
       </body>
     </html>
