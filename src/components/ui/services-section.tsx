@@ -102,7 +102,7 @@ export const ServicesSection = () => {
                 delay: index * 0.1,
               }}
               viewport={{ once: true }}
-              className="group bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 hover:border-blue-500/30 transition-all duration-300 hover:transform hover:-translate-y-2"
+              className="group bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 hover:border-blue-500/30 transition-all duration-300 hover:transform hover:-translate-y-2 flex flex-col h-full"
             >
               {/* Service Icon & Title */}
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
@@ -115,7 +115,7 @@ export const ServicesSection = () => {
               </div>
 
               {/* Service Description */}
-              <p className="text-gray-300 leading-relaxed mb-4 sm:mb-6 text-sm sm:text-base">
+              <p className="text-gray-300 leading-relaxed mb-4 sm:mb-6 text-sm sm:text-base flex-grow">
                 {service.description}
               </p>
 
@@ -136,7 +136,7 @@ export const ServicesSection = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className={`w-full px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r ${service.color} text-white font-semibold rounded-lg sm:rounded-xl hover:shadow-lg transition-all duration-300 text-sm sm:text-base`}
+                className={`w-full px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r ${service.color} text-white font-semibold rounded-lg sm:rounded-xl hover:shadow-lg transition-all duration-300 text-sm sm:text-base mt-auto`}
               >
                 <span className="hidden sm:inline">Get Started →</span>
                 <span className="sm:hidden">Start →</span>

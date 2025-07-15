@@ -1,13 +1,14 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Home, User, Briefcase, Mail, Menu, X } from "lucide-react";
+import { Home, User, Briefcase, Mail, Menu, X, Layers } from "lucide-react";
 
 const navItems = [
   { name: "Home", href: "#hero", icon: <Home className="w-4 h-4" /> },
   { name: "About", href: "#about", icon: <User className="w-4 h-4" /> },
   { name: "Services", href: "#services", icon: <span className="w-4 h-4 text-xs">🔧</span> },
   { name: "Projects", href: "#projects", icon: <Briefcase className="w-4 h-4" /> },
+  { name: "Portfolio", href: "#portfolio", icon: <Layers className="w-4 h-4" /> },
   { name: "Contact", href: "#contact", icon: <Mail className="w-4 h-4" /> },
 ];
 
@@ -33,7 +34,7 @@ export const FloatingNavbar = () => {
       setLastScrollY(currentScrollY);
 
       // Update active section
-      const sections = ['hero', 'about', 'services', 'projects', 'contact'];
+      const sections = ['hero', 'about', 'services', 'projects', 'portfolio', 'contact'];
       const sectionElements = sections.map(id => document.getElementById(id));
       
       for (let i = sections.length - 1; i >= 0; i--) {
