@@ -3,7 +3,6 @@ import { HeroSection } from "@/components/ui/hero-section";
 import { AboutSection } from "@/components/ui/about-section";
 import { ServicesSection } from "@/components/ui/services-section";
 import { ProjectsSection } from "@/components/ui/projects-section";
-import { PortfolioSection } from "@/components/ui/portfolio-section";
 import { TestimonialsSection } from "@/components/ui/testimonials-section";
 import { WorkProcessSection } from "@/components/ui/work-process-section";
 import { ContactSection } from "@/components/ui/contact-section";
@@ -26,10 +25,6 @@ export default function Home() {
       
       <section id="projects">
         <ProjectsSection />
-      </section>
-      
-      <section id="portfolio">
-        <PortfolioSection />
       </section>
 
       <section id="testimonials">

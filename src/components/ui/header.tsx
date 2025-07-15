@@ -32,10 +32,6 @@ export const Header = () => {
       link: "#projects",
     },
     {
-      name: "Portfolio",
-      link: "#portfolio",
-    },
-    {
       name: "Contact",
       link: "#contact",
     },
