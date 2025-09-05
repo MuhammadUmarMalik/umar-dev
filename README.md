@@ -141,7 +141,7 @@ This project is for personal use. Feel free to fork and customize for your own p
 - **Email**: umarmalik.cs711@gmail.com
 - **Phone**: +92 306 2617205
 - **GitHub**: [MuhammadUmarMalik](https://github.com/MuhammadUmarMalik)
-- **LinkedIn**: [muhammad-umar-malik786](https://linkedin.com/in/muhammad-umar-malik786)
+- **LinkedIn**: [umarmalik-dev](https://www.linkedin.com/in/umarmalik-dev/))
 
 ---
 
