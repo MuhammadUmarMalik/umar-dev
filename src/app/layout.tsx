@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Header } from "@/components/ui/header";
+import dynamic from "next/dynamic";
 import { Footer } from "@/components/ui/footer";
-import { ScrollToTop } from "@/components/ui/scroll-to-top";
+const Header = dynamic(() => import("@/components/ui/header").then(m => m.Header), { ssr: false });
+const ScrollToTop = dynamic(() => import("@/components/ui/scroll-to-top").then(m => m.ScrollToTop), { ssr: false });
+const Analytics = dynamic(() => import("@vercel/analytics/next").then(m => m.Analytics), { ssr: false });
+const SpeedInsights = dynamic(() => import("@vercel/speed-insights/next").then(m => m.SpeedInsights), { ssr: false });
 import "./globals.css";
 
 const geistSans = Geist({

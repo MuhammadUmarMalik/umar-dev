@@ -134,3 +134,9 @@ body {
   outline: 2px solid var(--color-accent-blue);
   outline-offset: 2px;
 }
+
+/* Performance: defer rendering work for offscreen content */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 800px;
+}
