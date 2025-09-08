@@ -23,6 +23,7 @@ export const metadata: Metadata = {
     template: "%s | Muhammad Umar"
   },
   description: "Professional Full Stack Developer & Creative Designer specializing in modern web applications, mobile development, and UI/UX design. Building exceptional digital experiences with React, Next.js, Node.js & more.",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://yourdomain.com"),
   keywords: [
     "Full Stack Developer",
     "Frontend Developer", 
