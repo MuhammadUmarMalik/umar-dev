@@ -2,6 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ExternalLink, Github, ShoppingCart, Users, Heart } from "lucide-react";
+import Image from "next/image";
 
 const featuredProjects = [
   {
@@ -11,7 +12,10 @@ const featuredProjects = [
     technologies: ["Adonis.js", "JWT", "PostgreSQL", "RESTful API", "E-commerce"],
     category: "Backend Development",
     color: "from-blue-500 to-blue-600",
-    featured: true
+    featured: true,
+    problem: "Legacy monolith causing slow checkouts and security issues.",
+    solution: "Modular Adonis.js API with JWT auth, caching and DB indexing.",
+    outcomes: ["-42% checkout time", "+99.9% uptime", "OWASP aligned"],
   },
   {
     title: "Knowledge Exchange API",
@@ -20,7 +24,10 @@ const featuredProjects = [
     technologies: ["Node.js", "Academic Platform", "Marketplace", "Student Collaboration", "API"],
     category: "Full Stack Development",
     color: "from-purple-500 to-purple-600",
-    featured: true
+    featured: true,
+    problem: "Fragmented student tools with poor discoverability.",
+    solution: "Search-first API with role-based access and rate limiting.",
+    outcomes: ["3x engagement", "+1.8k MAU", "p95 < 250ms"],
   },
   {
     title: "Blood Stream App",
@@ -29,7 +36,10 @@ const featuredProjects = [
     technologies: ["React Native", "Real-time Chat", "Location Mapping", "Mobile App", "Healthcare"],
     category: "Mobile Development",
     color: "from-red-500 to-red-600",
-    featured: true
+    featured: true,
+    problem: "Emergency donor-recipient matching took hours.",
+    solution: "Geolocation + realtime messaging with notifications.",
+    outcomes: ["<15m match time", "+24% donor signups"],
   }
 ];
 
@@ -59,7 +69,7 @@ const additionalProjects = [
 
 export const ProjectsSection = () => {
   return (
-    <section id="projects" className="py-12 sm:py-16 md:py-20 px-3 sm:px-4 md:px-6 lg:px-8 relative bg-gradient-to-b from-slate-900/30 via-slate-950/50 to-slate-900/30">
+    <section id="projects" className="scroll-mt-24 py-12 sm:py-16 md:py-20 px-3 sm:px-4 md:px-6 lg:px-8 relative bg-gradient-to-b from-slate-900/30 via-slate-950/50 to-slate-900/30">
       <div className="container mx-auto max-w-7xl">
         {/* Section Header */}
         <motion.div
@@ -104,7 +114,7 @@ export const ProjectsSection = () => {
                 delay: index * 0.1,
               }}
               viewport={{ once: true }}
-              className="group bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-8 hover:border-cyan-500/30 transition-all duration-300 hover:transform hover:-translate-y-2 flex flex-col h-full"
+              className="group bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-8 hover:border-[var(--color-accent-blue)]/30 transition-all duration-300 hover:transform hover:-translate-y-2 flex flex-col h-full"
             >
               {/* Featured Badge */}
               <div className="flex items-center justify-between mb-4">
@@ -126,9 +136,31 @@ export const ProjectsSection = () => {
                 {project.category}
               </p>
 
-              <p className="text-gray-300 leading-relaxed mb-6 flex-grow">
+              <p className="text-gray-300 leading-relaxed mb-6">
                 {project.description}
               </p>
+
+              {/* Problem → Solution → Outcome */}
+              <div className="mb-6 space-y-2 text-sm">
+                <div className="flex gap-2">
+                  <span className="text-gray-400 min-w-[72px]">Problem</span>
+                  <span className="text-gray-200">{project.problem}</span>
+                </div>
+                <div className="flex gap-2">
+                  <span className="text-gray-400 min-w-[72px]">Solution</span>
+                  <span className="text-gray-200">{project.solution}</span>
+                </div>
+                <div className="flex gap-2">
+                  <span className="text-gray-400 min-w-[72px]">Outcome</span>
+                  <div className="flex flex-wrap gap-2">
+                    {project.outcomes?.map((out, i) => (
+                      <span key={i} className="px-2 py-1 rounded-md bg-white/[0.04] text-slate-300 border border-white/[0.08]">
+                        {out}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
 
               {/* Technologies */}
               <div className="flex flex-wrap gap-2 mb-6">
@@ -144,9 +176,9 @@ export const ProjectsSection = () => {
 
               {/* Project Links */}
               <div className="flex gap-3 mt-auto">
-                <button className="flex-1 px-4 py-2 bg-slate-700/50 border border-slate-600/50 text-gray-300 rounded-lg hover:bg-slate-600/50 hover:border-slate-500/50 transition-all duration-300 flex items-center justify-center gap-2">
+                <button aria-label="View case study" className="flex-1 px-4 py-2 bg-slate-700/50 border border-slate-600/50 text-gray-300 rounded-lg hover:bg-slate-600/50 hover:border-slate-500/50 transition-all duration-300 flex items-center justify-center gap-2">
                   <ExternalLink className="w-4 h-4" />
-                  <span className="text-sm">View Details</span>
+                  <span className="text-sm">View Case Study</span>
                 </button>
               </div>
             </motion.div>
@@ -171,7 +203,7 @@ export const ProjectsSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1, duration: 0.6 }}
                 viewport={{ once: true }}
-                className="bg-slate-800/30 backdrop-blur-sm border border-slate-700/30 rounded-xl p-6 hover:border-cyan-500/20 transition-all duration-300 flex flex-col h-full"
+                className="bg-slate-800/30 backdrop-blur-sm border border-slate-700/30 rounded-xl p-6 hover:border-[var(--color-accent-blue)]/20 transition-all duration-300 flex flex-col h-full"
               >
                 <h4 className="text-lg font-semibold text-white mb-2">
                   {project.title}

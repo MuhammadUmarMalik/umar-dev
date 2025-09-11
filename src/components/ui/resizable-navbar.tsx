@@ -21,6 +21,10 @@ interface NavBodyProps {
   children: React.ReactNode;
   className?: string;
   visible?: boolean;
+  navPadding?: number;
+  onStartResize?: (clientY: number) => void;
+  navWidth?: number;
+  onStartResizeWidth?: (clientX: number) => void;
 }
 
 interface NavItemsProps {
@@ -30,12 +34,14 @@ interface NavItemsProps {
   }[];
   className?: string;
   onItemClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
+  activeLink?: string;
 }
 
 interface MobileNavProps {
   children: React.ReactNode;
   className?: string;
   visible?: boolean;
+  navPadding?: number;
 }
 
 interface MobileNavHeaderProps {
@@ -51,12 +57,27 @@ interface MobileNavMenuProps {
 }
 
 export const Navbar = ({ children, className }: NavbarProps) => {
+  // Beginner-friendly constants for resize behavior
+  const NAV_PADDING_MIN = 8;   // px
+  const NAV_PADDING_MAX = 28;  // px
+  const NAV_WIDTH_MIN = 720;   // px
+  const NAV_WIDTH_MAX = 1200;  // px
+  const NAV_WIDTH_DEFAULT = 960; // px
+
   const ref = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
   const [visible, setVisible] = useState<boolean>(false);
+  const [navPadding, setNavPadding] = useState<number>(12); // px; roughly py-3
+  const isDraggingRef = useRef(false);
+  const startYRef = useRef(0);
+  const startPadRef = useRef(12);
+  const [navWidth, setNavWidth] = useState<number>(NAV_WIDTH_DEFAULT);
+  const isDraggingWidthRef = useRef(false);
+  const startXRef = useRef(0);
+  const startWidthRef = useRef(NAV_WIDTH_DEFAULT);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     if (latest > 100) {
@@ -69,13 +90,63 @@ export const Navbar = ({ children, className }: NavbarProps) => {
   return (
     <motion.div
       ref={ref}
+      id="site-navbar"
+      data-navbar-root
       className={cn("fixed inset-x-0 top-4 z-[100] w-full px-4 sm:px-6 lg:px-8", className)}
     >
       {React.Children.map(children, (child) =>
         React.isValidElement(child)
           ? React.cloneElement(
-              child as React.ReactElement<{ visible?: boolean }>,
-              { visible },
+              child as React.ReactElement<{ visible?: boolean; navPadding?: number; onStartResize?: (clientY: number) => void; navWidth?: number; onStartResizeWidth?: (clientX: number) => void }>,
+              { 
+                visible, 
+                navPadding,
+                navWidth,
+                onStartResize: (clientY: number) => {
+                  if (window.innerWidth < 1024) return; // desktop only
+                  isDraggingRef.current = true;
+                  startYRef.current = clientY;
+                  startPadRef.current = navPadding;
+                  document.body.style.userSelect = "none";
+                  const onMove = (ev: PointerEvent) => {
+                    if (!isDraggingRef.current) return;
+                    const delta = ev.clientY - startYRef.current;
+                    const next = Math.min(NAV_PADDING_MAX, Math.max(NAV_PADDING_MIN, startPadRef.current + delta * 0.5));
+                    setNavPadding(next);
+                  };
+                  const onUp = () => {
+                    if (!isDraggingRef.current) return;
+                    isDraggingRef.current = false;
+                    document.body.style.userSelect = "";
+                    window.removeEventListener("pointermove", onMove);
+                    window.removeEventListener("pointerup", onUp);
+                  };
+                  window.addEventListener("pointermove", onMove);
+                  window.addEventListener("pointerup", onUp);
+                },
+                onStartResizeWidth: (clientX: number) => {
+                  if (window.innerWidth < 1024) return;
+                  isDraggingWidthRef.current = true;
+                  startXRef.current = clientX;
+                  startWidthRef.current = navWidth;
+                  document.body.style.userSelect = "none";
+                  const onMove = (ev: PointerEvent) => {
+                    if (!isDraggingWidthRef.current) return;
+                    const delta = ev.clientX - startXRef.current;
+                    const next = Math.min(NAV_WIDTH_MAX, Math.max(NAV_WIDTH_MIN, startWidthRef.current + delta));
+                    setNavWidth(next);
+                  };
+                  const onUp = () => {
+                    if (!isDraggingWidthRef.current) return;
+                    isDraggingWidthRef.current = false;
+                    document.body.style.userSelect = "";
+                    window.removeEventListener("pointermove", onMove);
+                    window.removeEventListener("pointerup", onUp);
+                  };
+                  window.addEventListener("pointermove", onMove);
+                  window.addEventListener("pointerup", onUp);
+                }
+              },
             )
           : child,
       )}
@@ -83,7 +154,7 @@ export const Navbar = ({ children, className }: NavbarProps) => {
   );
 };
 
-export const NavBody = ({ children, className, visible }: NavBodyProps) => {
+export const NavBody = ({ children, className, visible, navPadding, onStartResize, navWidth, onStartResizeWidth }: NavBodyProps) => {
   return (
     <motion.div
       animate={{
@@ -100,17 +171,38 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
         damping: 30,
       }}
       className={cn(
-        "relative z-[60] mx-auto hidden w-full max-w-6xl flex-row items-center justify-between rounded-full bg-slate-900/70 backdrop-blur-sm border border-slate-700/50 px-4 py-3 lg:flex",
+        "group relative z-[60] mx-auto hidden w-full max-w-none flex-row items-center justify-between rounded-full bg-slate-900/70 backdrop-blur-sm border border-slate-700/50 px-4 lg:flex",
         visible && "bg-slate-900/90 backdrop-blur-lg border-slate-600/60",
         className,
       )}
+      style={{ paddingTop: navPadding, paddingBottom: navPadding, maxWidth: navWidth }}
     >
       {children}
+      {/* Resize handle */}
+      <button
+        type="button"
+        aria-label="Resize header"
+        onPointerDown={(e) => onStartResize && onStartResize(e.clientY)}
+        className="hidden lg:block absolute left-1/2 -translate-x-1/2 -bottom-3 h-3 w-24 cursor-ns-resize opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity"
+      >
+        <span className="sr-only">Resize header</span>
+        <div className="mx-auto h-1 w-10 rounded-full bg-white/20 hover:bg-white/30 transition-colors" />
+      </button>
+      {/* Width handle */}
+      <button
+        type="button"
+        aria-label="Resize navbar width"
+        onPointerDown={(e) => onStartResizeWidth && onStartResizeWidth(e.clientX)}
+        className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 h-10 w-4 cursor-ew-resize opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity"
+      >
+        <span className="sr-only">Resize width</span>
+        <div className="mx-auto h-8 w-0.5 rounded-full bg-white/20 hover:bg-white/30 transition-colors" />
+      </button>
     </motion.div>
   );
 };
 
-export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
+export const NavItems = ({ items, className, onItemClick, activeLink }: NavItemsProps) => {
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
@@ -121,33 +213,47 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
         className,
       )}
     >
-      {items.map((item, idx) => (
-        <a
-          onMouseEnter={() => setHovered(idx)}
-          onClick={(e) => {
-            e.preventDefault();
-            if (onItemClick) {
-              onItemClick(e);
-            }
-          }}
-          className="relative px-3 xl:px-4 py-2 text-slate-300 hover:text-white transition-colors duration-200 text-sm xl:text-base"
-          key={`link-${idx}`}
-          href={item.link}
-        >
-          {hovered === idx && (
-            <motion.div
-              layoutId="hovered"
-              className="absolute inset-0 h-full w-full rounded-full bg-slate-700/50"
-            />
-          )}
-          <span className="relative z-20">{item.name}</span>
-        </a>
-      ))}
+      {items.map((item, idx) => {
+        const isActive = !!activeLink && (activeLink === item.link || (activeLink.startsWith("#") && item.link.startsWith("#") && activeLink === item.link));
+        return (
+          <a
+            onMouseEnter={() => setHovered(idx)}
+            onClick={(e) => {
+              e.preventDefault();
+              if (onItemClick) onItemClick(e);
+            }}
+            className={cn(
+              "relative px-3 xl:px-4 py-2 text-sm xl:text-base transition-colors duration-200",
+              isActive ? "text-white" : "text-slate-300 hover:text-white"
+            )}
+            key={`link-${idx}`}
+            href={item.link}
+            aria-current={isActive ? "page" : undefined}
+          >
+            {isActive && (
+              <motion.div
+                layoutId="activePill"
+                className="absolute inset-0 rounded-full bg-white/8 border border-white/10 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04)]"
+              />
+            )}
+            {!isActive && hovered === idx && (
+              <motion.div
+                layoutId="hoveredPill"
+                className="absolute inset-0 rounded-full bg-slate-700/40"
+              />
+            )}
+            <span className="relative z-20 inline-flex items-center">
+              {item.name}
+            </span>
+            {/* Removed extra underline to avoid double indicators */}
+          </a>
+        );
+      })}
     </motion.div>
   );
 };
 
-export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
+export const MobileNav = ({ children, className, visible, navPadding }: MobileNavProps) => {
   return (
     <motion.div
       animate={{
@@ -168,6 +274,7 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
         visible && "bg-slate-900/90 backdrop-blur-lg border-slate-600/60",
         className,
       )}
+      style={{ paddingTop: navPadding, paddingBottom: navPadding }}
     >
       {children}
     </motion.div>
@@ -194,7 +301,6 @@ export const MobileNavMenu = ({
   children,
   className,
   isOpen,
-  onClose: _onClose,
 }: MobileNavMenuProps) => {
   return (
     <AnimatePresence>

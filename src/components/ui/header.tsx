@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 import {
   Navbar,
@@ -17,27 +18,58 @@ export const Header = () => {
   const navItems = [
     {
       name: "Home",
-      link: "#hero",
+      link: "/",
     },
     {
       name: "About",
-      link: "#about",
+      link: "/about",
     },
     {
       name: "Services",
-      link: "#services",
+      link: "/services",
     },
     {
       name: "Projects",
-      link: "#projects",
+      link: "/projects",
+    },
+    {
+      name: "Blog",
+      link: "/blog",
     },
     {
       name: "Contact",
-      link: "#contact",
+      link: "/contact",
     },
   ];
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [active, setActive] = useState<string>("/");
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (pathname !== "/") {
+      setActive(pathname);
+      return;
+    }
+    const sectionIds = ["hero", "services", "projects", "contact"]; // hash-based sections on home
+    const handleScroll = () => {
+      let current: string = "/";
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sectionIds[i]);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 96) {
+            current = `#${sectionIds[i]}`;
+            break;
+          }
+        }
+      }
+      setActive(current);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [pathname]);
 
   const scrollToSection = (href: string) => {
     console.log('🔍 Scrolling to:', href);
@@ -95,32 +127,39 @@ export const Header = () => {
         <NavbarLogo />
         <NavItems 
           items={navItems} 
+          activeLink={active}
           onItemClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
             const href = e.currentTarget.getAttribute('href');
             if (href) {
               e.preventDefault();
               e.stopPropagation();
-              scrollToSection(href);
+              if (href.startsWith('/')) {
+                window.location.href = href;
+                setActive(href);
+              } else {
+                scrollToSection(href);
+                setActive(href);
+              }
             }
           }} 
         />
         <div className="flex items-center gap-2 xl:gap-4">
           <NavbarButton 
             variant="secondary"
-            href="#about"
+            href="/about"
             className="hidden sm:inline-block"
-            onClick={(e: React.MouseEvent) => handleButtonClick(e, "#about")}
+            onClick={(e: React.MouseEvent) => handleButtonClick(e, "/about")}
           >
             <span className="hidden lg:inline">About Me</span>
             <span className="lg:hidden">About</span>
           </NavbarButton>
           <NavbarButton 
             variant="primary"
-            href="#contact"
-            onClick={(e: React.MouseEvent) => handleButtonClick(e, "#contact")}
+            href="/contact"
+            onClick={(e: React.MouseEvent) => handleButtonClick(e, "/contact")}
           >
-            <span className="hidden sm:inline">Get Quote</span>
-            <span className="sm:hidden">Quote</span>
+            <span className="hidden sm:inline">Hire Me</span>
+            <span className="sm:hidden">Contact</span>
           </NavbarButton>
         </div>
       </NavBody>
@@ -147,6 +186,7 @@ export const Header = () => {
                 e.preventDefault();
                 e.stopPropagation();
                 scrollToSection(item.link);
+                setActive(item.link);
               }}
               className="relative text-slate-300 hover:text-white transition-colors duration-200 py-3 w-full border-b border-slate-700/30 last:border-b-0 text-left bg-transparent border-0 outline-none focus:outline-none cursor-pointer"
             >

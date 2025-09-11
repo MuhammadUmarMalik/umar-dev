@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Footer } from "@/components/ui/footer";
 import { Header } from "@/components/ui/header";
 import { ScrollToTop } from "@/components/ui/scroll-to-top";
+import { CookieConsent } from "@/components/ui/cookie-consent";
+import { GoogleAnalytics } from "@/components/ui/google-analytics";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
@@ -107,15 +109,18 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-br from-slate-950 via-blue-950/20 to-slate-950 text-white min-h-screen overflow-x-hidden`}
       >
+        <a href="#main" className="skip-link">Skip to content</a>
         <div className="relative min-h-screen flex flex-col">
           <Header />
-          <main className="flex-1">
+          <main id="main" className="flex-1">
             {children}
           </main>
           <Footer />
+          <CookieConsent />
           <ScrollToTop />
           <Analytics />
           <SpeedInsights />
+          <GoogleAnalytics />
         </div>
       </body>
     </html>

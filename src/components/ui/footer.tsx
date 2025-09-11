@@ -8,10 +8,11 @@ export const Footer = () => {
 
 
   const quickLinks = [
-    { name: "About", href: "#about" },
-    { name: "Services", href: "#services" },
-    { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" }
+    { name: "About", href: "/about" },
+    { name: "Blog", href: "/blog" },
+    { name: "Privacy Policy", href: "/privacy-policy" },
+    { name: "Terms & Conditions", href: "/terms" },
+    { name: "Contact", href: "/contact" }
   ];
 
   const services = [
@@ -108,7 +109,11 @@ export const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="py-6 border-t border-slate-800/50">
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div className="flex items-center gap-3">
+              <a href="#contact" className="px-4 py-2 rounded-lg bg-[var(--color-primary-500)] hover:bg-[var(--color-primary-600)] text-white font-semibold transition-colors">Hire Me</a>
+              <a href="/Muhammad-Umar-Resume.pdf" className="px-4 py-2 rounded-lg border border-white/10 text-slate-200 hover:bg-white/5 transition-colors">Download Resume</a>
+            </div>
             <p className="text-gray-400 text-sm">
               © {currentYear} Muhammad Umar. All rights reserved.
             </p>

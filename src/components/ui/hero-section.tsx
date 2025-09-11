@@ -16,11 +16,17 @@ export const HeroSection = () => {
         setTimeout(cb, 0);
       }
     };
-    schedule(() => setShowDecor(true));
+    const mount = () => setShowDecor(true);
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      // Skip heavy decor on reduced motion
+      setShowDecor(false);
+    } else {
+      schedule(mount);
+    }
   }, []);
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900/50 to-slate-950 pt-16 sm:pt-20 md:pt-24 lg:pt-20 xl:pt-16">
+    <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900/50 to-slate-950 pt-24 sm:pt-28 md:pt-28 lg:pt-28 xl:pt-28">
       {/* Background decorative elements (mounted after first paint) */}
       {showDecor && (
         <div className="absolute inset-0 overflow-hidden will-change-transform">
@@ -43,20 +49,20 @@ export const HeroSection = () => {
 
           {/* Main Title with FlipWords */}
           <h1
-            className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-3 sm:mb-4 leading-tight"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-5 leading-[1.05] tracking-tight"
           >
-            <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent block mb-1 sm:mb-2">
+            <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent block mb-2">
               <span className="hidden sm:inline">Full Stack Web Developer</span>
               <span className="sm:hidden">Full Stack Developer</span>
             </span>
-            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent block">
-              and <FlipWords words={words} className="bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent" />
+            <span className="text-gradient-primary block">
+              and <FlipWords words={words} className="text-gradient-primary" />
             </span>
           </h1>
 
           {/* Tagline */}
           <h4
-            className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-blue-300 mb-4 sm:mb-6 px-2"
+            className="text-lg sm:text-xl md:text-2xl font-semibold text-[var(--color-accent-blue-soft)] mb-4 sm:mb-6 px-2"
           >
             <span className="hidden sm:inline">Build Your Vision with Clean Code and Stunning Design</span>
             <span className="sm:hidden">Clean Code, Stunning Design</span>
@@ -64,7 +70,7 @@ export const HeroSection = () => {
 
           {/* Description */}
           <p
-            className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 mb-6 sm:mb-8 leading-relaxed max-w-4xl mx-auto px-2"
+            className="text-base sm:text-lg md:text-xl text-gray-300 mb-8 sm:mb-10 leading-8 max-w-[68ch] mx-auto px-2"
           >
             Need a web app that performs flawlessly or visuals that tell your brand&apos;s story? 
             I&apos;m <span className="text-blue-400 font-semibold">Muhammad Umar Malik</span>, a results-driven developer and designer 
@@ -98,7 +104,7 @@ export const HeroSection = () => {
 
           {/* CTA Section */}
           <div
-            className="mb-8 sm:mb-12"
+            className="mb-10 sm:mb-14"
           >
             <p className="text-sm sm:text-base md:text-lg font-semibold text-white mb-3 sm:mb-4 px-2">
                               <span className="hidden sm:inline">Let&apos;s Build Your Project Today</span>
@@ -107,7 +113,7 @@ export const HeroSection = () => {
             
             <button 
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg sm:rounded-xl hover:from-blue-700 hover:to-purple-700 transform hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl text-sm sm:text-base"
+              className="px-6 sm:px-8 md:px-10 py-3 sm:py-3.5 md:py-4 bg-[var(--color-primary-500)] hover:bg-[var(--color-primary-600)] text-white font-semibold rounded-xl active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)]/30 transform hover:-translate-y-0.5 transition-all duration-200 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)] text-base sm:text-lg"
             >
               <span className="hidden sm:inline">Get a Free Quote</span>
               <span className="sm:hidden">Get Quote</span>
