@@ -35,9 +35,9 @@ const skills = [
 ];
 
 const stats = [
-  { number: "1", label: "Year Experience", icon: "🚀" },
-  { number: "20+", label: "Projects Done", icon: "⚡" },
-  { number: "10+", label: "Technologies", icon: "🛠️" },
+  { number: "2+", label: "Years Experience", icon: "🚀" },
+  { number: "40+", label: "Projects Delivered", icon: "⚡" },
+  { number: "15+", label: "Tech Stack Mastery", icon: "🛠️" },
   { number: "100%", label: "Client Satisfaction", icon: "❤️" },
 ];
 
