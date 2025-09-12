@@ -7,6 +7,13 @@ export const ContactSection = () => {
   const contactInfo = [
     {
       icon: <Mail className="w-6 h-6" />,
+      label: "Support Email",
+      value: "support@umarmalik-dev.com",
+      href: "mailto:support@umarmalik-dev.com",
+      color: "from-blue-500 to-blue-600"
+    },
+    {
+      icon: <Mail className="w-6 h-6" />,
       label: "Email",
       value: "umarmalik.cs711@gmail.com",
       href: "mailto:umarmalik.cs711@gmail.com",
@@ -167,7 +174,7 @@ export const ContactSection = () => {
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  onClick={() => window.open('mailto:umarmalik.cs711@gmail.com?subject=Project Inquiry&body=Hi Muhammad, I would like to discuss a project with you.', '_blank')}
+                  onClick={() => window.open('mailto:support@umarmalik-dev.com?subject=Project Inquiry&body=Hi Muhammad, I would like to discuss a project with you.', '_blank')}
                   className="w-full px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-green-600 to-blue-600 text-white font-semibold rounded-xl hover:from-green-700 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-3 text-sm sm:text-base"
                 >
                   <Mail className="w-5 h-5" />
@@ -187,7 +194,7 @@ export const ContactSection = () => {
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  onClick={() => window.open('mailto:umarmalik.cs711@gmail.com?subject=Free Quote Request&body=Hi Muhammad, I would like to get a free quote for my project.', '_blank')}
+                  onClick={() => window.open('mailto:support@umarmalik-dev.com?subject=Free Quote Request&body=Hi Muhammad, I would like to get a free quote for my project.', '_blank')}
                   className="w-full px-6 sm:px-8 py-3 sm:py-4 border-2 border-green-500/30 text-green-400 font-semibold rounded-xl hover:bg-green-500/10 hover:border-green-500/50 transition-all duration-300 flex items-center justify-center gap-3 text-sm sm:text-base"
                 >
                   <ExternalLink className="w-5 h-5" />

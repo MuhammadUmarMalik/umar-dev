@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -14,105 +14,75 @@ export const FlipWords = ({
 }) => {
   const [currentWord, setCurrentWord] = useState(words[0]);
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
-  const [reservedWidth, setReservedWidth] = useState<number>(0);
-
-  // Reserve width equal to the longest word to prevent layout shifts
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  // Use a more efficient way to handle width without DOM manipulation on mount
   useEffect(() => {
-    const longest = words.reduce((a, b) => (a.length >= b.length ? a : b), "");
-    // Roughly estimate width by creating a hidden measurer
-    const measurer = document.createElement("span");
-    measurer.style.position = "absolute";
-    measurer.style.visibility = "hidden";
-    measurer.style.whiteSpace = "nowrap";
-    measurer.style.fontWeight = "700";
-    measurer.style.fontSize = "inherit";
-    measurer.style.fontFamily = "inherit";
-    measurer.textContent = longest;
-    document.body.appendChild(measurer);
-    const width = measurer.getBoundingClientRect().width;
-    document.body.removeChild(measurer);
-    setReservedWidth(width);
-  }, [words]);
+    // Defer animation initialization until after page load
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 300); // Small delay to ensure page has loaded core content
+    
+    return () => clearTimeout(timer);
+  }, []);
 
-  // thanks for the fix Julian - https://github.com/Julian-AT
   const startAnimation = useCallback(() => {
+    if (!isLoaded) return;
     const word = words[words.indexOf(currentWord) + 1] || words[0];
     setCurrentWord(word);
     setIsAnimating(true);
-  }, [currentWord, words]);
+  }, [currentWord, words, isLoaded]);
 
   useEffect(() => {
-    if (!isAnimating)
-      setTimeout(() => {
+    if (!isAnimating && isLoaded) {
+      const timer = setTimeout(() => {
         startAnimation();
       }, duration);
-  }, [isAnimating, duration, startAnimation]);
+      return () => clearTimeout(timer);
+    }
+  }, [isAnimating, duration, startAnimation, isLoaded]);
 
+  // Apply simpler animation for the entire word rather than individual letters
   return (
-    <AnimatePresence
-      onExitComplete={() => {
-        setIsAnimating(false);
-      }}
+    <div 
+      ref={containerRef} 
+      className={cn("z-10 inline-block relative", className)}
+      style={{ minWidth: "180px" }} // Approximate fixed width to prevent layout shifts
     >
-      <motion.div
-        initial={{
-          opacity: 0,
-          y: 10,
+      <AnimatePresence
+        onExitComplete={() => {
+          setIsAnimating(false);
         }}
-        animate={{
-          opacity: 1,
-          y: 0,
-        }}
-        transition={{
-          type: "spring",
-          stiffness: 100,
-          damping: 10,
-        }}
-        exit={{
-          opacity: 0,
-          y: -40,
-          x: 40,
-          filter: "blur(8px)",
-          scale: 2,
-          position: "absolute",
-        }}
-        className={cn(
-          "z-10 inline-block relative text-left text-neutral-900 dark:text-neutral-100 px-2",
-          className
-        )}
-        style={{ minWidth: reservedWidth ? `${Math.ceil(reservedWidth)}px` : undefined }}
-        key={currentWord}
       >
-        {/* edit suggested by Sajal: https://x.com/DewanganSajal */}
-        {currentWord.split(" ").map((word, wordIndex) => (
-          <motion.span
-            key={word + wordIndex}
-            initial={{ opacity: 0, y: 10, filter: "blur(8px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+        {isLoaded && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{
-              delay: wordIndex * 0.3,
+              type: "spring",
+              stiffness: 100,
+              damping: 10,
               duration: 0.3,
             }}
-            className="inline-block whitespace-nowrap"
+            exit={{
+              opacity: 0,
+              y: -20,
+              position: "absolute",
+            }}
+            className="z-10 inline-block text-left px-2 whitespace-nowrap"
+            key={currentWord}
           >
-            {word.split("").map((letter, letterIndex) => (
-              <motion.span
-                key={word + letterIndex}
-                initial={{ opacity: 0, y: 10, filter: "blur(8px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                transition={{
-                  delay: wordIndex * 0.3 + letterIndex * 0.05,
-                  duration: 0.2,
-                }}
-                className="inline-block"
-              >
-                {letter}
-              </motion.span>
-            ))}
-            <span className="inline-block">&nbsp;</span>
-          </motion.span>
-        ))}
-      </motion.div>
-    </AnimatePresence>
+            {currentWord}
+          </motion.div>
+        )}
+      </AnimatePresence>
+      {!isLoaded && (
+        // Static placeholder while loading to prevent layout shift
+        <span className="z-10 inline-block text-left px-2 whitespace-nowrap">
+          {words[0]}
+        </span>
+      )}
+    </div>
   );
 }; 

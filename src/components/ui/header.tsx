@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 import {
   Navbar,
@@ -108,11 +109,7 @@ export const Header = () => {
     }
   };
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    e.stopPropagation();
-    scrollToSection(href);
-  };
+  // Scroll functions are handled directly in onClick events
 
   const handleButtonClick = (e: React.MouseEvent, href: string) => {
     e.preventDefault();
@@ -188,9 +185,19 @@ export const Header = () => {
                 scrollToSection(item.link);
                 setActive(item.link);
               }}
-              className="relative text-slate-300 hover:text-white transition-colors duration-200 py-3 w-full border-b border-slate-700/30 last:border-b-0 text-left bg-transparent border-0 outline-none focus:outline-none cursor-pointer"
+              className={cn(
+                "relative text-slate-300 hover:text-white transition-all duration-300 py-3 w-full mb-2 text-left bg-transparent border-0 outline-none focus:outline-none cursor-pointer rounded-lg px-4",
+                active === item.link 
+                  ? "bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30 text-white font-medium shadow-[0_0_10px_rgba(59,130,246,0.2)]" 
+                  : "hover:bg-slate-800/50 border border-transparent hover:border-slate-700/50"
+              )}
             >
-              <span className="block text-lg font-medium">{item.name}</span>
+              <div className="flex items-center">
+                {active === item.link && (
+                  <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2 shadow-[0_0_5px_rgba(59,130,246,0.7)]"></div>
+                )}
+                <span className="block text-lg font-medium">{item.name}</span>
+              </div>
             </button>
           ))}
           <div className="flex w-full flex-col gap-3 mt-4 pt-4 border-t border-slate-700/50">

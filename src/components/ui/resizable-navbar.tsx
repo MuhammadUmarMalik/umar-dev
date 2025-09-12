@@ -61,8 +61,8 @@ export const Navbar = ({ children, className }: NavbarProps) => {
   const NAV_PADDING_MIN = 8;   // px
   const NAV_PADDING_MAX = 28;  // px
   const NAV_WIDTH_MIN = 720;   // px
-  const NAV_WIDTH_MAX = 1200;  // px
-  const NAV_WIDTH_DEFAULT = 960; // px
+  const NAV_WIDTH_MAX = 1600;  // px
+  const NAV_WIDTH_DEFAULT = 1280; // px
 
   const ref = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll({
@@ -171,8 +171,8 @@ export const NavBody = ({ children, className, visible, navPadding, onStartResiz
         damping: 30,
       }}
       className={cn(
-        "group relative z-[60] mx-auto hidden w-full max-w-none flex-row items-center justify-between rounded-full bg-slate-900/70 backdrop-blur-sm border border-slate-700/50 px-4 lg:flex",
-        visible && "bg-slate-900/90 backdrop-blur-lg border-slate-600/60",
+        "group relative z-[60] mx-auto hidden w-full flex-row items-center justify-between rounded-full bg-gradient-to-r from-slate-900/80 to-slate-800/80 backdrop-blur-md border border-slate-700/60 px-6 lg:flex",
+        visible && "bg-gradient-to-r from-slate-900/95 to-slate-800/95 backdrop-blur-lg border-blue-500/20 shadow-[0_0_15px_rgba(59,130,246,0.15)]",
         className,
       )}
       style={{ paddingTop: navPadding, paddingBottom: navPadding, maxWidth: navWidth }}
@@ -209,7 +209,7 @@ export const NavItems = ({ items, className, onItemClick, activeLink }: NavItems
     <motion.div
       onMouseLeave={() => setHovered(null)}
       className={cn(
-        "flex flex-1 flex-row items-center justify-center space-x-1 xl:space-x-2 text-sm font-medium text-slate-300 transition duration-200",
+        "flex flex-1 flex-row items-center justify-center space-x-2 xl:space-x-4 text-sm font-medium text-slate-300 transition duration-200",
         className,
       )}
     >
@@ -223,8 +223,10 @@ export const NavItems = ({ items, className, onItemClick, activeLink }: NavItems
               if (onItemClick) onItemClick(e);
             }}
             className={cn(
-              "relative px-3 xl:px-4 py-2 text-sm xl:text-base transition-colors duration-200",
-              isActive ? "text-white" : "text-slate-300 hover:text-white"
+              "relative px-3 xl:px-5 py-2.5 text-sm xl:text-base transition-all duration-300 rounded-md",
+              isActive 
+                ? "text-white font-semibold" 
+                : "text-slate-300 hover:text-white"
             )}
             key={`link-${idx}`}
             href={item.link}
@@ -233,13 +235,19 @@ export const NavItems = ({ items, className, onItemClick, activeLink }: NavItems
             {isActive && (
               <motion.div
                 layoutId="activePill"
-                className="absolute inset-0 rounded-full bg-white/8 border border-white/10 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04)]"
+                className="absolute inset-0 rounded-md bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30 shadow-[0_0_10px_rgba(59,130,246,0.3)]"
               />
             )}
             {!isActive && hovered === idx && (
               <motion.div
                 layoutId="hoveredPill"
-                className="absolute inset-0 rounded-full bg-slate-700/40"
+                className="absolute inset-0 rounded-md bg-slate-700/40 border border-slate-600/20"
+              />
+            )}
+            {isActive && (
+              <motion.div
+                layoutId="activeIndicator"
+                className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-blue-500 rounded-full shadow-[0_0_8px_rgba(59,130,246,0.7)]"
               />
             )}
             <span className="relative z-20 inline-flex items-center">
@@ -257,11 +265,11 @@ export const MobileNav = ({ children, className, visible, navPadding }: MobileNa
   return (
     <motion.div
       animate={{
-        backdropFilter: visible ? "blur(16px)" : "none",
+        backdropFilter: visible ? "blur(16px)" : "blur(8px)",
         boxShadow: visible
-          ? "0 0 24px rgba(0, 0, 0, 0.15), 0 1px 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05), 0 0 4px rgba(0, 0, 0, 0.1), 0 16px 68px rgba(0, 0, 0, 0.1)"
+          ? "0 0 24px rgba(0, 0, 0, 0.15), 0 1px 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(59,130,246,0.1), 0 0 8px rgba(59,130,246,0.1)"
           : "0 0 0 1px rgba(255, 255, 255, 0.05)",
-        scale: visible ? 0.96 : 1,
+        scale: visible ? 0.98 : 1,
         y: visible ? 0 : 0,
       }}
       transition={{
@@ -270,8 +278,8 @@ export const MobileNav = ({ children, className, visible, navPadding }: MobileNa
         damping: 30,
       }}
       className={cn(
-        "relative z-50 mx-auto flex w-full flex-col items-center justify-between rounded-2xl bg-slate-900/70 backdrop-blur-sm border border-slate-700/50 lg:hidden",
-        visible && "bg-slate-900/90 backdrop-blur-lg border-slate-600/60",
+        "relative z-50 mx-auto flex w-full flex-col items-center justify-between rounded-xl bg-gradient-to-r from-slate-900/80 to-slate-800/80 backdrop-blur-md border border-slate-700/60 lg:hidden",
+        visible && "bg-gradient-to-r from-slate-900/95 to-slate-800/95 backdrop-blur-lg border-blue-500/20",
         className,
       )}
       style={{ paddingTop: navPadding, paddingBottom: navPadding }}
@@ -311,11 +319,11 @@ export const MobileNavMenu = ({
           exit={{ opacity: 0, height: 0 }}
           transition={{ duration: 0.3, ease: "easeInOut" }}
           className={cn(
-            "w-full overflow-hidden border-t border-slate-700/50",
+            "w-full overflow-hidden border-t border-blue-500/20 bg-gradient-to-b from-slate-900/95 to-slate-800/95",
             className,
           )}
         >
-          <div className="flex w-full flex-col items-start justify-start gap-2 px-4 py-6" onClick={(e) => e.stopPropagation()}>
+          <div className="flex w-full flex-col items-start justify-start gap-2 px-4 py-6 backdrop-blur-md" onClick={(e) => e.stopPropagation()}>
             {children}
           </div>
         </motion.div>
@@ -334,13 +342,13 @@ export const MobileNavToggle = ({
   return (
     <button
       onClick={onClick}
-      className="flex items-center justify-center w-10 h-10 text-white hover:text-blue-400 transition-colors duration-200 rounded-lg hover:bg-slate-700/50 active:scale-95"
+      className="flex items-center justify-center w-10 h-10 text-white hover:text-blue-400 transition-all duration-300 rounded-lg hover:bg-blue-500/20 border border-transparent hover:border-blue-500/30 active:scale-95 shadow-lg hover:shadow-blue-500/20"
       aria-label={isOpen ? "Close menu" : "Open menu"}
     >
       <motion.div
         initial={false}
-        animate={{ rotate: isOpen ? 180 : 0 }}
-        transition={{ duration: 0.2 }}
+        animate={{ rotate: isOpen ? 180 : 0, scale: isOpen ? 1.1 : 1 }}
+        transition={{ duration: 0.3, type: "spring" }}
       >
         {isOpen ? (
           <IconX className="w-5 h-5" />
@@ -356,24 +364,26 @@ export const NavbarLogo = () => {
   return (
     <a
       href="#hero"
-      className="relative z-20 flex items-center space-x-1.5 sm:space-x-2 px-1 sm:px-2 py-1 text-sm font-normal group"
+      className="relative z-20 flex items-center space-x-2.5 sm:space-x-3 px-1 sm:px-3 py-2 text-sm font-normal group"
     >
-      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-200 overflow-hidden">
+      <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl overflow-hidden border-2 border-blue-400/30 shadow-[0_0_15px_rgba(59,130,246,0.3)] group-hover:border-blue-400/70 transition-all duration-300">
         <Image 
           src="/favicon.png"
           alt="Umar" 
-          width={40}
-          height={40}
-          className="w-full h-full object-cover rounded-lg"
+          width={44}
+          height={44}
+          className="w-full h-full object-cover rounded-lg group-hover:scale-110 transition-transform duration-500"
         />
       </div>
-      <span className="font-bold text-white group-hover:text-blue-400 transition-colors duration-200 hidden sm:block uppercase text-sm sm:text-base md:text-lg">
-        Muhammad Umar
-      </span>
-      <span className="font-bold text-white group-hover:text-blue-400 transition-colors duration-200 sm:hidden uppercase text-sm">
-        Umar
-      </span>
-     
+      <div className="flex flex-col">
+        <span className="font-bold text-white group-hover:text-blue-400 transition-colors duration-200 hidden sm:block uppercase text-sm sm:text-base md:text-lg tracking-wide">
+          Muhammad Umar
+        </span>
+        <span className="text-xs text-slate-400 hidden sm:block">Full Stack Developer</span>
+        <span className="font-bold text-white group-hover:text-blue-400 transition-colors duration-200 sm:hidden uppercase text-sm">
+          Umar
+        </span>
+      </div>
     </a>
   );
 };
@@ -396,15 +406,15 @@ export const NavbarButton = ({
   | React.ComponentPropsWithoutRef<"button">
 )) => {
   const baseStyles =
-    "px-2 sm:px-3 xl:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold relative cursor-pointer hover:-translate-y-0.5 transition-all duration-200 inline-block text-center whitespace-nowrap active:scale-95";
+    "px-3 sm:px-4 xl:px-5 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-semibold relative cursor-pointer hover:-translate-y-0.5 transition-all duration-300 inline-block text-center whitespace-nowrap active:scale-95";
 
   const variantStyles = {
     primary:
-      "bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl",
-    secondary: "bg-transparent border border-slate-600 text-slate-300 hover:bg-slate-700/50 hover:text-white hover:border-slate-500",
-    dark: "bg-slate-800 text-white hover:bg-slate-700 border border-slate-700",
+      "bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-500 hover:to-purple-500 shadow-[0_0_15px_rgba(79,70,229,0.4)] hover:shadow-[0_0_20px_rgba(79,70,229,0.6)] border border-blue-500/30",
+    secondary: "bg-transparent border border-slate-600 text-slate-300 hover:bg-slate-700/50 hover:text-white hover:border-blue-500/30 hover:shadow-[0_0_10px_rgba(59,130,246,0.2)]",
+    dark: "bg-slate-800 text-white hover:bg-slate-700 border border-slate-700 hover:border-slate-600",
     gradient:
-      "bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600",
+      "bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-400 hover:to-purple-400 shadow-[0_0_15px_rgba(79,70,229,0.3)] hover:shadow-[0_0_20px_rgba(79,70,229,0.5)] border border-purple-500/20",
   };
 
   return (

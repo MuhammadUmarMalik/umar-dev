@@ -7,21 +7,14 @@ export const HeroSection = () => {
   const [showDecor, setShowDecor] = useState(false);
 
   useEffect(() => {
-    const schedule = (cb: () => void) => {
-      // Prefer idle time to mount heavy decorative layers after first paint
-      const ric: any = (window as any).requestIdleCallback;
-      if (typeof ric === "function") {
-        ric(cb, { timeout: 1500 });
-      } else {
-        setTimeout(cb, 0);
-      }
-    };
-    const mount = () => setShowDecor(true);
+    // Load decorative elements only after main content has loaded
+    // Use a faster timeout to reduce the delay for visual elements
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       // Skip heavy decor on reduced motion
       setShowDecor(false);
     } else {
-      schedule(mount);
+      // Use a shorter timeout for background elements
+      setTimeout(() => setShowDecor(true), 100);
     }
   }, []);
 
