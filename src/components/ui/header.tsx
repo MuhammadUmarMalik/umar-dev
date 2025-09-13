@@ -92,7 +92,7 @@ export const Header = () => {
       
       // Use setTimeout to ensure menu closes before scrolling
       setTimeout(() => {
-        const headerOffset = 80;
+        const headerOffset = 100;
         const elementPosition = element.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
         

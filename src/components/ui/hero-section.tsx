@@ -19,7 +19,7 @@ export const HeroSection = () => {
   }, []);
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900/50 to-slate-950 pt-24 sm:pt-28 md:pt-28 lg:pt-28 xl:pt-28">
+    <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900/50 to-slate-950 pt-28 sm:pt-36 md:pt-44 lg:pt-48 scroll-mt-28 sm:scroll-mt-32 md:scroll-mt-36">
       {/* Background decorative elements (mounted after first paint) */}
       {showDecor && (
         <div className="absolute inset-0 overflow-hidden will-change-transform">
@@ -29,7 +29,7 @@ export const HeroSection = () => {
         </div>
       )}
 
-      <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12 relative z-10 mt-20">
+      <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 max-w-7xl relative z-10">
         <div className="text-center max-w-6xl mx-auto">
           {/* Status Badge */}
           <div

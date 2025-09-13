@@ -35,8 +35,8 @@ export function PageHeader({ title, subtitle, eyebrow, cta, variant = "default",
       <div
         className={
           variant === "centered"
-            ? "container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 pt-36 sm:pt-40 md:pt-44 pb-16 sm:pb-20 md:pb-24 text-center relative z-10"
-            : "container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 pt-36 sm:pt-40 md:pt-44 pb-16 sm:pb-16 md:pb-20 relative z-10"
+            ? "container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 pt-28 sm:pt-36 md:pt-44 lg:pt-48 pb-16 sm:pb-20 md:pb-24 text-center relative z-10"
+            : "container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 pt-28 sm:pt-36 md:pt-44 lg:pt-48 pb-16 sm:pb-16 md:pb-20 relative z-10"
         }
       >
         {/* Decorative elements */}

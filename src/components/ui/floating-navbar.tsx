@@ -61,7 +61,7 @@ export const FloatingNavbar = () => {
       setMobileMenuOpen(false);
       
       // Calculate position with header offset
-      const headerOffset = 80;
+      const headerOffset = 100;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
       

@@ -92,7 +92,7 @@ export const Navbar = ({ children, className }: NavbarProps) => {
       ref={ref}
       id="site-navbar"
       data-navbar-root
-      className={cn("fixed inset-x-0 top-4 z-[100] w-full px-4 sm:px-6 lg:px-8", className)}
+      className={cn("fixed inset-x-0 top-3 sm:top-4 z-[100] w-full px-3 sm:px-4 lg:px-8", className)}
     >
       {React.Children.map(children, (child) =>
         React.isValidElement(child)
@@ -162,7 +162,7 @@ export const NavBody = ({ children, className, visible, navPadding, onStartResiz
         boxShadow: visible
           ? "0 0 24px rgba(0, 0, 0, 0.15), 0 1px 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05), 0 0 4px rgba(0, 0, 0, 0.1), 0 16px 68px rgba(0, 0, 0, 0.1)"
           : "0 0 0 1px rgba(255, 255, 255, 0.05)",
-        scale: visible ? 0.95 : 1,
+        scale: visible ? 0.97 : 1,
         y: visible ? 0 : 0,
       }}
       transition={{
@@ -171,8 +171,8 @@ export const NavBody = ({ children, className, visible, navPadding, onStartResiz
         damping: 30,
       }}
       className={cn(
-        "group relative z-[60] mx-auto hidden w-full flex-row items-center justify-between rounded-full bg-gradient-to-r from-slate-900/80 to-slate-800/80 backdrop-blur-md border border-slate-700/60 px-6 lg:flex",
-        visible && "bg-gradient-to-r from-slate-900/95 to-slate-800/95 backdrop-blur-lg border-blue-500/20 shadow-[0_0_15px_rgba(59,130,246,0.15)]",
+        "group relative z-[60] mx-auto hidden w-full flex-row items-center justify-between rounded-xl bg-gradient-to-r from-slate-900/95 to-slate-800/95 backdrop-blur-md border border-slate-700/80 px-4 sm:px-6 lg:flex",
+        visible && "bg-gradient-to-r from-slate-900/95 to-slate-800/95 backdrop-blur-lg border-blue-500/30 shadow-[0_0_15px_rgba(59,130,246,0.15)]",
         className,
       )}
       style={{ paddingTop: navPadding, paddingBottom: navPadding, maxWidth: navWidth }}
@@ -261,7 +261,7 @@ export const NavItems = ({ items, className, onItemClick, activeLink }: NavItems
   );
 };
 
-export const MobileNav = ({ children, className, visible, navPadding }: MobileNavProps) => {
+export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
   return (
     <motion.div
       animate={{
@@ -278,11 +278,11 @@ export const MobileNav = ({ children, className, visible, navPadding }: MobileNa
         damping: 30,
       }}
       className={cn(
-        "relative z-50 mx-auto flex w-full flex-col items-center justify-between rounded-xl bg-gradient-to-r from-slate-900/80 to-slate-800/80 backdrop-blur-md border border-slate-700/60 lg:hidden",
-        visible && "bg-gradient-to-r from-slate-900/95 to-slate-800/95 backdrop-blur-lg border-blue-500/20",
+        "relative z-50 mx-auto flex w-full flex-col items-center justify-between rounded-xl bg-gradient-to-r from-slate-900/95 to-slate-800/95 backdrop-blur-md border border-slate-700/80 lg:hidden",
+        visible && "bg-gradient-to-r from-slate-900/95 to-slate-800/95 backdrop-blur-lg border-blue-500/30 shadow-lg shadow-blue-500/10",
         className,
       )}
-      style={{ paddingTop: navPadding, paddingBottom: navPadding }}
+      style={{ paddingTop: 5, paddingBottom: 5 }}
     >
       {children}
     </motion.div>
@@ -296,7 +296,7 @@ export const MobileNavHeader = ({
   return (
     <div
       className={cn(
-        "flex w-full flex-row items-center justify-between px-4 py-3",
+        "flex w-full flex-row items-center justify-between px-2 py-1 sm:py-1.5",
         className,
       )}
     >
@@ -342,7 +342,7 @@ export const MobileNavToggle = ({
   return (
     <button
       onClick={onClick}
-      className="flex items-center justify-center w-10 h-10 text-white hover:text-blue-400 transition-all duration-300 rounded-lg hover:bg-blue-500/20 border border-transparent hover:border-blue-500/30 active:scale-95 shadow-lg hover:shadow-blue-500/20"
+      className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 text-white hover:text-blue-400 transition-all duration-300 rounded-lg hover:bg-blue-500/20 border border-slate-700/50 hover:border-blue-500/30 active:scale-95 shadow-md hover:shadow-blue-500/20"
       aria-label={isOpen ? "Close menu" : "Open menu"}
     >
       <motion.div
@@ -364,19 +364,19 @@ export const NavbarLogo = () => {
   return (
     <a
       href="#hero"
-      className="relative z-20 flex items-center space-x-2.5 sm:space-x-3 px-1 sm:px-3 py-2 text-sm font-normal group"
+      className="relative z-20 flex items-center space-x-2 sm:space-x-3 px-1 py-1 sm:py-1.5 text-sm font-normal group"
     >
-      <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl overflow-hidden border-2 border-blue-400/30 shadow-[0_0_15px_rgba(59,130,246,0.3)] group-hover:border-blue-400/70 transition-all duration-300">
+      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg overflow-hidden border-[1.5px] sm:border-2 border-blue-400/40 shadow-[0_0_8px_rgba(59,130,246,0.25)] group-hover:border-blue-400/70 transition-all duration-300">
         <Image 
           src="/favicon.png"
           alt="Umar" 
-          width={44}
-          height={44}
+          width={40}
+          height={40}
           className="w-full h-full object-cover rounded-lg group-hover:scale-110 transition-transform duration-500"
         />
       </div>
       <div className="flex flex-col">
-        <span className="font-bold text-white group-hover:text-blue-400 transition-colors duration-200 hidden sm:block uppercase text-sm sm:text-base md:text-lg tracking-wide">
+        <span className="font-bold text-white group-hover:text-blue-400 transition-colors duration-200 hidden sm:block uppercase text-sm sm:text-base tracking-wide">
           Muhammad Umar
         </span>
         <span className="text-xs text-slate-400 hidden sm:block">Full Stack Developer</span>
@@ -406,7 +406,7 @@ export const NavbarButton = ({
   | React.ComponentPropsWithoutRef<"button">
 )) => {
   const baseStyles =
-    "px-3 sm:px-4 xl:px-5 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-semibold relative cursor-pointer hover:-translate-y-0.5 transition-all duration-300 inline-block text-center whitespace-nowrap active:scale-95";
+    "px-2 sm:px-4 xl:px-5 py-1 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold relative cursor-pointer hover:-translate-y-0.5 transition-all duration-300 inline-block text-center whitespace-nowrap active:scale-95";
 
   const variantStyles = {
     primary:

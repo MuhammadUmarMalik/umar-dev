@@ -19,13 +19,13 @@ export default function ProjectsPage() {
   return (
     <>
       {/* Modern Hero Section Design */}
-      <div className="relative overflow-hidden -mt-16 pt-32 pb-16">
+      <div className="relative overflow-hidden pt-28 sm:pt-36 md:pt-44 lg:pt-48 pb-16">
         {/* Background elements */}
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900 to-transparent z-0"></div>
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-500/5 rounded-full blur-[120px] -z-10"></div>
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-[100px] -z-10"></div>
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+        <div className="container max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 relative z-10">
           {/* Hero Content */}
           <div className="flex flex-col lg:flex-row items-center lg:items-start gap-10 lg:gap-16">
             {/* Left Content */}
@@ -135,7 +135,7 @@ export default function ProjectsPage() {
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-slate-900 to-transparent"></div>
       </div>
       
-      <div id="featured-projects">
+      <div id="featured-projects" className="scroll-mt-28 sm:scroll-mt-32 md:scroll-mt-36">
         <Section className="py-12">
         <div className="max-w-7xl mx-auto">
           {/* Featured Project Header */}
