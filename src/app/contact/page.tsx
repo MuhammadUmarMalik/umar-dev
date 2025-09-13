@@ -21,7 +21,6 @@ export default function ContactPage() {
   return (
     <>
       <div className="relative overflow-hidden pt-28 sm:pt-36 md:pt-44 lg:pt-48 pb-10 sm:pb-16">
-
         <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 max-w-7xl relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             {/* Badge */}
@@ -80,8 +79,6 @@ export default function ContactPage() {
           </div>
         </div>
         
-        {/* Bottom gradient fade */}
-        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-slate-950 to-transparent"></div>
       </div>
       <Section className="py-8 sm:py-10">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10">
@@ -91,18 +88,7 @@ export default function ContactPage() {
             <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-blue-600/20 opacity-40 blur-sm"></div>
             
             {/* Card background */}
-            <div className="relative h-full rounded-2xl bg-gradient-to-b from-[#0c1221] to-[#0a101d] border border-blue-500/20 overflow-hidden shadow-[0_0_15px_rgba(59,130,246,0.15)]">
-              {/* Background decorative elements */}
-              <div className="absolute top-0 left-1/2 w-60 h-60 bg-gradient-to-br from-blue-500/10 to-indigo-500/10 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/2 pointer-events-none animate-pulse-slower"></div>
-              <div className="absolute bottom-0 right-0 w-40 h-40 bg-gradient-to-tr from-purple-500/10 to-pink-500/10 rounded-full blur-3xl translate-y-1/2 translate-x-1/4 pointer-events-none animate-pulse-slow"></div>
-              
-              {/* Decorative lines */}
-              <div className="absolute inset-0 overflow-hidden opacity-10">
-                <div className="absolute left-0 top-[15%] w-[30%] h-[1px] bg-gradient-to-r from-transparent via-blue-500 to-transparent"></div>
-                <div className="absolute right-0 top-[45%] w-[20%] h-[1px] bg-gradient-to-l from-transparent via-purple-500 to-transparent"></div>
-                <div className="absolute left-0 bottom-[30%] w-[25%] h-[1px] bg-gradient-to-r from-transparent via-indigo-500 to-transparent"></div>
-                <div className="absolute right-0 bottom-[15%] w-[15%] h-[1px] bg-gradient-to-l from-transparent via-blue-500 to-transparent"></div>
-              </div>
+            <div className="relative h-full rounded-2xl bg-slate-900/80 backdrop-blur-md border border-blue-500/20 overflow-hidden shadow-[0_0_15px_rgba(59,130,246,0.15)]">
               
               <div className="p-6 relative z-10 flex flex-col items-center justify-center h-full">
                 <div className="flex flex-col items-center justify-center mb-6 max-w-md mx-auto">
@@ -122,7 +108,7 @@ export default function ContactPage() {
 
                 {/* Quick action buttons */}
                 <div className="grid sm:grid-cols-2 gap-3 mb-4 w-full max-w-2xl mx-auto">
-                  <a href="mailto:umarmalik.cs711@gmail.com" className="group flex items-center gap-3 px-4 py-3 rounded-2xl bg-[#0e1628] hover:bg-[#131f37] border border-blue-500/20 hover:border-blue-500/40 text-white transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 relative overflow-hidden">
+                  <a href="mailto:umarmalik.cs711@gmail.com" className="group flex items-center gap-3 px-4 py-3 rounded-2xl bg-slate-900/80 backdrop-blur-sm hover:bg-slate-800/80 border border-blue-500/20 hover:border-blue-500/40 text-white transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 relative overflow-hidden">
                     <span className="absolute inset-0 bg-gradient-to-r from-blue-600/0 via-blue-600/5 to-blue-600/0 opacity-0 group-hover:opacity-100 transform translate-x-full group-hover:translate-x-0 transition-all duration-1000"></span>
                     <span className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-400 rounded-full text-white shadow-md group-hover:scale-110 transition-transform duration-300">
                       <Mail className="w-5 h-5" />
@@ -132,7 +118,7 @@ export default function ContactPage() {
                       <span className="text-xs text-slate-400">umarmalik.cs711@gmail.com</span>
                     </div>
                   </a>
-                  <a href="https://wa.me/923062617205?text=Hi%20Muhammad%2C%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 px-4 py-3 rounded-2xl bg-[#0e1628] hover:bg-[#131f37] border border-emerald-500/20 hover:border-emerald-500/40 text-white transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 relative overflow-hidden">
+                  <a href="https://wa.me/923062617205?text=Hi%20Muhammad%2C%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 px-4 py-3 rounded-2xl bg-slate-900/80 backdrop-blur-sm hover:bg-slate-800/80 border border-emerald-500/20 hover:border-emerald-500/40 text-white transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 relative overflow-hidden">
                     <span className="absolute inset-0 bg-gradient-to-r from-emerald-600/0 via-emerald-600/5 to-emerald-600/0 opacity-0 group-hover:opacity-100 transform translate-x-full group-hover:translate-x-0 transition-all duration-1000"></span>
                     <span className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-emerald-600 to-emerald-400 rounded-full text-white shadow-md group-hover:scale-110 transition-transform duration-300">
                       <FaWhatsapp className="w-5 h-5" />
@@ -142,7 +128,7 @@ export default function ContactPage() {
                       <span className="text-xs text-slate-400">+92 306 2617205</span>
                     </div>
                   </a>
-                  <a href="https://linkedin.com/in/muhammad-umar-malik786" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 px-4 py-3 rounded-2xl bg-[#0e1628] hover:bg-[#131f37] border border-sky-500/20 hover:border-sky-500/40 text-white transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 relative overflow-hidden">
+                  <a href="https://linkedin.com/in/muhammad-umar-malik786" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 px-4 py-3 rounded-2xl bg-slate-900/80 backdrop-blur-sm hover:bg-slate-800/80 border border-sky-500/20 hover:border-sky-500/40 text-white transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 relative overflow-hidden">
                     <span className="absolute inset-0 bg-gradient-to-r from-sky-600/0 via-sky-600/5 to-sky-600/0 opacity-0 group-hover:opacity-100 transform translate-x-full group-hover:translate-x-0 transition-all duration-1000"></span>
                     <span className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-sky-600 to-sky-400 rounded-full text-white shadow-md group-hover:scale-110 transition-transform duration-300">
                       <Linkedin className="w-5 h-5" />
@@ -152,7 +138,7 @@ export default function ContactPage() {
                       <span className="text-xs text-slate-400">muhammad-umar-malik786</span>
                     </div>
                   </a>
-                  <a href="https://github.com/MuhammadUmarMalik" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 px-4 py-3 rounded-2xl bg-[#0e1628] hover:bg-[#131f37] border border-slate-700/30 hover:border-slate-600/50 text-white transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 relative overflow-hidden">
+                  <a href="https://github.com/MuhammadUmarMalik" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 px-4 py-3 rounded-2xl bg-slate-900/80 backdrop-blur-sm hover:bg-slate-800/80 border border-slate-700/30 hover:border-slate-600/50 text-white transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 relative overflow-hidden">
                     <span className="absolute inset-0 bg-gradient-to-r from-slate-600/0 via-slate-600/5 to-slate-600/0 opacity-0 group-hover:opacity-100 transform translate-x-full group-hover:translate-x-0 transition-all duration-1000"></span>
                     <span className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-slate-700 to-slate-500 rounded-full text-white shadow-md group-hover:scale-110 transition-transform duration-300">
                       <Github className="w-5 h-5" />
@@ -166,7 +152,7 @@ export default function ContactPage() {
 
                 {/* Info cards */}
                 <div className="grid sm:grid-cols-2 gap-3 mb-4 w-full max-w-2xl mx-auto">
-                  <div className="rounded-2xl bg-gradient-to-br from-[#131b2e] to-[#111827] border border-blue-500/20 p-4 transition-all duration-300 hover:border-blue-500/40 hover:-translate-y-0.5 group relative overflow-hidden">
+                  <div className="rounded-2xl bg-slate-900/90 backdrop-blur-sm border border-blue-500/20 p-4 transition-all duration-300 hover:border-blue-500/40 hover:-translate-y-0.5 group relative overflow-hidden">
                     <div className="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div className="text-blue-400 font-medium mb-2 text-sm flex items-center justify-center gap-2">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -182,7 +168,7 @@ export default function ContactPage() {
                       <span>Under 24 hours</span>
                     </div>
                   </div>
-                  <div className="rounded-2xl bg-gradient-to-br from-[#131b2e] to-[#111827] border border-emerald-500/20 p-4 transition-all duration-300 hover:border-emerald-500/40 hover:-translate-y-0.5 group relative overflow-hidden">
+                  <div className="rounded-2xl bg-slate-900/90 backdrop-blur-sm border border-emerald-500/20 p-4 transition-all duration-300 hover:border-emerald-500/40 hover:-translate-y-0.5 group relative overflow-hidden">
                     <div className="absolute inset-0 bg-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div className="text-emerald-400 font-medium mb-2 text-sm flex items-center justify-center gap-2">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -224,7 +210,7 @@ export default function ContactPage() {
             <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-blue-600/20 opacity-40 blur-sm"></div>
             
             {/* Card background */}
-            <div className="relative h-full rounded-2xl bg-gradient-to-b from-[#0c1221] to-[#0a101d] border border-blue-500/20 overflow-hidden shadow-[0_0_15px_rgba(59,130,246,0.15)]">
+            <div className="relative h-full rounded-2xl bg-slate-900/80 backdrop-blur-md border border-blue-500/20 overflow-hidden shadow-[0_0_15px_rgba(59,130,246,0.15)]">
               
               <div className="p-6 relative z-10">
                 {/* Form header with modern styling */}
