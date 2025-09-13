@@ -217,12 +217,39 @@ body {
   top: 8px;
 }
 
+/* Custom animations for background */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes pulse-slower {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-pulse-slower {
+  animation: pulse-slower 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   html:focus-within {
     scroll-behavior: auto;
   }
-  .animate-float, .animate-glow {
+  .animate-float, .animate-glow, .animate-pulse-slow, .animate-pulse-slower {
     animation: none !important;
   }
 }

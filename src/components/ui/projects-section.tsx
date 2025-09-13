@@ -69,7 +69,7 @@ const additionalProjects = [
 
 export const ProjectsSection = () => {
   return (
-    <section id="projects" className="scroll-mt-24 py-12 sm:py-16 md:py-20 px-3 sm:px-4 md:px-6 lg:px-8 relative bg-gradient-to-b from-slate-900/30 via-slate-950/50 to-slate-900/30">
+    <section id="projects" className="scroll-mt-24 py-12 sm:py-16 md:py-20 px-3 sm:px-4 md:px-6 lg:px-8 relative">
       <div className="container mx-auto max-w-7xl">
         {/* Section Header */}
         <motion.div

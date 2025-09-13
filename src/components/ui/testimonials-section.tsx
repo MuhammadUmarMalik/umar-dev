@@ -44,7 +44,7 @@ const testimonials = [
 
 export const TestimonialsSection = () => {
   return (
-    <section id="testimonials" className="py-20 px-6 lg:px-8 relative bg-gradient-to-b from-slate-900/30 via-slate-950/50 to-slate-900/30">
+    <section id="testimonials" className="py-20 px-6 lg:px-8 relative">
       <div className="container mx-auto max-w-6xl">
         {/* Section Header */}
         <motion.div
@@ -54,8 +54,8 @@ export const TestimonialsSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-500/10 border border-yellow-500/20 rounded-full text-yellow-400 text-sm font-medium mb-6">
-            <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 text-sm font-medium mb-6">
+            <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
             Client Testimonials
           </div>
           
@@ -64,14 +64,14 @@ export const TestimonialsSection = () => {
               What Clients
             </span>
             <br />
-            <span className="bg-gradient-to-r from-yellow-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
               Say About Me
             </span>
           </h2>
           
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
             Real feedback from real clients who trusted me with their projects and achieved 
-            <span className="text-yellow-400 font-semibold"> exceptional results</span>
+            <span className="text-blue-400 font-semibold"> exceptional results</span>
           </p>
         </motion.div>
 
@@ -87,17 +87,17 @@ export const TestimonialsSection = () => {
                 delay: index * 0.2,
               }}
               viewport={{ once: true }}
-              className="group bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-8 hover:border-yellow-500/30 transition-all duration-300 relative"
+              className="group bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-8 hover:border-blue-500/30 transition-all duration-300 relative"
             >
               {/* Quote Icon */}
-              <div className="absolute -top-4 -left-4 w-8 h-8 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full flex items-center justify-center">
+              <div className="absolute -top-4 -left-4 w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center">
                 <Quote className="w-4 h-4 text-white" />
               </div>
 
               {/* Stars */}
               <div className="flex gap-1 mb-4">
                 {[...Array(testimonial.rating)].map((_, starIndex) => (
-                  <Star key={starIndex} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star key={starIndex} className="w-5 h-5 fill-blue-400 text-blue-400" />
                 ))}
               </div>
 
@@ -112,11 +112,11 @@ export const TestimonialsSection = () => {
                   <div className="text-white font-semibold">
                     {testimonial.author}
                   </div>
-                  <div className="text-yellow-400 text-sm">
+                  <div className="text-blue-400 text-sm">
                     {testimonial.project}
                   </div>
                 </div>
-                <div className="w-12 h-12 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
                   {testimonial.author.charAt(0)}
                 </div>
               </div>
@@ -130,7 +130,7 @@ export const TestimonialsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center bg-gradient-to-r from-yellow-500/10 to-orange-500/10 rounded-2xl p-8 border border-yellow-500/20"
+          className="text-center bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl p-8 border border-blue-500/20"
         >
           <h3 className="text-2xl font-bold text-white mb-4">
             Your Success Story Could Be Next
@@ -139,12 +139,12 @@ export const TestimonialsSection = () => {
             Join the growing list of satisfied clients who chose quality, reliability, and results.
           </p>
           
-          <button
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="px-8 py-4 bg-gradient-to-r from-yellow-600 to-orange-600 text-white font-semibold rounded-xl hover:from-yellow-700 hover:to-orange-700 transform hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl"
+          <a
+            href="/contact"
+            className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-purple-700 transform hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl inline-block"
           >
             Start Your Project Today
-          </button>
+          </a>
         </motion.div>
       </div>
     </section>

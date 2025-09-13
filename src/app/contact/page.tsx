@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { ContactForm } from "@/components/ui/contact-form";
 import { Section } from "@/components/ui/section";
 import { Mail, Phone, Linkedin, Github, Calendar } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 
 export const metadata: Metadata = {
   title: "Contact | Work with Muhammad Umar",
@@ -20,21 +21,6 @@ export default function ContactPage() {
   return (
     <>
       <div className="relative overflow-hidden pt-28 sm:pt-36 md:pt-44 lg:pt-48 pb-10 sm:pb-16">
-        {/* Enhanced background with subtle gradients */}
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-900/80 to-slate-950"></div>
-          
-          {/* Larger gradient orbs with subtle animation */}
-          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-500/5 rounded-full blur-[120px] animate-pulse-slower"></div>
-          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-[100px] animate-pulse-slower" style={{animationDelay: "2s"}}></div>
-          
-          {/* Subtle gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/5 to-purple-900/5"></div>
-          
-          {/* Refined decorative elements */}
-          <div className="absolute inset-x-0 top-[30%] h-px bg-gradient-to-r from-transparent via-blue-500/10 to-transparent"></div>
-          <div className="absolute inset-y-0 right-[25%] w-px bg-gradient-to-b from-transparent via-purple-500/10 to-transparent"></div>
-        </div>
 
         <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 max-w-7xl relative z-10">
           <div className="max-w-4xl mx-auto text-center">
@@ -119,62 +105,62 @@ export default function ContactPage() {
               </div>
               
               <div className="p-6 relative z-10 flex flex-col items-center justify-center h-full">
-                <div className="flex flex-col items-center justify-center mb-4 max-w-md">
-                  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-500/30 text-emerald-400 text-sm mb-4 animate-fadeIn shadow-sm">
-                    <span className="flex h-2 w-2 relative">
+                <div className="flex flex-col items-center justify-center mb-6 max-w-md mx-auto">
+                  <div className="inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-500/30 text-emerald-400 text-sm mb-4 animate-fadeIn shadow-sm">
+                    <span className="flex h-2 w-2 relative flex-shrink-0">
                       <span className="animate-pulse-slow absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-50"></span>
                       <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                     </span>
-                    Open to new projects
+                    <span>Open to new projects</span>
                   </div>
                   
-                  <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2 text-center">Let&apos;s Connect</h2>
-                  <p className="text-gray-300 leading-relaxed mb-4 text-center max-w-xs">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 text-center">Let&apos;s Connect</h2>
+                  <p className="text-gray-300 leading-relaxed mb-4 text-center max-w-xs mx-auto">
                     Have a project in mind? Reach out through any of the channels below.
                   </p>
                 </div>
 
                 {/* Quick action buttons */}
                 <div className="grid sm:grid-cols-2 gap-3 mb-4 w-full max-w-2xl mx-auto">
-                  <a href="mailto:umarmalik.cs711@gmail.com" className="group flex items-center justify-center gap-3 px-4 py-3 rounded-2xl bg-[#131b2e] hover:bg-[#182338] border border-blue-500/20 hover:border-blue-500/40 text-white transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 relative overflow-hidden">
+                  <a href="mailto:umarmalik.cs711@gmail.com" className="group flex items-center gap-3 px-4 py-3 rounded-2xl bg-[#0e1628] hover:bg-[#131f37] border border-blue-500/20 hover:border-blue-500/40 text-white transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 relative overflow-hidden">
                     <span className="absolute inset-0 bg-gradient-to-r from-blue-600/0 via-blue-600/5 to-blue-600/0 opacity-0 group-hover:opacity-100 transform translate-x-full group-hover:translate-x-0 transition-all duration-1000"></span>
-                    <span className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-400 rounded-xl text-white shadow-md group-hover:scale-110 transition-transform duration-300">
+                    <span className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-400 rounded-full text-white shadow-md group-hover:scale-110 transition-transform duration-300">
                       <Mail className="w-5 h-5" />
                     </span>
-                    <span>
-                      <span className="block font-medium text-white group-hover:text-blue-200 transition-colors duration-300">Email</span>
+                    <div className="flex flex-col">
+                      <span className="font-medium text-white group-hover:text-blue-200 transition-colors duration-300">Email</span>
                       <span className="text-xs text-slate-400">umarmalik.cs711@gmail.com</span>
-                    </span>
+                    </div>
                   </a>
-                  <a href="https://wa.me/923062617205?text=Hi%20Muhammad%2C%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" className="group flex items-center justify-center gap-3 px-4 py-3 rounded-2xl bg-[#131b2e] hover:bg-[#182338] border border-emerald-500/20 hover:border-emerald-500/40 text-white transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 relative overflow-hidden">
+                  <a href="https://wa.me/923062617205?text=Hi%20Muhammad%2C%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 px-4 py-3 rounded-2xl bg-[#0e1628] hover:bg-[#131f37] border border-emerald-500/20 hover:border-emerald-500/40 text-white transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 relative overflow-hidden">
                     <span className="absolute inset-0 bg-gradient-to-r from-emerald-600/0 via-emerald-600/5 to-emerald-600/0 opacity-0 group-hover:opacity-100 transform translate-x-full group-hover:translate-x-0 transition-all duration-1000"></span>
-                    <span className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-emerald-600 to-emerald-400 rounded-xl text-white shadow-md group-hover:scale-110 transition-transform duration-300">
-                      <Phone className="w-5 h-5" />
+                    <span className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-emerald-600 to-emerald-400 rounded-full text-white shadow-md group-hover:scale-110 transition-transform duration-300">
+                      <FaWhatsapp className="w-5 h-5" />
                     </span>
-                    <span>
-                      <span className="block font-medium text-white group-hover:text-emerald-200 transition-colors duration-300">WhatsApp</span>
+                    <div className="flex flex-col">
+                      <span className="font-medium text-white group-hover:text-emerald-200 transition-colors duration-300">WhatsApp</span>
                       <span className="text-xs text-slate-400">+92 306 2617205</span>
-                    </span>
+                    </div>
                   </a>
-                  <a href="https://linkedin.com/in/muhammad-umar-malik786" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 px-4 py-3 rounded-2xl bg-[#131b2e] hover:bg-[#182338] border border-sky-500/20 hover:border-sky-500/40 text-white transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 relative overflow-hidden">
+                  <a href="https://linkedin.com/in/muhammad-umar-malik786" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 px-4 py-3 rounded-2xl bg-[#0e1628] hover:bg-[#131f37] border border-sky-500/20 hover:border-sky-500/40 text-white transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 relative overflow-hidden">
                     <span className="absolute inset-0 bg-gradient-to-r from-sky-600/0 via-sky-600/5 to-sky-600/0 opacity-0 group-hover:opacity-100 transform translate-x-full group-hover:translate-x-0 transition-all duration-1000"></span>
-                    <span className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-sky-600 to-sky-400 rounded-xl text-white shadow-md group-hover:scale-110 transition-transform duration-300">
+                    <span className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-sky-600 to-sky-400 rounded-full text-white shadow-md group-hover:scale-110 transition-transform duration-300">
                       <Linkedin className="w-5 h-5" />
                     </span>
-                    <span>
-                      <span className="block font-medium text-white group-hover:text-sky-200 transition-colors duration-300">LinkedIn</span>
+                    <div className="flex flex-col">
+                      <span className="font-medium text-white group-hover:text-sky-200 transition-colors duration-300">LinkedIn</span>
                       <span className="text-xs text-slate-400">muhammad-umar-malik786</span>
-                    </span>
+                    </div>
                   </a>
-                  <a href="https://github.com/MuhammadUmarMalik" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 px-4 py-3 rounded-2xl bg-[#131b2e] hover:bg-[#182338] border border-slate-700/30 hover:border-slate-600/50 text-white transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 relative overflow-hidden">
+                  <a href="https://github.com/MuhammadUmarMalik" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 px-4 py-3 rounded-2xl bg-[#0e1628] hover:bg-[#131f37] border border-slate-700/30 hover:border-slate-600/50 text-white transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 relative overflow-hidden">
                     <span className="absolute inset-0 bg-gradient-to-r from-slate-600/0 via-slate-600/5 to-slate-600/0 opacity-0 group-hover:opacity-100 transform translate-x-full group-hover:translate-x-0 transition-all duration-1000"></span>
-                    <span className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-slate-700 to-slate-500 rounded-xl text-white shadow-md group-hover:scale-110 transition-transform duration-300">
+                    <span className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-slate-700 to-slate-500 rounded-full text-white shadow-md group-hover:scale-110 transition-transform duration-300">
                       <Github className="w-5 h-5" />
                     </span>
-                    <span>
-                      <span className="block font-medium text-white group-hover:text-slate-300 transition-colors duration-300">GitHub</span>
+                    <div className="flex flex-col">
+                      <span className="font-medium text-white group-hover:text-slate-300 transition-colors duration-300">GitHub</span>
                       <span className="text-xs text-slate-400">MuhammadUmarMalik</span>
-                    </span>
+                    </div>
                   </a>
                 </div>
 
@@ -182,34 +168,34 @@ export default function ContactPage() {
                 <div className="grid sm:grid-cols-2 gap-3 mb-4 w-full max-w-2xl mx-auto">
                   <div className="rounded-2xl bg-gradient-to-br from-[#131b2e] to-[#111827] border border-blue-500/20 p-4 transition-all duration-300 hover:border-blue-500/40 hover:-translate-y-0.5 group relative overflow-hidden">
                     <div className="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="text-blue-400 font-medium mb-2 text-sm flex items-center gap-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div className="text-blue-400 font-medium mb-2 text-sm flex items-center justify-center gap-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
-                      Response time
+                      <span>Response time</span>
                     </div>
-                    <div className="text-white font-semibold flex items-center gap-2 relative z-10">
-                      <span className="flex h-3 w-3 relative">
+                    <div className="text-white font-semibold flex items-center justify-center gap-2 relative z-10">
+                      <span className="flex h-3 w-3 relative flex-shrink-0">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-30"></span>
                         <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
                       </span>
-                      Under 24 hours
+                      <span>Under 24 hours</span>
                     </div>
                   </div>
                   <div className="rounded-2xl bg-gradient-to-br from-[#131b2e] to-[#111827] border border-emerald-500/20 p-4 transition-all duration-300 hover:border-emerald-500/40 hover:-translate-y-0.5 group relative overflow-hidden">
                     <div className="absolute inset-0 bg-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="text-emerald-400 font-medium mb-2 text-sm flex items-center gap-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div className="text-emerald-400 font-medium mb-2 text-sm flex items-center justify-center gap-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
-                      Availability
+                      <span>Availability</span>
                     </div>
-                    <div className="text-white font-semibold flex items-center gap-2 relative z-10">
-                      <span className="flex h-3 w-3 relative">
+                    <div className="text-white font-semibold flex items-center justify-center gap-2 relative z-10">
+                      <span className="flex h-3 w-3 relative flex-shrink-0">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-30"></span>
                         <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
                       </span>
-                      Taking new projects
+                      <span>Taking new projects</span>
                     </div>
                   </div>
                 </div>

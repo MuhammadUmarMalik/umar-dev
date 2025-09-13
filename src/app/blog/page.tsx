@@ -165,22 +165,6 @@ export default function BlogIndexPage() {
       />
     
       <div className="relative overflow-hidden pt-28 sm:pt-36 md:pt-44 lg:pt-48 pb-16 sm:pb-20">
-        {/* Enhanced background with animated gradients */}
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-900/80 to-slate-950"></div>
-          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-500/5 rounded-full blur-[120px]"></div>
-          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-[100px]"></div>
-          
-          {/* Animated particles */}
-          <div className="absolute top-1/4 left-1/4 w-2 h-2 rounded-full bg-blue-400/40 animate-pulse"></div>
-          <div className="absolute top-1/3 right-1/3 w-3 h-3 rounded-full bg-purple-400/30 animate-pulse" style={{animationDelay: "0.5s"}}></div>
-          <div className="absolute bottom-1/4 right-1/4 w-2 h-2 rounded-full bg-blue-400/40 animate-pulse" style={{animationDelay: "1s"}}></div>
-          <div className="absolute bottom-1/3 left-1/3 w-3 h-3 rounded-full bg-purple-400/30 animate-pulse" style={{animationDelay: "1.5s"}}></div>
-          
-          {/* Decorative lines */}
-          <div className="absolute inset-x-0 top-[25%] h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent"></div>
-          <div className="absolute inset-y-0 right-[20%] w-px bg-gradient-to-b from-transparent via-purple-500/20 to-transparent"></div>
-        </div>
 
         <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 max-w-7xl relative z-10">
           <div className="max-w-4xl mx-auto">

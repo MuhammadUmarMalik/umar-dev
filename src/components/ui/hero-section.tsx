@@ -19,7 +19,7 @@ export const HeroSection = () => {
   }, []);
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900/50 to-slate-950 pt-28 sm:pt-36 md:pt-44 lg:pt-48 scroll-mt-28 sm:scroll-mt-32 md:scroll-mt-36">
+    <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-28 sm:pt-36 md:pt-44 lg:pt-48 scroll-mt-28 sm:scroll-mt-32 md:scroll-mt-36">
       {/* Background decorative elements (mounted after first paint) */}
       {showDecor && (
         <div className="absolute inset-0 overflow-hidden will-change-transform">

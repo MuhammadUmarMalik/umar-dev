@@ -43,7 +43,7 @@ const stats = [
 
 export const AboutSection = () => {
   return (
-    <section id="about" className="py-12 sm:py-16 md:py-20 px-3 sm:px-4 md:px-6 lg:px-8 relative bg-gradient-to-b from-slate-950/50 to-slate-900/30">
+    <section id="about" className="py-12 sm:py-16 md:py-20 px-3 sm:px-4 md:px-6 lg:px-8 relative">
       <div className="container mx-auto max-w-6xl">
         {/* Section Header */}
         <motion.div

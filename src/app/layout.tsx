@@ -5,6 +5,7 @@ import { Header } from "@/components/ui/header";
 import { ScrollToTop } from "@/components/ui/scroll-to-top";
 import { CookieConsent } from "@/components/ui/cookie-consent";
 import { GoogleAnalytics } from "@/components/ui/google-analytics";
+import { BackgroundGlass } from "@/components/ui/background-glass";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
@@ -107,9 +108,10 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/favicon.png" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-br from-slate-950 via-blue-950/20 to-slate-950 text-white min-h-screen overflow-x-hidden`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased text-white min-h-screen overflow-x-hidden`}
       >
         <a href="#main" className="skip-link">Skip to content</a>
+        <BackgroundGlass />
         <div className="relative min-h-screen flex flex-col">
           <Header />
           <main id="main" className="flex-1">

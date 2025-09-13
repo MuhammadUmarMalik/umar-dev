@@ -21,10 +21,6 @@ export default function ServicesPage() {
     <>
       {/* Modern Services Hero Section */}
       <div className="relative overflow-hidden pt-28 sm:pt-36 md:pt-44 lg:pt-48 pb-20">
-        {/* Background elements */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900 to-transparent z-0"></div>
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-500/5 rounded-full blur-[120px] -z-10"></div>
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-[100px] -z-10"></div>
         
         <div className="container max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -151,7 +147,6 @@ export default function ServicesPage() {
         </div>
         
         {/* Bottom Gradient Separator */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-slate-900 to-transparent"></div>
       </div>
       
       <div id="services" className="scroll-mt-28 sm:scroll-mt-32 md:scroll-mt-36">

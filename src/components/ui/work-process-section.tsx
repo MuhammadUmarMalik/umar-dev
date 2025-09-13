@@ -47,7 +47,7 @@ const processSteps = [
 
 export const WorkProcessSection = () => {
   return (
-    <section id="process" className="py-20 px-6 lg:px-8 relative bg-gradient-to-b from-slate-950/30 via-slate-900/50 to-slate-950/30">
+    <section id="process" className="py-20 px-6 lg:px-8 relative">
       <div className="container mx-auto max-w-7xl">
         {/* Section Header */}
         <motion.div

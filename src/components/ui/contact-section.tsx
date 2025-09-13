@@ -29,8 +29,8 @@ export const ContactSection = () => {
     {
       icon: <Linkedin className="w-6 h-6" />,
       label: "LinkedIn",
-      value: "muhammad-umar-malik786",
-      href: "https://linkedin.com/in/muhammad-umar-malik786",
+      value: "umarmalik-dev",
+      href: "https://www.linkedin.com/in/umarmalik-dev/",
       color: "from-blue-600 to-blue-700"
     },
     {
@@ -43,7 +43,7 @@ export const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" className="py-12 sm:py-16 md:py-20 px-3 sm:px-4 md:px-6 lg:px-8 relative bg-gradient-to-b from-slate-900/30 via-slate-950/80 to-slate-900/50">
+    <section id="contact" className="py-12 sm:py-16 md:py-20 px-3 sm:px-4 md:px-6 lg:px-8 relative">
       <div className="container mx-auto max-w-6xl">
         {/* Section Header */}
         <motion.div
@@ -223,7 +223,7 @@ export const ContactSection = () => {
             {/* Quick Stats */}
             <div className="grid grid-cols-2 gap-3 sm:gap-4">
               {[
-               { number: "1", label: "Year Experience", icon: "🚀" },
+               { number: "2+", label: "Year Experience", icon: "🚀" },
                { number: "20+", label: "Projects Done", icon: "⚡" },
                { number: "10+", label: "Technologies", icon: "🛠️" },
                { number: "100%", label: "Client Satisfaction", icon: "❤️" },
