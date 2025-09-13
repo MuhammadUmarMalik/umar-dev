@@ -247,7 +247,7 @@ export default function ProjectsPage() {
                   Start a project
                 </a>
                 <a 
-                  href="https://calendly.com/"
+                  href="https://calendly.com/umarmalik-cs711/30min"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-6 py-3 bg-transparent hover:bg-slate-800/50 text-slate-300 hover:text-white border border-slate-700/50 hover:border-blue-500/30 font-medium rounded-lg transition-all duration-300"

@@ -47,6 +47,13 @@ const services = [
     color: "from-blue-500 to-blue-600"
   },
   {
+    icon: <Globe className="w-6 h-6" />,
+    title: "WordPress Development",
+    description: "Custom WordPress websites and themes tailored to your specific needs. From business websites to blogs and e-commerce stores, I create responsive, SEO-friendly, and easy-to-manage WordPress solutions.",
+    technologies: ["WordPress", "Custom Themes", "WooCommerce", "Elementor", "PHP"],
+    color: "from-blue-500 to-blue-600"
+  },
+  {
     icon: <CreditCard className="w-6 h-6" />,
     title: "Payment Gateway Integration",
     description: "Accept online payments with secure integrations like Stripe, PayPal, and JazzCash. Hassle-free setup for a seamless checkout experience.",

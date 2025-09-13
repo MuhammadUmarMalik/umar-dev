@@ -15,103 +15,151 @@ export default function BlogIndexPage() {
   return (
     <div className="blog-page">
       <style dangerouslySetInnerHTML={{ __html: `
+        .filter-btn {
+          transition: all 0.3s ease;
+          position: relative;
+          overflow: hidden;
+        }
+        
+        .filter-btn:hover {
+          color: white !important;
+          border-color: rgba(59, 130, 246, 0.5) !important;
+          background-color: rgba(30, 41, 59, 0.5) !important;
+        }
+        
+        .filter-btn:active {
+          transform: translateY(1px);
+        }
+        
         .filter-btn.active-filter {
           background: linear-gradient(to right, rgb(37, 99, 235), rgb(147, 51, 234)) !important;
           color: white !important;
-          border-color: rgba(37, 99, 235, 0.3) !important;
+          border-color: rgba(59, 130, 246, 0.3) !important;
+          box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.1), 0 2px 4px -1px rgba(37, 99, 235, 0.06) !important;
+        }
+        
+        .filter-btn.active-filter::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background: linear-gradient(to right, rgb(59, 130, 246), rgb(168, 85, 247));
         }
       `}} />
       {/* Client-side filtering with improved implementation */}
       <script
         dangerouslySetInnerHTML={{
           __html: `
-            // Function to initialize filters after DOM is fully loaded
-            function initBlogFilters() {
-              // Get all filter buttons and posts
-              const filterButtons = document.querySelectorAll('[data-filter]');
-              const posts = document.querySelectorAll('[data-category]');
-              const searchInput = document.getElementById('blog-search');
-              
-              if (!filterButtons.length || !posts.length) {
-                // If elements aren't found, try again in 100ms
-                setTimeout(initBlogFilters, 100);
-                return;
+            (function() {
+              // Wait for DOM to be fully loaded
+              function ready(callback) {
+                if (document.readyState !== 'loading') {
+                  callback();
+                } else {
+                  document.addEventListener('DOMContentLoaded', callback);
+                }
               }
               
-              // Add active class to the default filter button
-              const defaultFilter = document.querySelector('[data-filter="All Posts"]');
-              if (defaultFilter) {
-                defaultFilter.classList.add('active-filter');
-              }
-              
-              // Function to apply filter
-              function applyFilter(filter) {
-                // Reset all buttons
-                filterButtons.forEach(btn => {
-                  btn.classList.remove('active-filter');
-                });
-                
-                // Style active button
-                const activeButton = document.querySelector(\`[data-filter="\${filter}"]\`);
-                if (activeButton) {
-                  activeButton.classList.add('active-filter');
+              // Main initialization function
+              function initBlogFilters() {
+                // Try to get elements with retry mechanism
+                function getElements() {
+                  const filterButtons = document.querySelectorAll('.filter-btn[data-filter]');
+                  const posts = document.querySelectorAll('[data-category]');
+                  const searchInput = document.getElementById('blog-search');
+                  
+                  if (!filterButtons.length || !posts.length) {
+                    console.log('Blog filter elements not found, retrying in 200ms...');
+                    setTimeout(getElements, 200);
+                    return;
+                  }
+                  
+                  setupFilters(filterButtons, posts, searchInput);
                 }
                 
-                // Filter posts
-                const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
-                
-                posts.forEach(post => {
-                  const category = post.getAttribute('data-category');
-                  const title = post.querySelector('[data-title]')?.getAttribute('data-title')?.toLowerCase() || '';
-                  const excerpt = post.querySelector('[data-excerpt]')?.getAttribute('data-excerpt')?.toLowerCase() || '';
+                // Setup filter functionality
+                function setupFilters(filterButtons, posts, searchInput) {
+                  console.log('Setting up blog filters with', filterButtons.length, 'buttons and', posts.length, 'posts');
                   
-                  const matchesCategory = filter === 'All Posts' || filter === category;
-                  const matchesSearch = !searchTerm || title.includes(searchTerm) || excerpt.includes(searchTerm);
-                  
-                  if (matchesCategory && matchesSearch) {
-                    post.style.display = '';
-                  } else {
-                    post.style.display = 'none';
+                  // Set initial active state
+                  const defaultFilter = document.querySelector('[data-filter="All Posts"]');
+                  if (defaultFilter) {
+                    defaultFilter.classList.add('active-filter');
                   }
-                });
+                  
+                  // Filter application function
+                  function applyFilter(filter) {
+                    // Update button states
+                    filterButtons.forEach(btn => {
+                      const isActive = btn.getAttribute('data-filter') === filter;
+                      btn.classList.toggle('active-filter', isActive);
+                      btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+                    });
+                    
+                    // Get search term if search is active
+                    const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
+                    
+                    // Apply filtering to posts
+                    posts.forEach(post => {
+                      const category = post.getAttribute('data-category');
+                      const titleEl = post.querySelector('[data-title]');
+                      const excerptEl = post.querySelector('[data-excerpt]');
+                      
+                      const title = titleEl ? titleEl.getAttribute('data-title').toLowerCase() : '';
+                      const excerpt = excerptEl ? excerptEl.getAttribute('data-excerpt').toLowerCase() : '';
+                      
+                      const matchesCategory = filter === 'All Posts' || filter === category;
+                      const matchesSearch = !searchTerm || 
+                                           title.includes(searchTerm) || 
+                                           excerpt.includes(searchTerm);
+                      
+                      // Show/hide based on both filters
+                      post.style.display = (matchesCategory && matchesSearch) ? '' : 'none';
+                    });
+                  }
+                  
+                  // Add click events to filter buttons
+                  filterButtons.forEach(button => {
+                    button.addEventListener('click', function(e) {
+                      e.preventDefault();
+                      const filter = this.getAttribute('data-filter');
+                      console.log('Filter clicked:', filter);
+                      applyFilter(filter);
+                    });
+                  });
+                  
+                  // Add search functionality
+                  if (searchInput) {
+                    searchInput.addEventListener('input', function() {
+                      // Get current active filter
+                      const activeButton = document.querySelector('.filter-btn.active-filter');
+                      const currentFilter = activeButton ? activeButton.getAttribute('data-filter') : 'All Posts';
+                      applyFilter(currentFilter);
+                    });
+                  }
+                  
+                  // Initial filter application
+                  applyFilter('All Posts');
+                }
+                
+                // Start the process
+                getElements();
+                
+                // Final safety check
+                setTimeout(() => {
+                  const activeFilter = document.querySelector('.filter-btn.active-filter');
+                  if (!activeFilter) {
+                    console.log('Filter initialization may have failed, retrying...');
+                    getElements();
+                  }
+                }, 1500);
               }
               
-              // Add click event to filter buttons
-              filterButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                  const filter = this.getAttribute('data-filter');
-                  applyFilter(filter);
-                });
-              });
-              
-              // Add search functionality
-              if (searchInput) {
-                searchInput.addEventListener('input', function() {
-                  // Get current active filter
-                  const activeFilter = document.querySelector('.active-filter');
-                  const filter = activeFilter ? activeFilter.getAttribute('data-filter') : 'All Posts';
-                  applyFilter(filter);
-                });
-              }
-            }
-            
-            // Initialize on page load
-            if (document.readyState === 'loading') {
-              document.addEventListener('DOMContentLoaded', initBlogFilters);
-            } else {
-              initBlogFilters();
-            }
-            
-            // Add a delayed check to ensure filters are initialized
-            setTimeout(() => {
-              const filterButtons = document.querySelectorAll('[data-filter]');
-              const posts = document.querySelectorAll('[data-category]');
-              
-              if (!filterButtons.length || !posts.length) {
-                console.log('Blog filters not initialized properly. Retrying...');
-                initBlogFilters();
-              }
-            }, 1000);
+              // Initialize
+              ready(initBlogFilters);
+            })();
           `
         }}
       />
@@ -166,14 +214,20 @@ export default function BlogIndexPage() {
             {/* Search bar */}
             <div className="max-w-2xl mx-auto relative">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600/30 to-purple-600/30 rounded-lg blur-sm"></div>
-              <div className="relative flex items-center bg-slate-900/90 border border-slate-700/50 rounded-lg overflow-hidden backdrop-blur-sm">
+              <div className="relative flex items-center bg-slate-900/90 border border-slate-700/50 rounded-lg overflow-hidden backdrop-blur-sm focus-within:border-blue-500/50 transition-all duration-300">
                 <input 
                   id="blog-search"
-                  type="text" 
+                  type="search" 
                   placeholder="Search articles..." 
-                  className="w-full py-3 px-4 bg-transparent text-white placeholder-slate-400 outline-none"
+                  aria-label="Search blog posts"
+                  autoComplete="off"
+                  className="w-full py-3 px-4 bg-transparent text-white placeholder-slate-400 outline-none focus:ring-0 focus:ring-offset-0"
                 />
-                <button className="px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white flex items-center justify-center">
+                <button 
+                  type="button"
+                  aria-label="Search"
+                  className="px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white flex items-center justify-center hover:from-blue-500 hover:to-purple-500 transition-all duration-300"
+                >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
@@ -189,21 +243,25 @@ export default function BlogIndexPage() {
       <Section className="py-12">
         <div className="max-w-7xl mx-auto">
           {/* Category filters */}
-          <div className="mb-10 overflow-x-auto pb-2 no-scrollbar">
-            <div className="flex gap-2 min-w-max">
+          <div className="mb-10 overflow-x-auto pb-4 no-scrollbar">
+            <div className="flex gap-3 min-w-max">
               <button 
+                type="button"
                 data-filter="All Posts"
-                className="filter-btn px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 shadow-lg shadow-blue-500/10"
-                style={{backgroundColor: 'transparent', border: '1px solid rgba(100, 116, 139, 0.5)', color: '#94a3b8'}}
+                aria-pressed="true"
+                className="filter-btn px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 shadow-md"
+                style={{backgroundColor: 'rgba(15, 23, 42, 0.3)', border: '1px solid rgba(100, 116, 139, 0.5)', color: '#94a3b8'}}
               >
                 All Posts
               </button>
               {categories.slice(1).map((category) => (
                 <button 
+                  type="button"
                   key={category}
                   data-filter={category}
-                  className="filter-btn px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
-                  style={{backgroundColor: 'transparent', border: '1px solid rgba(100, 116, 139, 0.5)', color: '#94a3b8'}}
+                  aria-pressed="false"
+                  className="filter-btn px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 shadow-sm"
+                  style={{backgroundColor: 'rgba(15, 23, 42, 0.3)', border: '1px solid rgba(100, 116, 139, 0.5)', color: '#94a3b8'}}
                 >
                   {category}
                 </button>

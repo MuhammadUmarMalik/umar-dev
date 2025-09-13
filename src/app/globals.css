@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+@keyframes shine {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(400%);
+  }
+}
+
 @theme inline {
   /* Dark Theme Color Palette */
   --color-background: #0B0F1A;
@@ -139,6 +148,15 @@ body {
   100% { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes gradient-x {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
@@ -162,6 +180,11 @@ body {
 
 .animate-fadeIn {
   animation: fadeIn 0.8s ease-out forwards;
+}
+
+.animate-gradient-x {
+  animation: gradient-x 8s ease infinite;
+  background-size: 400% 400%;
 }
 
 /* Selection styling */
