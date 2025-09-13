@@ -1,8 +1,10 @@
 import React from "react";
 import Link from "next/link";
 import { posts } from "./posts";
-import { PageHeader } from "@/components/ui/page-header";
 import { Section } from "@/components/ui/section";
+
+// Get unique categories from posts
+const categories = ["All Posts", ...Array.from(new Set(posts.map(post => post.category)))];
 
 export const metadata = {
   title: "Blog",
@@ -11,30 +13,206 @@ export const metadata = {
 
 export default function BlogIndexPage() {
   return (
-    <>
-      <PageHeader
-        eyebrow="Latest Articles"
-        title="Insights, Tutorials, and Case Studies"
-        subtitle="Exploring web development trends, coding techniques, and design principles to help you build better digital products."
-        customEyebrow={
-          <span className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30 text-blue-400 text-sm font-medium animate-fadeIn">
+    <div className="blog-page">
+      <style dangerouslySetInnerHTML={{ __html: `
+        .filter-btn.active-filter {
+          background: linear-gradient(to right, rgb(37, 99, 235), rgb(147, 51, 234)) !important;
+          color: white !important;
+          border-color: rgba(37, 99, 235, 0.3) !important;
+        }
+      `}} />
+      {/* Client-side filtering with improved implementation */}
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+            // Function to initialize filters after DOM is fully loaded
+            function initBlogFilters() {
+              // Get all filter buttons and posts
+              const filterButtons = document.querySelectorAll('[data-filter]');
+              const posts = document.querySelectorAll('[data-category]');
+              const searchInput = document.getElementById('blog-search');
+              
+              if (!filterButtons.length || !posts.length) {
+                // If elements aren't found, try again in 100ms
+                setTimeout(initBlogFilters, 100);
+                return;
+              }
+              
+              // Add active class to the default filter button
+              const defaultFilter = document.querySelector('[data-filter="All Posts"]');
+              if (defaultFilter) {
+                defaultFilter.classList.add('active-filter');
+              }
+              
+              // Function to apply filter
+              function applyFilter(filter) {
+                // Reset all buttons
+                filterButtons.forEach(btn => {
+                  btn.classList.remove('active-filter');
+                });
+                
+                // Style active button
+                const activeButton = document.querySelector(\`[data-filter="\${filter}"]\`);
+                if (activeButton) {
+                  activeButton.classList.add('active-filter');
+                }
+                
+                // Filter posts
+                const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+                
+                posts.forEach(post => {
+                  const category = post.getAttribute('data-category');
+                  const title = post.querySelector('[data-title]')?.getAttribute('data-title')?.toLowerCase() || '';
+                  const excerpt = post.querySelector('[data-excerpt]')?.getAttribute('data-excerpt')?.toLowerCase() || '';
+                  
+                  const matchesCategory = filter === 'All Posts' || filter === category;
+                  const matchesSearch = !searchTerm || title.includes(searchTerm) || excerpt.includes(searchTerm);
+                  
+                  if (matchesCategory && matchesSearch) {
+                    post.style.display = '';
+                  } else {
+                    post.style.display = 'none';
+                  }
+                });
+              }
+              
+              // Add click event to filter buttons
+              filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                  const filter = this.getAttribute('data-filter');
+                  applyFilter(filter);
+                });
+              });
+              
+              // Add search functionality
+              if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                  // Get current active filter
+                  const activeFilter = document.querySelector('.active-filter');
+                  const filter = activeFilter ? activeFilter.getAttribute('data-filter') : 'All Posts';
+                  applyFilter(filter);
+                });
+              }
+            }
+            
+            // Initialize on page load
+            if (document.readyState === 'loading') {
+              document.addEventListener('DOMContentLoaded', initBlogFilters);
+            } else {
+              initBlogFilters();
+            }
+            
+            // Add a delayed check to ensure filters are initialized
+            setTimeout(() => {
+              const filterButtons = document.querySelectorAll('[data-filter]');
+              const posts = document.querySelectorAll('[data-category]');
+              
+              if (!filterButtons.length || !posts.length) {
+                console.log('Blog filters not initialized properly. Retrying...');
+                initBlogFilters();
+              }
+            }, 1000);
+          `
+        }}
+      />
+    
+      <div className="relative overflow-hidden pt-28 sm:pt-36 md:pt-44 lg:pt-48 pb-16 sm:pb-20">
+        {/* Enhanced background with animated gradients */}
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-900/80 to-slate-950"></div>
+          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-500/5 rounded-full blur-[120px]"></div>
+          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-[100px]"></div>
+          
+          {/* Animated particles */}
+          <div className="absolute top-1/4 left-1/4 w-2 h-2 rounded-full bg-blue-400/40 animate-pulse"></div>
+          <div className="absolute top-1/3 right-1/3 w-3 h-3 rounded-full bg-purple-400/30 animate-pulse" style={{animationDelay: "0.5s"}}></div>
+          <div className="absolute bottom-1/4 right-1/4 w-2 h-2 rounded-full bg-blue-400/40 animate-pulse" style={{animationDelay: "1s"}}></div>
+          <div className="absolute bottom-1/3 left-1/3 w-3 h-3 rounded-full bg-purple-400/30 animate-pulse" style={{animationDelay: "1.5s"}}></div>
+          
+          {/* Decorative lines */}
+          <div className="absolute inset-x-0 top-[25%] h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent"></div>
+          <div className="absolute inset-y-0 right-[20%] w-px bg-gradient-to-b from-transparent via-purple-500/20 to-transparent"></div>
+        </div>
+
+        <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 max-w-7xl relative z-10">
+          <div className="max-w-4xl mx-auto">
+            {/* Badge */}
+            <div className="flex justify-center mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30 text-blue-400 text-sm font-medium animate-fadeIn backdrop-blur-sm shadow-lg shadow-blue-500/5">
             <span className="flex h-2 w-2 relative">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
             </span>
             Latest Articles
+              </div>
+            </div>
+            
+            {/* Main title with enhanced styling */}
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-center mb-6 leading-tight">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-white">
+                Insights, Tutorials, and 
+                <span className="relative whitespace-nowrap">
+                  <span className="absolute -inset-1 bg-gradient-to-r from-blue-600/20 to-purple-600/20 blur rounded-lg"></span>
+                  <span className="relative bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400"> Case Studies</span>
           </span>
-        }
-        customTitle={
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-white">
-            Insights, Tutorials, and Case Studies
           </span>
-        }
-      />
+            </h1>
+            
+            {/* Subtitle with improved styling */}
+            <p className="text-lg sm:text-xl text-slate-300/90 text-center mb-8 leading-relaxed max-w-3xl mx-auto">
+              Exploring web development trends, coding techniques, and design principles to help you build better digital products.
+            </p>
+            
+            {/* Search bar */}
+            <div className="max-w-2xl mx-auto relative">
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600/30 to-purple-600/30 rounded-lg blur-sm"></div>
+              <div className="relative flex items-center bg-slate-900/90 border border-slate-700/50 rounded-lg overflow-hidden backdrop-blur-sm">
+                <input 
+                  id="blog-search"
+                  type="text" 
+                  placeholder="Search articles..." 
+                  className="w-full py-3 px-4 bg-transparent text-white placeholder-slate-400 outline-none"
+                />
+                <button className="px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Bottom gradient fade */}
+        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-slate-950 to-transparent"></div>
+      </div>
       <Section className="py-12">
         <div className="max-w-7xl mx-auto">
+          {/* Category filters */}
+          <div className="mb-10 overflow-x-auto pb-2 no-scrollbar">
+            <div className="flex gap-2 min-w-max">
+              <button 
+                data-filter="All Posts"
+                className="filter-btn px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 shadow-lg shadow-blue-500/10"
+                style={{backgroundColor: 'transparent', border: '1px solid rgba(100, 116, 139, 0.5)', color: '#94a3b8'}}
+              >
+                All Posts
+              </button>
+              {categories.slice(1).map((category) => (
+                <button 
+                  key={category}
+                  data-filter={category}
+                  className="filter-btn px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+                  style={{backgroundColor: 'transparent', border: '1px solid rgba(100, 116, 139, 0.5)', color: '#94a3b8'}}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+          </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {posts.map((post, index) => (
-              <Link key={post.slug} href={`/blog/${post.slug}`} className="group">
+            {posts.map((post) => (
+              <Link key={post.slug} href={`/blog/${post.slug}`} className="group" data-category={post.category}>
                 <article className="relative flex flex-col h-full overflow-hidden">
                   {/* Card glow effect */}
                   <div className="absolute -inset-1 bg-gradient-to-tr from-blue-600/0 via-blue-600/0 to-purple-600/0 rounded-2xl opacity-0 group-hover:opacity-100 group-hover:from-blue-600/20 group-hover:via-blue-600/10 group-hover:to-purple-600/20 blur-md transition-all duration-500 -z-10"></div>
@@ -44,18 +222,26 @@ export default function BlogIndexPage() {
                     {/* Tag */}
                     <div className="flex items-center gap-2 mb-4">
                       <span className="px-3 py-1 rounded-full text-xs font-medium bg-blue-900/20 border border-blue-500/20 text-blue-400">
-                        {index % 3 === 0 ? 'Tutorial' : index % 3 === 1 ? 'Case Study' : 'Development'}
+                        {post.category}
                       </span>
                       <span className="text-slate-500 text-xs">{new Date(post.date).toLocaleDateString('en-US', {year: 'numeric', month: 'short', day: 'numeric'})}</span>
                     </div>
                     
                     {/* Title */}
-                    <h2 className="text-xl sm:text-2xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
+                    <h2 
+                      className="text-xl sm:text-2xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors"
+                      data-title={post.title}
+                    >
                       {post.title}
                     </h2>
                     
                     {/* Excerpt */}
-                    <p className="text-slate-300 mb-6 line-clamp-3">{post.excerpt}</p>
+                    <p 
+                      className="text-slate-300 mb-6 line-clamp-3"
+                      data-excerpt={post.excerpt}
+                    >
+                      {post.excerpt}
+                    </p>
                     
                     {/* Read more button */}
                     <div className="flex items-center gap-2 text-blue-400 font-medium group-hover:translate-x-1 transition-transform duration-300">
@@ -95,7 +281,7 @@ export default function BlogIndexPage() {
           </div>
         </div>
       </Section>
-    </>
+    </div>
   );
 }
 
