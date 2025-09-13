@@ -1,6 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import { Section } from "@/components/ui/section";
+import { TestimonialsSection } from "@/components/ui/testimonials-section";
+import { WorkProcessSection } from "@/components/ui/work-process-section";
 import { FaReact, FaNodeJs } from "react-icons/fa";
 import { SiNextdotjs, SiTypescript, SiTailwindcss, SiMongodb } from "react-icons/si";
 
@@ -63,7 +65,7 @@ export default function AboutPage() {
                 <div key={idx} className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-lg p-2 sm:p-3 md:p-4 text-center hover:border-blue-500/30 hover:bg-slate-800/60 transition-all duration-300 transform hover:scale-105">
                   <div className="text-lg sm:text-xl md:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400 mb-0.5 sm:mb-1">
                       {stat.value}
-                  </div>
+                    </div>
                   <div className="text-[10px] sm:text-xs md:text-sm text-slate-400">{stat.label}</div>
                   </div>
                 ))}
@@ -178,15 +180,15 @@ export default function AboutPage() {
           <div className="flex flex-col items-center p-4 bg-slate-800/30 rounded-lg border border-slate-700/50 hover:border-blue-500/30 transition-all duration-300 w-24">
             <SiTypescript className="w-10 h-10 text-[#3178C6] mb-2" />
             <span className="text-sm text-slate-300">TypeScript</span>
-          </div>
+        </div>
           <div className="flex flex-col items-center p-4 bg-slate-800/30 rounded-lg border border-slate-700/50 hover:border-blue-500/30 transition-all duration-300 w-24">
             <FaNodeJs className="w-10 h-10 text-[#8CC84B] mb-2" />
             <span className="text-sm text-slate-300">Node.js</span>
-          </div>
+            </div>
           <div className="flex flex-col items-center p-4 bg-slate-800/30 rounded-lg border border-slate-700/50 hover:border-blue-500/30 transition-all duration-300 w-24">
             <SiTailwindcss className="w-10 h-10 text-[#38BDF8] mb-2" />
             <span className="text-sm text-slate-300">Tailwind</span>
-          </div>
+                    </div>
           <div className="flex flex-col items-center p-4 bg-slate-800/30 rounded-lg border border-slate-700/50 hover:border-blue-500/30 transition-all duration-300 w-24">
             <SiMongodb className="w-10 h-10 text-[#4DB33D] mb-2" />
             <span className="text-sm text-slate-300">MongoDB</span>
@@ -214,6 +216,12 @@ export default function AboutPage() {
           </div>
         </div>
       </Section>
+      
+      {/* How I Work With You Section */}
+      <WorkProcessSection />
+      
+      {/* Testimonials Section */}
+      <TestimonialsSection />
     </div>
   );
 }

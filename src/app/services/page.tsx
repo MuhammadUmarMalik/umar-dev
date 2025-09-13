@@ -3,14 +3,14 @@ import { Section } from "@/components/ui/section";
 import { ServicesSection } from "@/components/ui/services-section";
 
 export const metadata: Metadata = {
-  title: "Services | Full-Stack, WordPress, Mobile, and UI/UX by Muhammad Umar",
+  title: "Services | Web Development, WordPress, Security & Optimization",
   description:
-    "End-to-end services: web apps, WordPress development, mobile apps, backend APIs, and UI/UX design. Built with Next.js, React, WordPress, Node.js. Conversion-focused and performance-driven.",
+    "End-to-end services: web apps, WordPress development, bug fixing, speed optimization, security & maintenance, mobile apps, backend APIs, and UI/UX design.",
   alternates: { canonical: "/services" },
   openGraph: {
     title: "Services by Muhammad Umar",
     description:
-      "Full-stack development, WordPress, mobile apps, backend APIs, and UI/UX design.",
+      "Full-stack development, WordPress, bug fixing, speed optimization, security & maintenance, mobile apps, and UI/UX design.",
     url: "/services",
     type: "website",
   },

@@ -7,7 +7,10 @@ import {
   Server, 
   Monitor, 
   Palette, 
-  CreditCard 
+  Bug,
+  Gauge,
+  Code,
+  ShieldCheck
 } from "lucide-react";
 
 const services = [
@@ -54,17 +57,31 @@ const services = [
     color: "from-blue-500 to-blue-600"
   },
   {
-    icon: <CreditCard className="w-6 h-6" />,
-    title: "Payment Gateway Integration",
-    description: "Accept online payments with secure integrations like Stripe, PayPal, and JazzCash. Hassle-free setup for a seamless checkout experience.",
-    technologies: ["Stripe", "PayPal", "JazzCash", "Secure Payments", "E-commerce"],
+    icon: <Bug className="w-6 h-6" />,
+    title: "Bug Fixing & Troubleshooting",
+    description: "Identify and resolve issues in your existing web applications. I provide thorough debugging, error fixing, and code optimization to ensure your website runs smoothly without any glitches.",
+    technologies: ["Debugging", "Error Resolution", "Code Review", "Testing", "Maintenance"],
+    color: "from-blue-500 to-blue-600"
+  },
+  {
+    icon: <Gauge className="w-6 h-6" />,
+    title: "Speed Optimization",
+    description: "Improve your website's performance and loading times. I optimize code, compress images, implement caching strategies, and follow best practices to ensure your site delivers a fast, smooth user experience.",
+    technologies: ["Performance Tuning", "Lazy Loading", "Caching", "Image Optimization", "Core Web Vitals"],
+    color: "from-blue-500 to-blue-600"
+  },
+  {
+    icon: <ShieldCheck className="w-6 h-6" />,
+    title: "Website Security & Maintenance",
+    description: "Keep your website secure, up-to-date, and protected from threats. I provide regular maintenance, security audits, vulnerability fixes, and backup solutions to ensure your website remains safe and operational.",
+    technologies: ["Security Audits", "Malware Removal", "Updates", "Backups", "Monitoring"],
     color: "from-blue-500 to-blue-600"
   }
 ];
 
 export const ServicesSection = () => {
   return (
-    <section id="services" className="py-12 sm:py-16 md:py-20 px-3 sm:px-4 md:px-6 lg:px-8 relative bg-gradient-to-b from-slate-950/30 via-slate-900/50 to-slate-950/30">
+    <section id="services" className="py-12 sm:py-16 md:py-20 px-3 sm:px-4 md:px-6 lg:px-8 relative">
       <div className="container mx-auto max-w-7xl">
         {/* Section Header */}
         <motion.div
