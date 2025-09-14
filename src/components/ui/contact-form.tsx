@@ -54,7 +54,8 @@ export function ContactForm() {
       message,
       submittedAt: new Date().toISOString(),
       userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : '',
-      form: 'contact'
+      form: 'contact',
+      sheet: 'contacts'
     } as const;
 
     let submitted = false;

@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { posts } from "./posts";
 import { Section } from "@/components/ui/section";
+import NewsletterForm from "@/components/ui/newsletter-form";
 
 // Get unique categories from posts
 const categories = ["All Posts", ...Array.from(new Set(posts.map(post => post.category)))];
@@ -359,16 +360,7 @@ export default function BlogIndexPage() {
               <div className="max-w-3xl mx-auto text-center">
                 <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Stay updated with latest articles</h2>
                 <p className="text-slate-300 mb-6">Get notified when I publish new content. No spam, just quality insights.</p>
-                <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                  <input 
-                    type="email" 
-                    placeholder="Enter your email" 
-                    className="flex-1 px-4 py-3 bg-slate-800/50 border border-slate-700/50 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50"
-                  />
-                  <button className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-medium rounded-lg transition-all duration-300 shadow-lg hover:shadow-blue-900/30 border border-blue-500/30">
-                    Subscribe
-                  </button>
-                </div>
+                <NewsletterForm />
               </div>
             </div>
           </div>
