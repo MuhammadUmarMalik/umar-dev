@@ -547,7 +547,7 @@ export default function BlogPostPage({ params }: Props) {
             <aside className="hidden lg:block lg:col-span-3 xl:col-span-3 relative">
               <div className="sticky top-28">
                 {/* Table of Contents (top-left, sticky) */}
-                <TOC className="toc w-64 xl:w-72 shrink-0 bg-slate-900/40 rounded-xl border border-slate-700/30 p-5 backdrop-blur-sm" />
+                <TOC className="toc w-full max-w-[320px] xl:max-w-[360px] mx-auto shrink-0 bg-slate-900/40 rounded-xl border border-slate-700/30 p-5 backdrop-blur-sm" />
               </div>
 
             </aside>
@@ -555,7 +555,7 @@ export default function BlogPostPage({ params }: Props) {
             {/* Main content column */}
             <div className="lg:col-span-9 xl:col-span-9 min-w-0">
               {/* Content container with enhanced styling */}
-              <div className="bg-slate-950/40 backdrop-blur-sm rounded-2xl border border-slate-800/40 shadow-xl overflow-hidden">
+              <div className="bg-slate-950/40 backdrop-blur-sm rounded-2xl border border-slate-800/40 shadow-xl overflow-visible">
                 {/* Decorative elements */}
                 <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
                 <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
@@ -605,7 +605,7 @@ export default function BlogPostPage({ params }: Props) {
                     prose-li:text-slate-200 prose-li:my-1.5 prose-li:leading-relaxed
                     prose-strong:text-white prose-strong:font-medium
                     prose-blockquote:border-blue-500/60 prose-blockquote:bg-slate-800/20 prose-blockquote:rounded-lg prose-blockquote:py-2 prose-blockquote:px-6 prose-blockquote:shadow-sm prose-blockquote:not-italic
-                    max-w-[780px] xl:max-w-[820px] mx-auto">
+                    max-w-[860px] xl:max-w-[920px] mx-auto">
                     {/* Subtle heading indicator line */}
                     <div className="mb-8 flex items-center gap-2">
                       <div className="h-0.5 w-6 bg-blue-500 rounded-full"></div>
@@ -840,10 +840,10 @@ export default function BlogPostPage({ params }: Props) {
                     </div>
                     
                     {/* Posts grid */}
-                    <div className="grid grid-cols-1 md:[grid-template-columns:repeat(2,minmax(420px,1fr))] gap-8 justify-center">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center">
                       {posts.filter(p => p.slug !== post.slug).slice(0, 2).map(relatedPost => (
-                        <Link key={relatedPost.slug} href={`/blog/${relatedPost.slug}`} className="group">
-                          <div className="related-card rounded-xl overflow-hidden bg-slate-900/40 backdrop-blur-sm h-full flex flex-col shadow-md">
+                        <Link key={relatedPost.slug} href={`/blog/${relatedPost.slug}`} className="group block w-full max-w-[520px] md:max-w-[560px] mx-auto">
+                          <div className="related-card rounded-xl overflow-hidden bg-slate-900/40 backdrop-blur-sm h-full flex flex-col shadow-md w-full">
                             {/* Featured image area */}
                             <div className="relative h-48 bg-gradient-to-br from-blue-900/30 to-purple-900/30 overflow-hidden">
                               {relatedPost.image ? (
