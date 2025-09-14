@@ -17,6 +17,22 @@ export const CookieConsent = () => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({ acceptedAt: Date.now() }));
     } catch {}
+    try {
+      // Update Google Consent Mode to granted
+      // Ensure dataLayer exists
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const w = window as any;
+      w.dataLayer = w.dataLayer || [];
+      function gtag(){w.dataLayer.push(arguments);} // eslint-disable-line
+      gtag('consent', 'update', {
+        ad_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted',
+        analytics_storage: 'granted'
+      });
+      // Notify listeners (e.g., AdSenseLoader)
+      window.dispatchEvent(new CustomEvent('consent-updated', { detail: { consent: 'granted' } }));
+    } catch {}
     setVisible(false);
   };
 

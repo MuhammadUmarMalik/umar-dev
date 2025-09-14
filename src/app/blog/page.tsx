@@ -10,6 +10,7 @@ const categories = ["All Posts", ...Array.from(new Set(posts.map(post => post.ca
 export const metadata = {
   title: "Blog",
   description: "Articles and resources by Muhammad Umar on web development and design.",
+  alternates: { canonical: "/blog" },
 };
 
 export default function BlogIndexPage() {

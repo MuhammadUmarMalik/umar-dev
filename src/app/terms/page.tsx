@@ -5,6 +5,7 @@ import { Section } from "@/components/ui/section";
 export const metadata = {
   title: "Terms & Conditions",
   description: "Terms of use and disclaimer for Muhammad Umar's portfolio website.",
+  alternates: { canonical: "/terms" },
 };
 
 export default function TermsPage() {

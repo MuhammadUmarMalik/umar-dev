@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.com'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.umarmalik-dev.com'
 
   return {
     rules: [
@@ -21,7 +21,7 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: 'CCBot', disallow: '/' }, // CommonCrawl; block if undesired
     ],
     sitemap: `${baseUrl.replace(/\/$/, '')}/sitemap.xml`,
-    host: baseUrl,
+    host: baseUrl.replace(/\/$/, ''),
   }
 }
 

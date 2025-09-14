@@ -243,7 +243,7 @@ export default function ContactPage() {
             "@context": "https://schema.org",
             "@type": "Person",
             name: "Muhammad Umar",
-            url: "/",
+            url: (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.umarmalik-dev.com'),
             contactPoint: [
               {
                 "@type": "ContactPoint",

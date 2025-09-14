@@ -7,6 +7,7 @@ import { ScrollToTop } from "@/components/ui/scroll-to-top";
 import { CookieConsent } from "@/components/ui/cookie-consent";
 import { GoogleAnalytics } from "@/components/ui/google-analytics";
 import { BackgroundGlass } from "@/components/ui/background-glass";
+import AdSenseLoader from "@/components/ui/adsense-loader";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s | Muhammad Umar"
   },
   description: "Professional Full Stack Developer & Creative Designer specializing in modern web applications, mobile development, and UI/UX design. Building exceptional digital experiences with React, Next.js, Node.js & more.",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://yourdomain.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://www.umarmalik-dev.com"),
   keywords: [
     "Full Stack Developer",
     "Frontend Developer", 
@@ -52,7 +53,7 @@ export const metadata: Metadata = {
     siteName: "Muhammad Umar Portfolio",
     images: [
       {
-        url: "/favicon.png",
+        url: "/logo.png",
         width: 1200,
         height: 630,
         alt: "Muhammad Umar - Full Stack Developer"
@@ -63,7 +64,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Muhammad Umar - Full Stack Developer & Designer",
     description: "Professional Full Stack Developer & Creative Designer building exceptional digital experiences",
-    images: ["/favicon.png"]
+    images: ["/logo.png"]
   },
   robots: {
     index: true,
@@ -104,15 +105,33 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
       <head>
+        {/* Preconnects / DNS-Prefetch for performance */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.google-analytics.com" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
+        <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
+        <link rel="preconnect" href="https://googleads.g.doubleclick.net" />
+        <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon.png" type="image/png" />
         <link rel="apple-touch-icon" href="/favicon.png" />
-        <Script
-          id="adsbygoogle-init"
-          strategy="afterInteractive"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2087381537421355"
-          crossOrigin="anonymous"
-        />
+        <meta name="google-adsense-account" content="ca-pub-2087381537421355" />
+        {/* Consent Mode v2 defaults (deny until user accepts) */}
+        <Script id="consent-defaults" strategy="beforeInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);} 
+            gtag('consent', 'default', {
+              ad_storage: 'denied',
+              ad_user_data: 'denied',
+              ad_personalization: 'denied',
+              analytics_storage: 'denied',
+              wait_for_update: 500
+            });
+          `}
+        </Script>
         {process.env.NODE_ENV === "development" && (
           <script
             // Suppress specific framer-motion measurement warning in dev to keep console clean
@@ -155,6 +174,8 @@ export default function RootLayout({
           <Analytics />
           <SpeedInsights />
           <GoogleAnalytics />
+          {/* Load AdSense only after consent granted */}
+          <AdSenseLoader publisherId="ca-pub-2087381537421355" />
         </div>
       </body>
     </html>

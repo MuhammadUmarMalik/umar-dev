@@ -6,6 +6,7 @@ export const metadata = {
   title: "Privacy Policy",
   description:
     "Privacy Policy for Muhammad Umar's portfolio website explaining cookies, data collection, and advertising disclosures.",
+  alternates: { canonical: "/privacy-policy" },
 };
 
 export default function PrivacyPolicyPage() {

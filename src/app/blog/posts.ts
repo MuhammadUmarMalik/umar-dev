@@ -5,7 +5,7 @@ export type BlogPost = {
   date: string; // ISO string
   content: string;
   category: string;
-  image?: string;
+  image?: string; // e.g., "/images/post-1.webp" preferred
 };
 
 export const posts: BlogPost[] = [
