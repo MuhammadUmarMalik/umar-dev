@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s | Muhammad Umar"
   },
   description: "Professional Full Stack Developer & Creative Designer specializing in modern web applications, mobile development, and UI/UX design. Building exceptional digital experiences with React, Next.js, Node.js & more.",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://www.umarmalik-dev.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "umarmalik-dev.com"),
   keywords: [
     "Full Stack Developer",
     "Frontend Developer", 
@@ -77,6 +77,9 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  other: {
+    'google-adsense-account': 'ca-pub-2087381537421355',
+  },
   icons: {
     icon: [
       { url: '/icons/favicon.ico', sizes: 'any' },
@@ -117,7 +120,6 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon.png" type="image/png" />
         <link rel="apple-touch-icon" href="/favicon.png" />
-        <meta name="google-adsense-account" content="ca-pub-2087381537421355" />
         {/* Google AdSense */}
         <Script
           id="adsbygoogle"
