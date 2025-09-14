@@ -4,30 +4,103 @@ import React, { useState } from "react";
 export function ContactForm() {
   const [status, setStatus] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  // Configure your Google Apps Script Web App URL in .env.local as NEXT_PUBLIC_GSHEET_WEBAPP_URL
+  const GOOGLE_SHEET_WEBAPP_URL ="https://script.google.com/macros/s/AKfycbyKF2oed8mTTmElPMtwd3gWxQUfajnDkz7aX06MHHOquhp7ZNcOWO0p0yukGB28DlcZPA/exec";
+
+  // Ensures all fields clear (including selects with placeholder)
+  const resetFormFields = (form: HTMLFormElement) => {
+    form.reset();
+    try {
+      const sel1 = form.querySelector('#projectType') as HTMLSelectElement | null;
+      if (sel1) sel1.selectedIndex = 0;
+      const sel2 = form.querySelector('#referralSource') as HTMLSelectElement | null;
+      if (sel2) sel2.selectedIndex = 0;
+      const inputs = form.querySelectorAll('input');
+      inputs.forEach((inp) => { if ((inp as HTMLInputElement).type !== 'submit') (inp as HTMLInputElement).value = ''; });
+      const ta = form.querySelector('textarea') as HTMLTextAreaElement | null;
+      if (ta) ta.value = '';
+    } catch {}
+  }
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const name = formData.get("name");
-    const email = formData.get("email");
-    const country = formData.get("country");
-    const projectType = formData.get("projectType");
-    const deadline = formData.get("deadline");
-    const referralSource = formData.get("referralSource");
-    const message = formData.get("message");
+    const name = (formData.get("name") as string | null)?.toString().trim();
+    const email = (formData.get("email") as string | null)?.toString().trim();
+    const country = (formData.get("country") as string | null)?.toString().trim() || "";
+    const projectType = (formData.get("projectType") as string | null)?.toString().trim() || "";
+    const deadline = (formData.get("deadline") as string | null)?.toString().trim() || "";
+    const referralSource = (formData.get("referralSource") as string | null)?.toString().trim() || "";
+    const message = (formData.get("message") as string | null)?.toString().trim();
 
     if (!name || !email || !message) {
       setStatus("Please fill out all fields.");
       return;
     }
 
+    if (!GOOGLE_SHEET_WEBAPP_URL) {
+      setStatus("Missing Google Sheet Web App URL. Please set NEXT_PUBLIC_GSHEET_WEBAPP_URL.");
+      return;
+    }
+
+    const payload = {
+      name,
+      email,
+      country,
+      projectType,
+      deadline,
+      referralSource,
+      message,
+      submittedAt: new Date().toISOString(),
+      userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : '',
+      form: 'contact'
+    } as const;
+
     try {
       setSubmitting(true);
-      await new Promise((res) => setTimeout(res, 800));
-      setStatus("Thanks! Your message has been received.");
-      e.currentTarget.reset();
-    } catch (err) {
-      setStatus("Something went wrong. Please try again later.");
+      // Single, preflight-free submission: GET with query params (handled by doGet)
+      const params = new URLSearchParams();
+      Object.entries(payload).forEach(([k, v]) => params.append(k, String(v ?? '')));
+      params.append('cb', String(Date.now()));
+      await fetch(`${GOOGLE_SHEET_WEBAPP_URL}?${params.toString()}`, {
+        method: 'GET',
+        mode: 'no-cors',
+        keepalive: true,
+      });
+      resetFormFields(e.currentTarget);
+      setStatus(null);
+    } catch {
+      // Fallback 1: sendBeacon (fires-and-forgets without CORS/preflight)
+      try {
+        const params = new URLSearchParams();
+        Object.entries(payload).forEach(([k, v]) => params.append(k, String(v ?? '')));
+        params.append('cb', String(Date.now()));
+        const blob = new Blob([params.toString()], { type: 'application/x-www-form-urlencoded' });
+        const ok = typeof navigator !== 'undefined' && navigator.sendBeacon
+          ? navigator.sendBeacon(GOOGLE_SHEET_WEBAPP_URL, blob)
+          : false;
+        if (ok) {
+          resetFormFields(e.currentTarget);
+          setStatus(null);
+          return;
+        }
+      } catch {}
+
+      // Fallback 2: last-chance fetch with FormData no-cors
+      try {
+        const fd = new FormData();
+        Object.entries(payload).forEach(([k, v]) => fd.append(k, String(v ?? '')));
+        await fetch(GOOGLE_SHEET_WEBAPP_URL + `?cb=${Date.now()}`, {
+          method: 'POST',
+          body: fd,
+          mode: 'no-cors',
+          keepalive: true,
+        });
+        resetFormFields(e.currentTarget);
+        setStatus(null);
+      } catch {
+        setStatus("Something went wrong. Please try again later.");
+      }
     } finally {
       setSubmitting(false);
     }
@@ -76,9 +149,10 @@ export function ContactForm() {
           <select 
             id="projectType" 
             name="projectType" 
-            defaultValue="Web App"
+            defaultValue=""
             className="w-full h-11 px-4 rounded-lg bg-[#131b2e] border border-slate-700/30 text-white appearance-none focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/30 hover:border-slate-600/50 transition-all duration-200 shadow-sm shadow-blue-500/5"
           >
+            <option value="" disabled>Select project type</option>
             <option value="Web App">Web App</option>
             <option value="Mobile App">Mobile App</option>
             <option value="WordPress Development">WordPress Development</option>

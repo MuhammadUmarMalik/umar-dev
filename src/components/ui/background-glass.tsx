@@ -29,11 +29,15 @@ export const BackgroundGlass = () => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-[radial-gradient(circle,rgba(30,64,175,0.08)_0%,rgba(15,23,42,0)_50%)]"></div>
       </div>
       
-      {/* Subtle grid overlay for texture */}
-      <div className="absolute inset-0 bg-[url('/grid-pattern.png')] bg-repeat opacity-[0.02]"></div>
-      
-      {/* Subtle noise texture */}
-      <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.015] mix-blend-overlay"></div>
+      {/* Subtle grid overlay for texture (pure CSS, no asset) */}
+      <div
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px)",
+          backgroundSize: "24px 24px",
+        }}
+      ></div>
       
       {/* Light beams */}
       <div className="absolute -top-40 left-0 right-0 h-80 bg-gradient-to-b from-blue-500/10 to-transparent blur-3xl transform -rotate-[5deg] opacity-30"></div>

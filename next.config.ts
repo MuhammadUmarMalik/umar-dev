@@ -113,6 +113,15 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  // Rewrites for missing public asset paths
+  rewrites: async () => {
+    return [
+      {
+        source: '/favicon.ico',
+        destination: '/icons/favicon.ico',
+      },
+    ];
+  },
 };
 
 export default nextConfig;
