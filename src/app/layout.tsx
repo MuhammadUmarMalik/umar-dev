@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Footer } from "@/components/ui/footer";
 import { Header } from "@/components/ui/header";
@@ -45,7 +46,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: process.env.NEXT_PUBLIC_SITE_URL || "https://yourdomain.com",
+    url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.umarmalik-dev.com/",
     title: "Muhammad Umar - Full Stack Developer & Designer",
     description: "Professional Full Stack Developer & Creative Designer building exceptional digital experiences",
     siteName: "Muhammad Umar Portfolio",
@@ -106,6 +107,12 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon.png" type="image/png" />
         <link rel="apple-touch-icon" href="/favicon.png" />
+        <Script
+          id="adsbygoogle-init"
+          strategy="afterInteractive"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2087381537421355"
+          crossOrigin="anonymous"
+        />
         {process.env.NODE_ENV === "development" && (
           <script
             // Suppress specific framer-motion measurement warning in dev to keep console clean
