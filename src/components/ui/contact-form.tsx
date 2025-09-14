@@ -5,7 +5,7 @@ export function ContactForm() {
   const [status, setStatus] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   // Configure your Google Apps Script Web App URL in .env.local as NEXT_PUBLIC_GSHEET_WEBAPP_URL
-  const GOOGLE_SHEET_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbyKF2oed8mTTmElPMtwd3gWxQUfajnDkz7aX06MHHOquhp7ZNcOWO0p0yukGB28DlcZPA/exec";
+  const GOOGLE_SHEET_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbzFKYjND8hoA4e0Isggn-mUkyZoJfMWzqGiqh-l1DpyfPsTgrcCypzSivuJsTZKOEsdrA/exec";
 
   // Ensures all fields clear (including selects with placeholder)
   const resetFormFields = (form: HTMLFormElement) => {

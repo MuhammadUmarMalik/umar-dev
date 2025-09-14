@@ -22,7 +22,7 @@ export default function NewsletterForm({
 
   // Prefer env, but fall back to the known working script the site already uses
   const GOOGLE_SHEET_WEBAPP_URL = useMemo(() => {
-    return process.env.NEXT_PUBLIC_GSHEET_WEBAPP_URL || "https://script.google.com/macros/s/AKfycbyKF2oed8mTTmElPMtwd3gWxQUfajnDkz7aX06MHHOquhp7ZNcOWO0p0yukGB28DlcZPA/exec";
+    return "https://script.google.com/macros/s/AKfycbzFKYjND8hoA4e0Isggn-mUkyZoJfMWzqGiqh-l1DpyfPsTgrcCypzSivuJsTZKOEsdrA/exec";
   }, []);
 
   const validateEmail = (val: string) => /.+@.+\..+/.test(val.trim());
@@ -76,7 +76,7 @@ export default function NewsletterForm({
         params.append("cb", String(Date.now()));
         const blob = new Blob([params.toString()], { type: "application/x-www-form-urlencoded" });
         const ok = typeof navigator !== "undefined" && navigator.sendBeacon
-          ? navigator.sendBeacon(GOOGLE_SHEET_WEBAPP_URL, blob)
+          ? navigator.sendBeacon(String(GOOGLE_SHEET_WEBAPP_URL), blob)
           : false;
         if (ok) {
           setEmail("");
@@ -136,5 +136,3 @@ export default function NewsletterForm({
     </form>
   );
 }
-
-
