@@ -4,7 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Footer } from "@/components/ui/footer";
 import { Header } from "@/components/ui/header";
 import { ScrollToTop } from "@/components/ui/scroll-to-top";
-import { CookieConsent } from "@/components/ui/cookie-consent";
+import { EnhancedCookieConsent } from "@/components/ui/enhanced-cookie-consent";
 import { GoogleAnalytics } from "@/components/ui/google-analytics";
 import { BackgroundGlass } from "@/components/ui/background-glass";
 import AdSenseLoader from "@/components/ui/adsense-loader";
@@ -186,7 +186,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
-          <CookieConsent />
+          <EnhancedCookieConsent />
           <ScrollToTop />
           <Analytics />
           <SpeedInsights />
