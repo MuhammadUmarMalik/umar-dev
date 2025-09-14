@@ -462,6 +462,16 @@ export default function BlogPostPage({ params }: Props) {
         
         {/* Content container */}
         <div className="container relative z-20 mx-auto px-4 md:px-6 py-16 md:py-20">
+          {/* Back to blog */}
+          <div className="max-w-4xl mx-auto mb-6">
+            <Link href="/blog" className="inline-flex items-center gap-2 text-slate-400 hover:text-blue-400 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              <span>Back to articles</span>
+            </Link>
+          </div>
+
           <div className="max-w-4xl mx-auto text-center">
             {/* Category badge */}
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-blue-600/20 border border-blue-500/30 text-blue-400 text-xs font-medium backdrop-blur-sm mb-6">
