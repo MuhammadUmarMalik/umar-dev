@@ -9,32 +9,9 @@ import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import rehypeSanitize from "rehype-sanitize";
 import TOC from "@/components/ui/toc";
+import CodeBlock from "@/components/ui/code-block";
 
-// Custom code block component for better presentation
-const CodeBlock = ({ language, value, filename }: { language: string; value: string; filename?: string }) => {
-  return (
-    <div className="code-container">
-      {filename && (
-        <div className="code-header">
-          <div className="flex items-center gap-2">
-            <span className="flex space-x-1.5">
-              <span className="w-3 h-3 rounded-full bg-red-500/80"></span>
-              <span className="w-3 h-3 rounded-full bg-yellow-500/80"></span>
-              <span className="w-3 h-3 rounded-full bg-green-500/80"></span>
-            </span>
-            <span>{filename}</span>
-          </div>
-          <div className="text-xs opacity-70">{language}</div>
-        </div>
-      )}
-      <pre>
-        <code className={language ? `language-${language}` : ''}>
-          {value}
-        </code>
-      </pre>
-    </div>
-  );
-};
+// CodeBlock moved to client component at @/components/ui/code-block
 
 type Props = { params: { slug: string } };
 
