@@ -8,6 +8,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import rehypeSanitize from "rehype-sanitize";
+import TOC from "@/components/ui/toc";
 
 // Custom code block component for better presentation
 const CodeBlock = ({ language, value, filename }: { language: string; value: string; filename?: string }) => {
@@ -62,6 +63,26 @@ export async function generateMetadata({ params }: Props) {
 export default function BlogPostPage({ params }: Props) {
   const post = findPostBySlug(params.slug);
   if (!post) return notFound();
+
+  // Create stable, URL-friendly IDs from heading children
+  const getNodeText = (node: React.ReactNode): string => {
+    if (typeof node === 'string' || typeof node === 'number') return String(node);
+    if (Array.isArray(node)) return node.map(getNodeText).join(' ');
+    if (React.isValidElement(node)) {
+      const el = node as React.ReactElement<{ children?: React.ReactNode }>;
+      return getNodeText(el.props?.children);
+    }
+    return '';
+  };
+
+  const slugify = (node: React.ReactNode): string => {
+    const text = getNodeText(node);
+    return text
+      .toLowerCase()
+      .trim()
+      .replace(/[\u2000-\u206F\u2E00-\u2E7F'".,:;!?(){}\[\]<>@#$%^&*+=~`|\\/]+/g, '')
+      .replace(/\s+/g, '-');
+  };
 
   const formattedDate = new Date(post.date).toLocaleDateString('en-US', {
     year: 'numeric',
@@ -135,6 +156,25 @@ export default function BlogPostPage({ params }: Props) {
       height: 4px;
       border-radius: 50%;
       background-color: rgba(59, 130, 246, 0.5);
+    }
+
+    .toc-subsubitem {
+      margin-top: 0.35rem;
+      margin-bottom: 0.35rem;
+      padding-left: 1.75rem;
+      position: relative;
+      opacity: 0.9;
+    }
+    
+    .toc-subsubitem::before {
+      content: "";
+      position: absolute;
+      left: 0.75rem;
+      top: 0.6rem;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background-color: rgba(59, 130, 246, 0.4);
     }
     
     .toc-link {
@@ -311,77 +351,7 @@ export default function BlogPostPage({ params }: Props) {
     }
   `;
 
-  // Script for table of contents and scroll tracking
-  const tableOfContentsScript = `
-    (function() {
-      function generateTableOfContents() {
-        const article = document.querySelector('.blog-content');
-        const tocContainer = document.querySelector('.toc');
-        if (!article || !tocContainer) return;
-        
-        const headings = article.querySelectorAll('h2, h3');
-        if (headings.length === 0) {
-          tocContainer.style.display = 'none';
-          return;
-        }
-        
-        // Ensure all headings have IDs
-        headings.forEach((heading, index) => {
-          if (!heading.id) heading.id = 'heading-' + index;
-        });
-        
-        const tocList = document.createElement('ul');
-        tocList.className = 'toc-list';
-        
-        headings.forEach((heading) => {
-          const listItem = document.createElement('li');
-          listItem.className = heading.tagName.toLowerCase() === 'h3' ? 'toc-subitem' : 'toc-item';
-          
-          const link = document.createElement('a');
-          link.href = '#' + heading.id;
-          link.textContent = heading.textContent;
-          link.className = 'toc-link';
-          link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector('#' + heading.id);
-            if (!target) return;
-            const headerOffset = 100;
-            const y = target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
-            window.scrollTo({ top: y, behavior: 'smooth' });
-          });
-          
-          listItem.appendChild(link);
-          tocList.appendChild(listItem);
-        });
-        
-        tocContainer.appendChild(tocList);
-        
-        // Highlight active section in TOC
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                const id = entry.target.id;
-                document.querySelectorAll('.toc-link').forEach(link => {
-                  link.classList.toggle('active', link.getAttribute('href') === '#' + id);
-                });
-              }
-            });
-          },
-          { rootMargin: '-100px 0px -70% 0px', threshold: 0.1 }
-        );
-        
-        headings.forEach(heading => observer.observe(heading));
-      }
-      
-      // Initialize when DOM is ready
-      if (document.readyState === 'complete') {
-        generateTableOfContents();
-      } else {
-        window.addEventListener('load', generateTableOfContents);
-      }
-    })();
-  `;
+  // Removed inline TOC script; TOC is now a client component
 
   // Script for reading progress bar
   const readingProgressScript = `
@@ -480,7 +450,6 @@ export default function BlogPostPage({ params }: Props) {
       
       {/* Scripts for interactive elements */}
       <script dangerouslySetInnerHTML={{ __html: socialShareScript }} />
-      <script dangerouslySetInnerHTML={{ __html: tableOfContentsScript }} />
       <script dangerouslySetInnerHTML={{ __html: readingProgressScript }} />
       
       {/* Hero banner with featured image and post title */}
@@ -575,19 +544,11 @@ export default function BlogPostPage({ params }: Props) {
         <article className="max-w-6xl mx-auto">
         <div className="lg:grid lg:grid-cols-12 lg:gap-8">
             {/* Left sidebar with TOC and share buttons */}
-            <aside className="hidden lg:block lg:col-span-2 relative">
+            <aside className="hidden lg:block lg:col-span-3 xl:col-span-3 relative">
               <div className="sticky top-28 space-y-10">
-                {/* Table of Contents */}
-                <div className="toc bg-slate-900/40 rounded-xl border border-slate-700/30 p-5 backdrop-blur-sm">
-                  <h3 className="text-lg font-medium text-white flex items-center gap-2 mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h7" />
-                    </svg>
-                    Contents
-                  </h3>
-                  {/* TOC content will be populated by JS */}
-                </div>
-                
+                {/* Table of Contents (top-left) */}
+                <TOC className="toc w-64 xl:w-72 shrink-0 bg-slate-900/40 rounded-xl border border-slate-700/30 p-5 backdrop-blur-sm" />
+
                 {/* Share buttons */}
                 <div className="floating-share text-center">
                   <h3 className="text-sm font-medium text-slate-400 uppercase tracking-wider mb-4">Share</h3>
@@ -613,7 +574,7 @@ export default function BlogPostPage({ params }: Props) {
             </aside>
 
             {/* Main content column */}
-            <div className="lg:col-span-10">
+            <div className="lg:col-span-9 xl:col-span-9">
               {/* Content container with enhanced styling */}
               <div className="bg-slate-950/40 backdrop-blur-sm rounded-2xl border border-slate-800/40 shadow-xl overflow-hidden">
                 {/* Decorative elements */}
@@ -622,17 +583,9 @@ export default function BlogPostPage({ params }: Props) {
                 
                 {/* Main content with improved spacing */}
                 <div className="p-8 sm:p-12 md:p-16 relative">
-                  {/* Mobile TOC (visible only on mobile) */}
+                  {/* Mobile TOC (collapsible) */}
                   <div className="mb-8 lg:hidden">
-                    <div className="toc bg-slate-900/40 rounded-xl border border-slate-700/30 p-5 backdrop-blur-sm">
-                      <h3 className="text-lg font-medium text-white flex items-center gap-2 mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h7" />
-                        </svg>
-                        Contents
-                      </h3>
-                      {/* TOC content will be populated by JS */}
-                    </div>
+                    <TOC className="toc bg-slate-900/40 rounded-xl border border-slate-700/30 p-5 backdrop-blur-sm" collapsible initialOpen={false} />
                   </div>
                   
                   {/* Mobile share buttons */}
@@ -673,13 +626,25 @@ export default function BlogPostPage({ params }: Props) {
                     prose-li:text-slate-200 prose-li:my-1.5 prose-li:leading-relaxed
                     prose-strong:text-white prose-strong:font-medium
                     prose-blockquote:border-blue-500/60 prose-blockquote:bg-slate-800/20 prose-blockquote:rounded-lg prose-blockquote:py-2 prose-blockquote:px-6 prose-blockquote:shadow-sm prose-blockquote:not-italic
-                    max-w-[720px] mx-auto">
+                    max-w-[780px] xl:max-w-[820px] mx-auto">
                     {/* Subtle heading indicator line */}
                     <div className="mb-8 flex items-center gap-2">
                       <div className="h-0.5 w-6 bg-blue-500 rounded-full"></div>
                       <div className="h-0.5 w-3 bg-blue-500/70 rounded-full"></div>
                       <div className="h-0.5 w-1.5 bg-blue-500/40 rounded-full"></div>
                     </div>
+                    
+                    {/* Add sample headings for testing if no content */}
+                    {!post.content && (
+                      <>
+                        <h2>Sample Heading 2</h2>
+                        <p>Some sample content to test TOC generation</p>
+                        <h3>Sample Subheading 3</h3>
+                        <p>More sample content for testing</p>
+                        <h2>Another Heading 2</h2>
+                        <p>Final test content</p>
+                      </>
+                    )}
                     
                     <ReactMarkdown 
                       remarkPlugins={[remarkGfm]}
@@ -704,8 +669,8 @@ export default function BlogPostPage({ params }: Props) {
                           );
                         },
                         // Enhanced heading components with anchors
-                        h2: ({children, ...props}) => {
-                          const id = children?.toString().toLowerCase().replace(/\s+/g, '-');
+                        h2: ({children, ...props}: { children?: React.ReactNode }) => {
+                          const id = slugify(children || '') || undefined;
                           return (
                             <h2 id={id} {...props} className="group relative">
                               {children}
@@ -717,8 +682,8 @@ export default function BlogPostPage({ params }: Props) {
                             </h2>
                           );
                         },
-                        h3: ({children, ...props}) => {
-                          const id = children?.toString().toLowerCase().replace(/\s+/g, '-');
+                        h3: ({children, ...props}: { children?: React.ReactNode }) => {
+                          const id = slugify(children || '') || undefined;
                           return (
                             <h3 id={id} {...props} className="group relative">
                               {children}
@@ -942,6 +907,8 @@ export default function BlogPostPage({ params }: Props) {
                 </div>
               </div>
             </div>
+
+            {/* Right sidebar removed to keep TOC on top-left */}
           </div>
         </article>
       </Section>
