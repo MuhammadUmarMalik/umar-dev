@@ -47,6 +47,23 @@ export default function BlogIndexPage() {
           height: 2px;
           background: linear-gradient(to right, rgb(59, 130, 246), rgb(168, 85, 247));
         }
+
+        /* Modern card hover effects */
+        .card-3d { perspective: 1200px; }
+        .card-3d .inner { transform: rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateZ(0); transition: transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .4s ease, border-color .3s ease; will-change: transform; }
+        .card-3d:hover .inner { transform: translateY(-6px) scale(1.01); }
+
+        .card-3d .glow { position: absolute; inset: -1px; border-radius: 16px; background: conic-gradient(from 180deg at 50% 50%, rgba(59,130,246,.0), rgba(59,130,246,.35), rgba(147,51,234,.35), rgba(59,130,246,.35), rgba(59,130,246,.0)); filter: blur(16px); opacity: 0; transition: opacity .4s ease; pointer-events: none; }
+        .card-3d:hover .glow { opacity: .9; animation: card-rotate 8s linear infinite; }
+
+        .card-3d .shine::after { content: ''; position: absolute; inset: -1px; border-radius: 16px; background: linear-gradient(120deg, transparent, rgba(255,255,255,.12), transparent); transform: translateX(-130%) skewX(-15deg); transition: transform .7s ease, opacity .4s ease; opacity: 0; }
+        .card-3d:hover .shine::after { transform: translateX(130%) skewX(-15deg); opacity: 1; }
+
+        /* Spotlight following cursor */
+        .card-3d .inner::before { content: ''; position: absolute; inset: -1px; border-radius: 16px; background: radial-gradient(600px circle at var(--px,50%) var(--py,50%), rgba(59,130,246,.15), transparent 40%); opacity: 0; transition: opacity .4s ease; pointer-events: none; }
+        .card-3d:hover .inner::before { opacity: 1; }
+
+        @keyframes card-rotate { to { transform: rotate(360deg); } }
       `}} />
       {/* Client-side filtering with improved implementation */}
       <script
@@ -163,6 +180,41 @@ export default function BlogIndexPage() {
           `
         }}
       />
+      {/* Card motion/spotlight interactions */}
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+            (function() {
+              function initCardMotion() {
+                const cards = document.querySelectorAll('.card-3d');
+                cards.forEach(function(card){
+                  const inner = card.querySelector('.inner');
+                  if (!inner) return;
+                  function onMove(e){
+                    const b = card.getBoundingClientRect();
+                    const x = e.clientX - b.left;
+                    const y = e.clientY - b.top;
+                    const px = x / b.width; const py = y / b.height;
+                    const rx = (py - 0.5) * -10; const ry = (px - 0.5) * 10;
+                    inner.style.setProperty('--rx', rx.toFixed(2) + 'deg');
+                    inner.style.setProperty('--ry', ry.toFixed(2) + 'deg');
+                    inner.style.setProperty('--px', (px * 100).toFixed(1) + '%');
+                    inner.style.setProperty('--py', (py * 100).toFixed(1) + '%');
+                  }
+                  function onLeave(){
+                    inner.style.setProperty('--rx', '0deg');
+                    inner.style.setProperty('--ry', '0deg');
+                  }
+                  card.addEventListener('mousemove', onMove);
+                  card.addEventListener('mouseleave', onLeave);
+                });
+              }
+              if (document.readyState !== 'loading') initCardMotion();
+              else document.addEventListener('DOMContentLoaded', initCardMotion);
+            })();
+          `
+        }}
+      />
     
       <div className="relative overflow-hidden pt-28 sm:pt-36 md:pt-44 lg:pt-48 pb-16 sm:pb-20">
 
@@ -254,13 +306,12 @@ export default function BlogIndexPage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {posts.map((post) => (
-              <Link key={post.slug} href={`/blog/${post.slug}`} className="group" data-category={post.category}>
+              <Link key={post.slug} href={`/blog/${post.slug}`} className="group card-3d" data-category={post.category}>
                 <article className="relative flex flex-col h-full overflow-hidden">
-                  {/* Card glow effect */}
-                  <div className="absolute -inset-1 bg-gradient-to-tr from-blue-600/0 via-blue-600/0 to-purple-600/0 rounded-2xl opacity-0 group-hover:opacity-100 group-hover:from-blue-600/20 group-hover:via-blue-600/10 group-hover:to-purple-600/20 blur-md transition-all duration-500 -z-10"></div>
-                  
+                  {/* Animated glow */}
+                  <div className="glow"></div>
                   {/* Card content */}
-                  <div className="relative flex-1 rounded-2xl border border-slate-800/80 bg-gradient-to-b from-slate-900/90 to-slate-950/90 p-6 sm:p-8 transition-all duration-300 group-hover:border-slate-700/80 group-hover:shadow-lg">
+                  <div className="inner shine relative flex-1 rounded-2xl border border-slate-800/80 bg-gradient-to-b from-slate-900/90 to-slate-950/90 p-6 sm:p-8 transition-all duration-300 group-hover:border-slate-700/60 group-hover:shadow-2xl group-hover:shadow-blue-950/30">
                     {/* Tag */}
                     <div className="flex items-center gap-2 mb-4">
                       <span className="px-3 py-1 rounded-full text-xs font-medium bg-blue-900/20 border border-blue-500/20 text-blue-400">
@@ -286,9 +337,9 @@ export default function BlogIndexPage() {
                     </p>
                     
                     {/* Read more button */}
-                    <div className="flex items-center gap-2 text-blue-400 font-medium group-hover:translate-x-1 transition-transform duration-300">
+                    <div className="flex items-center gap-2 text-blue-400 font-medium transition-all duration-300 group-hover:gap-3">
                       Read article
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 group-hover:translate-x-0.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                       </svg>
                     </div>

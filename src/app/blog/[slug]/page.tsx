@@ -827,38 +827,38 @@ export default function BlogPostPage({ params }: Props) {
                     </div>
                     
                     {/* Posts grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10 justify-items-center">
                       {posts.filter(p => p.slug !== post.slug).slice(0, 2).map(relatedPost => (
-                        <Link key={relatedPost.slug} href={`/blog/${relatedPost.slug}`} className="group block w-full max-w-[520px] md:max-w-[560px] mx-auto">
-                          <div className="related-card rounded-xl overflow-hidden bg-slate-900/40 backdrop-blur-sm h-full flex flex-col shadow-md w-full">
+                        <Link key={relatedPost.slug} href={`/blog/${relatedPost.slug}`} className="group block w-full max-w-[560px] mx-auto">
+                          <div className="related-card rounded-2xl overflow-hidden bg-slate-900/50 backdrop-blur-md h-full flex flex-col shadow-xl shadow-blue-950/30 ring-1 ring-slate-800/60 hover:ring-blue-500/40 transition-all duration-300 w-full">
                             {/* Featured image area */}
-                            <div className="relative h-48 bg-gradient-to-br from-blue-900/30 to-purple-900/30 overflow-hidden">
+                            <div className="relative h-52 bg-gradient-to-br from-blue-900/30 to-purple-900/30 overflow-hidden">
                               {relatedPost.image ? (
                                 <div className="relative w-full h-full">
                                   <Image
                                     src={relatedPost.image}
                                     alt={relatedPost.title}
                                     fill
-                                    className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100"
+                                    className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
                                   />
                                 </div>
                               ) : (
-                                <div className="absolute inset-0 opacity-30 group-hover:opacity-40 transition-opacity">
-                                  <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 bg-blue-500/10 rounded-full blur-2xl group-hover:bg-blue-500/20 transition-all"></div>
-                                  <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-purple-500/10 rounded-full blur-xl group-hover:bg-purple-500/20 transition-all"></div>
+                                <div className="absolute inset-0 opacity-40 group-hover:opacity-50 transition-opacity">
+                                  <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 bg-blue-500/10 rounded-full blur-2xl group-hover:bg-blue-500/20 transition-all" />
+                                  <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-purple-500/10 rounded-full blur-xl group-hover:bg-purple-500/20 transition-all" />
                                 </div>
                               )}
                               
                               {/* Category badge */}
                               <div className="absolute top-4 left-4 z-10">
-                                <span className="px-3 py-1 rounded-full text-xs font-medium bg-blue-600/80 text-white shadow-lg shadow-blue-900/30">
+                                <span className="px-3 py-1 rounded-full text-xs font-medium bg-blue-600/90 text-white shadow-lg shadow-blue-900/30 backdrop-blur">
                                   {relatedPost.category}
                                 </span>
                               </div>
                             </div>
                             
                             <div className="p-6 flex-1 flex flex-col">
-                              <div className="flex items-center gap-2 mb-3 text-xs text-slate-500">
+                              <div className="flex items-center gap-2 mb-3 text-xs text-slate-400">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                 </svg>
@@ -867,8 +867,8 @@ export default function BlogPostPage({ params }: Props) {
                                 <span>{Math.ceil(relatedPost.content.length / 1000)} min read</span>
                               </div>
                               
-                              <h4 className="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">{relatedPost.title}</h4>
-                              <p className="text-slate-400 text-sm mb-5 line-clamp-2">{relatedPost.excerpt}</p>
+                              <h4 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors tracking-tight">{relatedPost.title}</h4>
+                              <p className="text-slate-300/90 text-sm mb-5 line-clamp-2">{relatedPost.excerpt}</p>
                               
                               <div className="mt-auto">
                                 <span className="inline-flex items-center gap-2 text-blue-400 text-sm font-medium group-hover:gap-3 transition-all">
