@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s | Muhammad Umar"
   },
   description: "Professional Full Stack Developer & Creative Designer specializing in modern web applications, mobile development, and UI/UX design. Building exceptional digital experiences with React, Next.js, Node.js & more.",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "umarmalik-dev.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://www.umarmalik-dev.com"),
   keywords: [
     "Full Stack Developer",
     "Frontend Developer", 
@@ -120,6 +120,7 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon.png" type="image/png" />
         <link rel="apple-touch-icon" href="/favicon.png" />
+        <meta name="google-adsense-account" content="ca-pub-2087381537421355" />
         {/* Google AdSense */}
         <Script
           id="adsbygoogle"
@@ -131,7 +132,7 @@ export default function RootLayout({
         {process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION && (
           <meta
             name="google-site-verification"
-            content={process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION}
+            content="ca-pub-2087381537421355"
           />
         )}
         {/* Consent Mode v2 defaults (deny until user accepts) */}
