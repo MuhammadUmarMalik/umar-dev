@@ -430,7 +430,7 @@ export default function BlogPostPage({ params }: Props) {
       <script dangerouslySetInnerHTML={{ __html: readingProgressScript }} />
       
       {/* Hero banner with featured image and post title */}
-      <div className="relative w-full  flex items-center">
+      <div className="relative w-full flex items-center pt-24 md:pt-28">
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950/95 via-slate-950/80 to-slate-950/95 z-10"></div>
         
