@@ -47,7 +47,7 @@ const nextConfig: NextConfig = {
   },
 
   // Webpack configuration for production builds
-  webpack: (config, { dev, isServer }) => {
+  webpack: (config, { dev }) => {
     // Production optimizations
     if (!dev) {
       config.resolve.fallback = {
@@ -110,6 +110,22 @@ const nextConfig: NextConfig = {
             value: 'public, max-age=31536000, immutable',
           },
         ],
+      },
+    ];
+  },
+  // Redirects for canonical domain (force www)
+  redirects: async () => {
+    return [
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'umarmalik-dev.com',
+          },
+        ],
+        destination: 'https://www.umarmalik-dev.com/:path*',
+        permanent: true,
       },
     ];
   },
