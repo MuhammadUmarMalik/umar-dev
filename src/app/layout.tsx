@@ -106,6 +106,7 @@ export default function RootLayout({
     <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
       <head>
         {/* Preconnects / DNS-Prefetch for performance */}
+        <meta name="google-adsense-account" content="ca-pub-2087381537421355"></meta>
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
@@ -118,6 +119,14 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.png" type="image/png" />
         <link rel="apple-touch-icon" href="/favicon.png" />
         <meta name="google-adsense-account" content="ca-pub-2087381537421355" />
+        {/* Google AdSense */}
+        <Script
+          id="adsbygoogle"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2087381537421355"
+          strategy="afterInteractive"
+          async
+          crossOrigin="anonymous"
+        />
         {process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION && (
           <meta
             name="google-site-verification"

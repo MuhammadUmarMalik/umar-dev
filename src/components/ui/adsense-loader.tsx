@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 type Props = {
   publisherId: string;
@@ -12,6 +12,10 @@ export default function AdSenseLoader({ publisherId }: Props) {
     function loadScript() {
       if (loadedRef.current) return;
       loadedRef.current = true;
+      const existing = document.querySelector(
+        'script[src^="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]'
+      ) as HTMLScriptElement | null;
+      if (existing) return;
       const script = document.createElement("script");
       script.setAttribute("data-ad-client", publisherId);
       script.async = true;
