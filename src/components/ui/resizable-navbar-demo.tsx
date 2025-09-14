@@ -39,7 +39,14 @@ export default function NavbarDemo() {
           <NavItems items={navItems} />
           <div className="flex items-center gap-4">
             <NavbarButton variant="secondary">Login</NavbarButton>
-            <NavbarButton variant="primary">Book a call</NavbarButton>
+            <NavbarButton
+              variant="primary"
+              href="https://calendly.com/umarmalik-cs711/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Book a call
+            </NavbarButton>
           </div>
         </NavBody>
 
@@ -72,13 +79,9 @@ export default function NavbarDemo() {
                 onClick={() => setIsMobileMenuOpen(false)}
                 variant="primary"
                 className="w-full"
-              >
-                Login
-              </NavbarButton>
-              <NavbarButton
-                onClick={() => setIsMobileMenuOpen(false)}
-                variant="primary"
-                className="w-full"
+                href="https://calendly.com/umarmalik-cs711/30min"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 Book a call
               </NavbarButton>
@@ -86,14 +89,14 @@ export default function NavbarDemo() {
           </MobileNavMenu>
         </MobileNav>
       </Navbar>
-      <DummyContent />
+      {/* <DummyContent /> */}
 
       {/* Navbar */}
     </div>
   );
 }
 
-const DummyContent = () => {
+export const DummyContent = () => {
   return (
     <div className="container mx-auto p-8 pt-24">
       <h1 className="mb-4 text-center text-3xl font-bold">

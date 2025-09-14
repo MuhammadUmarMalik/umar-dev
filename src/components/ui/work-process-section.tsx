@@ -147,12 +147,14 @@ export const WorkProcessSection = () => {
                             Let&apos;s discuss your project and kick off this proven process that has delivered success for countless clients.
           </p>
           
-          <button
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-xl hover:from-indigo-700 hover:to-purple-700 transform hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl"
+          <a
+            href="https://calendly.com/umarmalik-cs711/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-xl hover:from-indigo-700 hover:to-purple-700 transform hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl"
           >
             Book Your Free Consultation
-          </button>
+          </a>
         </motion.div>
       </div>
     </section>
