@@ -5,7 +5,7 @@ export function ContactForm() {
   const [status, setStatus] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   // Configure your Google Apps Script Web App URL in .env.local as NEXT_PUBLIC_GSHEET_WEBAPP_URL
-  const GOOGLE_SHEET_WEBAPP_URL ="https://script.google.com/macros/s/AKfycbyKF2oed8mTTmElPMtwd3gWxQUfajnDkz7aX06MHHOquhp7ZNcOWO0p0yukGB28DlcZPA/exec";
+  const GOOGLE_SHEET_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbyKF2oed8mTTmElPMtwd3gWxQUfajnDkz7aX06MHHOquhp7ZNcOWO0p0yukGB28DlcZPA/exec";
 
   // Ensures all fields clear (including selects with placeholder)
   const resetFormFields = (form: HTMLFormElement) => {
@@ -24,7 +24,8 @@ export function ContactForm() {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
+    const formEl = e.currentTarget;
+    const formData = new FormData(formEl);
     const name = (formData.get("name") as string | null)?.toString().trim();
     const email = (formData.get("email") as string | null)?.toString().trim();
     const country = (formData.get("country") as string | null)?.toString().trim() || "";
@@ -56,19 +57,27 @@ export function ContactForm() {
       form: 'contact'
     } as const;
 
+    let submitted = false;
     try {
       setSubmitting(true);
-      // Single, preflight-free submission: GET with query params (handled by doGet)
+      // Single, preflight-free submission: GET with query params (handled by doGet) when short enough
       const params = new URLSearchParams();
       Object.entries(payload).forEach(([k, v]) => params.append(k, String(v ?? '')));
       params.append('cb', String(Date.now()));
-      await fetch(`${GOOGLE_SHEET_WEBAPP_URL}?${params.toString()}`, {
-        method: 'GET',
-        mode: 'no-cors',
-        keepalive: true,
-      });
-      resetFormFields(e.currentTarget);
-      setStatus(null);
+      const queryString = params.toString();
+      if (queryString.length <= 1900) {
+        await fetch(`${GOOGLE_SHEET_WEBAPP_URL}?${queryString}`, {
+          method: 'GET',
+          mode: 'no-cors',
+          keepalive: true,
+        });
+        resetFormFields(formEl);
+        setStatus("Thanks! Your message has been sent.");
+        submitted = true;
+        return;
+      }
+      // If the query is too long for a safe GET, use fallbacks
+      throw new Error('QUERY_TOO_LONG');
     } catch {
       // Fallback 1: sendBeacon (fires-and-forgets without CORS/preflight)
       try {
@@ -80,8 +89,9 @@ export function ContactForm() {
           ? navigator.sendBeacon(GOOGLE_SHEET_WEBAPP_URL, blob)
           : false;
         if (ok) {
-          resetFormFields(e.currentTarget);
-          setStatus(null);
+          resetFormFields(formEl);
+          setStatus("Thanks! Your message has been sent.");
+          submitted = true;
           return;
         }
       } catch {}
@@ -96,13 +106,18 @@ export function ContactForm() {
           mode: 'no-cors',
           keepalive: true,
         });
-        resetFormFields(e.currentTarget);
-        setStatus(null);
+        resetFormFields(formEl);
+        setStatus("Thanks! Your message has been sent.");
+        submitted = true;
       } catch {
         setStatus("Something went wrong. Please try again later.");
       }
     } finally {
       setSubmitting(false);
+      // Extra safety: ensure fields are cleared when submission succeeded
+      if (submitted) {
+        try { resetFormFields(formEl); } catch {}
+      }
     }
   };
 
