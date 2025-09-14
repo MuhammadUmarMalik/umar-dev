@@ -116,6 +116,12 @@ const nextConfig: NextConfig = {
   // Rewrites for missing public asset paths
   rewrites: async () => {
     return [
+      // Canonicalize apex to www (optional; requires DNS apex to resolve)
+      // If you want www -> apex instead, invert source/destination.
+      {
+        source: 'https://umarmalik-dev.com/:path*',
+        destination: 'https://www.umarmalik-dev.com/:path*',
+      },
       {
         source: '/favicon.ico',
         destination: '/icons/favicon.ico',

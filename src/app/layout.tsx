@@ -118,6 +118,12 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.png" type="image/png" />
         <link rel="apple-touch-icon" href="/favicon.png" />
         <meta name="google-adsense-account" content="ca-pub-2087381537421355" />
+        {process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION && (
+          <meta
+            name="google-site-verification"
+            content={process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION}
+          />
+        )}
         {/* Consent Mode v2 defaults (deny until user accepts) */}
         <Script id="consent-defaults" strategy="beforeInteractive">
           {`
