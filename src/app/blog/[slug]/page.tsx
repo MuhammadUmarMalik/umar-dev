@@ -453,7 +453,7 @@ export default function BlogPostPage({ params }: Props) {
       <script dangerouslySetInnerHTML={{ __html: readingProgressScript }} />
       
       {/* Hero banner with featured image and post title */}
-      <div className="relative w-full min-h-[50vh] md:min-h-[60vh] flex items-center">
+      <div className="relative w-full  flex items-center">
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950/95 via-slate-950/80 to-slate-950/95 z-10"></div>
         
@@ -545,36 +545,15 @@ export default function BlogPostPage({ params }: Props) {
         <div className="lg:grid lg:grid-cols-12 lg:gap-8">
             {/* Left sidebar with TOC and share buttons */}
             <aside className="hidden lg:block lg:col-span-3 xl:col-span-3 relative">
-              <div className="sticky top-28 space-y-10">
-                {/* Table of Contents (top-left) */}
+              <div className="sticky top-28">
+                {/* Table of Contents (top-left, sticky) */}
                 <TOC className="toc w-64 xl:w-72 shrink-0 bg-slate-900/40 rounded-xl border border-slate-700/30 p-5 backdrop-blur-sm" />
-
-                {/* Share buttons */}
-                <div className="floating-share text-center">
-                  <h3 className="text-sm font-medium text-slate-400 uppercase tracking-wider mb-4">Share</h3>
-                  <div className="flex flex-col items-center gap-3">
-                    <button className="share-btn twitter" data-network="twitter" aria-label="Share on Twitter">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
-                      </svg>
-                    </button>
-                    <button className="share-btn facebook" data-network="facebook" aria-label="Share on Facebook">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
-                      </svg>
-                    </button>
-                    <button className="share-btn linkedin" data-network="linkedin" aria-label="Share on LinkedIn">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
-                      </svg>
-                    </button>
-                  </div>
-                </div>
               </div>
+
             </aside>
 
             {/* Main content column */}
-            <div className="lg:col-span-9 xl:col-span-9">
+            <div className="lg:col-span-9 xl:col-span-9 min-w-0">
               {/* Content container with enhanced styling */}
               <div className="bg-slate-950/40 backdrop-blur-sm rounded-2xl border border-slate-800/40 shadow-xl overflow-hidden">
                 {/* Decorative elements */}
@@ -699,6 +678,30 @@ export default function BlogPostPage({ params }: Props) {
                     >
                       {post.content}
                     </ReactMarkdown>
+
+                    {/* Social share at end of blog post */}
+                    <div className="mt-10 pt-6 border-t border-slate-800/50">
+                      <div className="flex items-center justify-between flex-wrap gap-4">
+                        <h3 className="text-sm font-medium text-slate-400 uppercase tracking-wider">Share this article</h3>
+                        <div className="flex items-center gap-3">
+                          <button className="share-btn twitter" data-network="twitter" aria-label="Share on Twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                            </svg>
+                          </button>
+                          <button className="share-btn facebook" data-network="facebook" aria-label="Share on Facebook">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                            </svg>
+                          </button>
+                          <button className="share-btn linkedin" data-network="linkedin" aria-label="Share on LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                     
                     {/* Section divider */}
@@ -837,8 +840,8 @@ export default function BlogPostPage({ params }: Props) {
                     </div>
                     
                     {/* Posts grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                      {posts.filter(p => p.slug !== post.slug).slice(0, 3).map(relatedPost => (
+                    <div className="grid grid-cols-1 md:[grid-template-columns:repeat(2,minmax(420px,1fr))] gap-8 justify-center">
+                      {posts.filter(p => p.slug !== post.slug).slice(0, 2).map(relatedPost => (
                         <Link key={relatedPost.slug} href={`/blog/${relatedPost.slug}`} className="group">
                           <div className="related-card rounded-xl overflow-hidden bg-slate-900/40 backdrop-blur-sm h-full flex flex-col shadow-md">
                             {/* Featured image area */}
