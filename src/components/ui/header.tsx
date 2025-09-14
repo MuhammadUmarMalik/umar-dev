@@ -73,11 +73,8 @@ export const Header = () => {
   }, [pathname]);
 
   const scrollToSection = (href: string) => {
-    console.log('🔍 Scrolling to:', href);
-    
     // Check if it's an external link (starts with '/')
     if (href.startsWith('/')) {
-      console.log('🌐 External link detected:', href);
       window.location.href = href;
       return;
     }
@@ -86,7 +83,6 @@ export const Header = () => {
     const element = document.getElementById(targetId);
     
     if (element) {
-      console.log('✅ Element found:', element);
       // Close mobile menu first
       setIsMobileMenuOpen(false);
       
@@ -95,17 +91,13 @@ export const Header = () => {
         const headerOffset = 100;
         const elementPosition = element.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-        
-        console.log('📍 Scrolling to position:', offsetPosition);
-        
+
         // Smooth scroll to section
         window.scrollTo({
           top: offsetPosition,
           behavior: 'smooth'
         });
       }, 150); // Small delay to let menu animation complete
-    } else {
-      console.log('❌ Element not found for ID:', targetId);
     }
   };
 
@@ -179,7 +171,6 @@ export const Header = () => {
             <button
               key={`mobile-link-${idx}`}
               onClick={(e) => {
-                console.log('📱 Mobile nav clicked:', item.name, item.link);
                 e.preventDefault();
                 e.stopPropagation();
                 scrollToSection(item.link);

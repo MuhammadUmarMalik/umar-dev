@@ -93,6 +93,7 @@ export const Navbar = ({ children, className }: NavbarProps) => {
       id="site-navbar"
       data-navbar-root
       className={cn("fixed inset-x-0 top-3 sm:top-4 z-[100] w-full px-3 sm:px-4 lg:px-8", className)}
+      style={{ position: 'fixed' }}
     >
       {React.Children.map(children, (child) =>
         React.isValidElement(child)
@@ -209,7 +210,7 @@ export const NavItems = ({ items, className, onItemClick, activeLink }: NavItems
     <motion.div
       onMouseLeave={() => setHovered(null)}
       className={cn(
-        "flex flex-1 flex-row items-center justify-center space-x-2 xl:space-x-4 text-sm font-medium text-slate-300 transition duration-200",
+        "relative flex flex-1 flex-row items-center justify-center space-x-2 xl:space-x-4 text-sm font-medium text-slate-300 transition duration-200",
         className,
       )}
     >

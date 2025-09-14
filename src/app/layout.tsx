@@ -106,6 +106,30 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon.png" type="image/png" />
         <link rel="apple-touch-icon" href="/favicon.png" />
+        {process.env.NODE_ENV === "development" && (
+          <script
+            // Suppress specific framer-motion measurement warning in dev to keep console clean
+            dangerouslySetInnerHTML={{
+              __html: `
+                (function(){
+                  if (typeof window === 'undefined') return;
+                  var originalWarn = console.warn;
+                  var msgPart = "Please ensure that the container has a non-static position";
+                  console.warn = function(){
+                    try {
+                      var args = Array.prototype.slice.call(arguments);
+                      var first = args[0] || '';
+                      if (typeof first === 'string' && first.indexOf(msgPart) !== -1) {
+                        return; // swallow this specific dev warning
+                      }
+                    } catch (e) {}
+                    return originalWarn.apply(console, arguments);
+                  };
+                })();
+              `,
+            }}
+          />
+        )}
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased text-white min-h-screen overflow-x-hidden`}
