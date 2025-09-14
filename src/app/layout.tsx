@@ -106,7 +106,6 @@ export default function RootLayout({
     <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
       <head>
         {/* Preconnects / DNS-Prefetch for performance */}
-        <meta name="google-adsense-account" content="ca-pub-2087381537421355"></meta>
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
