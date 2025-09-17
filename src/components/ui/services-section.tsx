@@ -114,9 +114,9 @@ export const ServicesSection = () => {
           </p>
         </motion.div>
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12 md:mb-16">
-          {services.map((service, index) => (
+        {/* Services Grid (show only 6) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12 md:mb-10">
+          {services.slice(0, 6).map((service, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
@@ -167,6 +167,16 @@ export const ServicesSection = () => {
               </motion.button>
             </motion.div>
           ))}
+        </div>
+
+        {/* View all services button */}
+        <div className="flex justify-center mb-12 md:mb-16">
+          <a
+            href="/services"
+            className="px-6 sm:px-8 py-3 sm:py-3.5 bg-transparent hover:bg-slate-800/50 text-slate-300 hover:text-white border border-slate-700/50 hover:border-blue-500/30 font-medium rounded-lg transition-all duration-300"
+          >
+            View all services →
+          </a>
         </div>
 
         {/* Call to Action */}

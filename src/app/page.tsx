@@ -4,8 +4,7 @@ import { ServicesSection } from "@/components/ui/services-section";
 import { ProjectsSection } from "@/components/ui/projects-section";
 import { TestimonialsSection } from "@/components/ui/testimonials-section";
 import { WorkProcessSection } from "@/components/ui/work-process-section";
-import { ContactSection } from "@/components/ui/contact-section";
-
+import { FAQSection } from "@/components/ui/faq-section";
 
 export default function Home() {
   return (
@@ -34,9 +33,10 @@ export default function Home() {
         <WorkProcessSection />
       </section>
       
-      <section id="contact">
-        <ContactSection />
+      <section id="faq">
+        <FAQSection />
       </section>
+      
     </main>
   );
 }
