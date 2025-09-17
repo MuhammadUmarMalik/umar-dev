@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { FlipWords } from "@/components/ui/flip-words";
 
 export const HeroSection = () => {
-  const words = ["Creative Designer", "Problem Solver", "UI/UX Expert", "Tech Innovator"];
+  const words = ["Revenue-Focused", "Conversion-Driven", "Performance First", "Design-Led"];
   const [showDecor, setShowDecor] = useState(false);
 
   useEffect(() => {
@@ -96,21 +96,21 @@ export const HeroSection = () => {
           </div>
 
           {/* CTA Section */}
-          <div
-            className="mb-10 sm:mb-14"
-          >
-            <p className="text-sm sm:text-base md:text-lg font-semibold text-white mb-3 sm:mb-4 px-2">
-                              <span className="hidden sm:inline">Let&apos;s Build Your Project Today</span>
-              <span className="sm:hidden">Ready to Start?</span>
-            </p>
-            
-            <button 
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-6 sm:px-8 md:px-10 py-3 sm:py-3.5 md:py-4 bg-[var(--color-primary-500)] hover:bg-[var(--color-primary-600)] text-white font-semibold rounded-xl active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)]/30 transform hover:-translate-y-0.5 transition-all duration-200 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)] text-base sm:text-lg"
-            >
-              <span className="hidden sm:inline">Get a Free Quote</span>
-              <span className="sm:hidden">Get Quote</span>
-            </button>
+          <div className="mb-10 sm:mb-14">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 px-2">
+              <button 
+                onClick={() => window.open('https://calendly.com/umarmalik-cs711/30min', '_blank')}
+                className="w-full sm:w-auto px-6 sm:px-8 md:px-10 py-3 sm:py-3.5 md:py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-semibold rounded-xl active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-blue-500/30 transform hover:-translate-y-0.5 transition-all duration-200 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)] text-base sm:text-lg"
+              >
+                Book a Free Consultation
+              </button>
+              <button 
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                className="w-full sm:w-auto px-6 sm:px-8 md:px-10 py-3 sm:py-3.5 md:py-4 bg-slate-800/50 border border-slate-700/50 hover:bg-slate-800/70 hover:border-slate-600/60 text-slate-200 font-semibold rounded-xl transition-all duration-200 text-base sm:text-lg"
+              >
+                Get a Proposal
+              </button>
+            </div>
           </div>
 
         </div>

@@ -5,6 +5,7 @@ import { ProjectsSection } from "@/components/ui/projects-section";
 import { TestimonialsSection } from "@/components/ui/testimonials-section";
 import { WorkProcessSection } from "@/components/ui/work-process-section";
 import { FAQSection } from "@/components/ui/faq-section";
+import { CTAAfterFAQ } from "@/components/ui/cta-after-faq";
 
 export default function Home() {
   return (
@@ -35,6 +36,10 @@ export default function Home() {
       
       <section id="faq">
         <FAQSection />
+      </section>
+      
+      <section id="cta">
+        <CTAAfterFAQ />
       </section>
       
     </main>
