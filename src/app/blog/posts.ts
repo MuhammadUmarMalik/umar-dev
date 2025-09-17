@@ -20,6 +20,72 @@ export const posts: BlogPost[] = [
       "# Getting Started with Next.js: A Practical Guide\n\n## Introduction\n\nHave you ever wanted to build a website that loads super fast and ranks well on Google? Next.js might be just what you need! In this beginner-friendly guide, I'll walk you through setting up your first Next.js project with no complicated jargon.\n\n## What is Next.js?\n\nNext.js is a framework built on top of React that makes creating websites easier. Think of it like a toolkit with everything you need already included. It handles many complex things automatically so you can focus on building your site.\n\n## Why Choose Next.js?\n\n- **Fast Websites**: Next.js creates speedy websites that visitors love\n- **SEO Friendly**: Search engines can easily understand your content\n- **Easy to Learn**: You can start with basic knowledge and learn as you go\n- **Great Developer Experience**: Helpful error messages and fast refresh while coding\n\n## Setting Up Your First Project\n\nLet's create your first Next.js project in just a few simple steps:\n\n1. Make sure you have Node.js installed (version 18.17 or newer)\n2. Open your terminal and run this command:\n\n```bash\nnpx create-next-app@latest my-first-nextjs-app\n```\n\n3. Answer the setup questions (you can just press Enter to accept the defaults)\n4. Once installation finishes, navigate to your project:\n\n```bash\ncd my-first-nextjs-app\n```\n\n5. Start your development server:\n\n```bash\nnpm run dev\n```\n\nThat's it! Visit http://localhost:3000 in your browser to see your new Next.js app running.\n\n## Understanding the Project Structure\n\nLet's look at the main folders and files in your new project:\n\n- **app/** - This is where your pages and components live\n- **public/** - Store images and other static files here\n- **package.json** - Lists your project dependencies\n\nThe most important folder is `app/`, which contains your website's pages.\n\n## Creating Your First Page\n\nIn Next.js, creating a new page is super easy. Just add a new folder in the `app` directory with a `page.tsx` file inside it.\n\nFor example, to create an \"About\" page:\n\n1. Create a folder: `app/about/`\n2. Add a file: `app/about/page.tsx`\n3. Add this simple code:\n\n```jsx\nexport default function AboutPage() {\n  return (\n    <div>\n      <h1>About Me</h1>\n      <p>This is my first Next.js page!</p>\n    </div>\n  );\n}\n```\n\nNow visit http://localhost:3000/about to see your new page!\n\n## Adding Styles with Tailwind CSS\n\nNext.js comes with Tailwind CSS, which makes styling easy with pre-built classes. Here's how to use it:\n\n```jsx\nexport default function AboutPage() {\n  return (\n    <div className=\"p-4 max-w-2xl mx-auto\">\n      <h1 className=\"text-3xl font-bold text-blue-600\">About Me</h1>\n      <p className=\"mt-2 text-gray-700\">This is my first Next.js page!</p>\n    </div>\n  );\n}\n```\n\n## Next Steps\n\nNow that you have your first Next.js app running, here are some things to try next:\n\n- Create more pages for your website\n- Add images from the public folder\n- Connect your site to a database\n- Deploy your site to Vercel with just a few clicks\n\n## Conclusion\n\nNext.js makes building modern websites accessible to beginners while providing powerful features for advanced developers. Start with these basics, and you'll be creating amazing websites in no time!\n\nHave questions about Next.js? Feel free to reach out through my contact page. Happy coding!",
   },
   {
+    slug: "adhuri-cart-case-study",
+    title: "Case Study: ADHURI CART – Scalable E‑commerce Backend with Adonis.js",
+    excerpt:
+      "How a modular Adonis.js API with JWT auth reduced checkout time by 42% and achieved 99.9% uptime.",
+    date: "2025-01-20",
+    category: "Case Studies",
+    image: "/images/adhuri-cart.webp",
+    content:
+      "# ADHURI CART – Scalable E‑commerce Backend with Adonis.js\n\n## Overview\n\nADHURI CART is a scalable e‑commerce backend built on **Adonis.js** with **JWT authentication**, **PostgreSQL**, caching, and robust observability. The goal was to modernize a legacy monolith that caused slow checkouts and recurring security incidents.\n\n## Problem\n\n- Monolithic codebase tightly coupled to views and business logic\n- Slow checkout flows, p95 > 4.5s on peak traffic\n- Authentication and session handling vulnerable to common OWASP issues\n- No clear separation for inventory, orders, and payments\n\n## Solution\n\n- Domain‑oriented modular architecture: `auth`, `catalog`, `cart`, `orders`, `payments`\n- **JWT** for stateless auth, refresh tokens, and role‑based access control\n- **PostgreSQL** with tuned indexes and connection pooling\n- **Caching** for product and cart reads to reduce DB load\n- **Queues** for order fulfillment and email notifications\n- **Observability**: structured logging, metrics, health checks\n\n## Architecture\n\n- API gateway exposes RESTful endpoints with versioning (e.g., `/v1/orders`)\n- Service layer encapsulates domain rules, repositories handle persistence\n- Validation at the edge; rate limiting and input sanitization\n\n## Outcomes\n\n- Checkout time: **−42%** (p95 ~ 2.6s → 1.5s)\n- Uptime: **99.9%** sustained over 90 days\n- Compliance: Aligned with **OWASP** best practices\n\n## Stack\n\n- Adonis.js, TypeScript, PostgreSQL, Redis, JWT, REST\n\n## Key Learning\n\nModular boundaries and observability drove most of the reliability gains while JWT + RBAC simplified auth flows across services.\n",
+  },
+  {
+    slug: "knowledge-exchange-api-case-study",
+    title: "Case Study: Knowledge Exchange API – Academic Marketplace Platform",
+    excerpt:
+      "Built a search‑first API with RBAC and rate limiting that 3× user engagement and reached 1.8k MAU.",
+    date: "2025-01-18",
+    category: "Case Studies",
+    image: "/images/knowledge-exchange.webp",
+    content:
+      "# Knowledge Exchange API – Academic Marketplace Platform\n\n## Overview\n\nA dynamic API powering a student‑to‑student marketplace for resources, tutoring, and collaboration. Focused on **discoverability**, **trust**, and **performance**.\n\n## Problem\n\n- Fragmented tools and poor content discovery\n- No role separation for buyers, sellers, and moderators\n- Abuse potential without rate limiting and audit trails\n\n## Solution\n\n- **Search‑first** design with weighted fields and filters\n- **RBAC**: students, mentors, moderators; scoped tokens\n- **Rate limiting** and API keys to prevent abuse\n- Content moderation workflow and activity logging\n\n## Outcomes\n\n- Engagement: **3×** increase in saved searches and messages\n- Scale: **1.8k MAU** within first quarter\n- Performance: **p95 < 250ms** on core endpoints\n\n## Stack\n\n- Node.js/TypeScript, Postgres, Redis, Elastic‑like search, JWT\n\n## Notes\n\nPrioritizing search relevance and trust signals (profiles, reviews, flags) unlocked network effects faster than adding new features.\n",
+  },
+  {
+    slug: "blood-stream-app-case-study",
+    title: "Case Study: Blood Stream – Real‑time Donor–Recipient Matching",
+    excerpt:
+      "React Native app using geolocation and realtime chat cut emergency match time to under 15 minutes.",
+    date: "2025-01-16",
+    category: "Case Studies",
+    image: "/images/blood-stream.webp",
+    content:
+      "# Blood Stream – Real‑time Donor–Recipient Matching\n\n## Overview\n\nA **React Native** application connecting blood donors and recipients with real‑time messaging, geolocation, and notifications.\n\n## Problem\n\n- Emergency donor‑recipient matching often took hours\n- No unified directory or availability status\n\n## Solution\n\n- Geolocation to surface nearby donors\n- Realtime messaging with push notifications\n- Availability and blood‑type filters\n- Privacy‑aware contact sharing\n\n## Outcomes\n\n- Median match time: **< 15 minutes**\n- Donor signups: **+24%** after launch\n\n## Stack\n\n- React Native, Expo, WebSockets/Socket.io, Postgres/Firebase (env‑dependent)\n\n## Insight\n\nSpeed‑to‑connect and trust signals (verified donors) were more impactful than adding extra features.\n",
+  },
+  {
+    slug: "loan-calculator-web-app-case-study",
+    title: "Case Study: Loan Calculator Web App – Faster Decisions for Finance Teams",
+    excerpt:
+      "A focused web tool that improved decision speed with clear UX and accurate amortization schedules.",
+    date: "2025-01-14",
+    category: "Case Studies",
+    image: "/images/loan-calculator.webp",
+    content:
+      "# Loan Calculator Web App – Faster Decisions for Finance Teams\n\n## Overview\n\nA browser‑based loan calculator with amortization tables and export, built for financial firms.\n\n## Problem\n\n- Spreadsheet drift and formula errors across teams\n- Slow manual calculations during client calls\n\n## Solution\n\n- Single source of truth with validated inputs\n- Accurate schedules with extra‑payment scenarios\n- CSV/PDF export and shareable links\n\n## Outcomes\n\n- Decision time reduced significantly during consultations\n- Fewer calculation discrepancies between teams\n\n## Stack\n\n- Next.js, TypeScript, Tailwind, server actions for exports\n",
+  },
+  {
+    slug: "linkedin-job-scraper-case-study",
+    title: "Case Study: LinkedIn Job Scraper – Structured Leads with CSV Export",
+    excerpt:
+      "Automated job collection with filters and CSV export streamlined lead gen and analysis.",
+    date: "2025-01-12",
+    category: "Case Studies",
+    image: "/images/job-scraper.webp",
+    content:
+      "# LinkedIn Job Scraper – Structured Leads with CSV Export\n\n## Overview\n\nA configurable scraping pipeline to collect job postings, apply filters, and export CSV for downstream tools.\n\n## Problem\n\n- Manual copy‑paste from job boards\n- No consistent schema for analysis\n\n## Solution\n\n- Headless browser with throttling and retries\n- Filters for keywords, locations, seniority\n- CSV export and deduplication by URL + title\n\n## Outcomes\n\n- Hours saved weekly in lead generation\n- Cleaner datasets for ATS and enrichment\n\n## Stack\n\n- Node.js, Playwright/Puppeteer, CSV utilities, simple dashboard\n",
+  },
+  {
+    slug: "portfolio-website-case-study",
+    title: "Case Study: Portfolio Website – Modern, Fast, and Accessible",
+    excerpt:
+      "A Next.js + Tailwind portfolio with animations and SEO best practices; foundation for content growth.",
+    date: "2025-01-10",
+    category: "Case Studies",
+    image: "/images/portfolio.webp",
+    content:
+      "# Portfolio Website – Modern, Fast, and Accessible\n\n## Overview\n\nThis website itself: **Next.js 15**, **TypeScript**, **Tailwind v4**, **Framer Motion**.\n\n## Highlights\n\n- App Router, SEO metadata, OpenGraph, sitemap, robots\n- Blog with `react-markdown`, TOC, code blocks\n- Reusable sections and design tokens via Tailwind v4 @theme\n\n## Results\n\n- Fast TTFB and good CWV on Vercel\n- Clean architecture for adding content and case studies\n\n## Stack\n\n- Next.js, Tailwind, Framer Motion, Lucide, React Markdown\n",
+  },
+  {
     slug: "optimize-portfolio-for-performance",
     title: "Optimizing a Portfolio Site for Performance and SEO",
     excerpt:

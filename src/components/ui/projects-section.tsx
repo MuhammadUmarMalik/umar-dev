@@ -2,7 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ExternalLink, Github, ShoppingCart, Users, Heart } from "lucide-react";
-import Image from "next/image";
+import Link from "next/link";
 
 const featuredProjects = [
   {
@@ -13,6 +13,7 @@ const featuredProjects = [
     category: "Backend Development",
     color: "from-blue-500 to-blue-600",
     featured: true,
+    slug: "adhuri-cart-case-study",
     problem: "Legacy monolith causing slow checkouts and security issues.",
     solution: "Modular Adonis.js API with JWT auth, caching and DB indexing.",
     outcomes: ["-42% checkout time", "+99.9% uptime", "OWASP aligned"],
@@ -25,6 +26,7 @@ const featuredProjects = [
     category: "Full Stack Development",
     color: "from-purple-500 to-purple-600",
     featured: true,
+    slug: "knowledge-exchange-api-case-study",
     problem: "Fragmented student tools with poor discoverability.",
     solution: "Search-first API with role-based access and rate limiting.",
     outcomes: ["3x engagement", "+1.8k MAU", "p95 < 250ms"],
@@ -37,6 +39,7 @@ const featuredProjects = [
     category: "Mobile Development",
     color: "from-red-500 to-red-600",
     featured: true,
+    slug: "blood-stream-app-case-study",
     problem: "Emergency donor-recipient matching took hours.",
     solution: "Geolocation + realtime messaging with notifications.",
     outcomes: ["<15m match time", "+24% donor signups"],
@@ -49,21 +52,24 @@ const additionalProjects = [
     description: "User-friendly tool developed for financial firms to assist in quick, accurate loan decisions.",
     technologies: ["Web App", "Financial Tools", "Calculations", "User-friendly UI"],
     category: "Web Development",
-    color: "from-emerald-500 to-emerald-600"
+    color: "from-emerald-500 to-emerald-600",
+    slug: "loan-calculator-web-app-case-study"
   },
   {
     title: "LinkedIn Job Scraper",
     description: "Custom job listing scraper with filters, CSV export, and future integration for ATS-friendly resume generation.",
     technologies: ["Web Scraping", "CSV Export", "Job Listings", "Data Processing"],
     category: "Automation",
-    color: "from-cyan-500 to-cyan-600"
+    color: "from-cyan-500 to-cyan-600",
+    slug: "linkedin-job-scraper-case-study"
   },
   {
     title: "Portfolio Website",
     description: "Modern, responsive portfolio website showcasing development and design skills with dark theme.",
     technologies: ["Next.js", "React", "Tailwind CSS", "Responsive Design"],
     category: "Web Development",
-    color: "from-indigo-500 to-indigo-600"
+    color: "from-indigo-500 to-indigo-600",
+    slug: "portfolio-website-case-study"
   }
 ];
 
@@ -176,10 +182,17 @@ export const ProjectsSection = () => {
 
               {/* Project Links */}
               <div className="flex gap-3 mt-auto">
-                <button aria-label="View case study" className="flex-1 px-4 py-2 bg-slate-700/50 border border-slate-600/50 text-gray-300 rounded-lg hover:bg-slate-600/50 hover:border-slate-500/50 transition-all duration-300 flex items-center justify-center gap-2">
-                  <ExternalLink className="w-4 h-4" />
-                  <span className="text-sm">View Case Study</span>
-                </button>
+                {project.slug ? (
+                  <Link href={`/blog/${project.slug}`} aria-label="View case study" className="flex-1 px-4 py-2 bg-slate-700/50 border border-slate-600/50 text-gray-300 rounded-lg hover:bg-slate-600/50 hover:border-slate-500/50 transition-all duration-300 flex items-center justify-center gap-2">
+                    <ExternalLink className="w-4 h-4" />
+                    <span className="text-sm">View Case Study</span>
+                  </Link>
+                ) : (
+                  <button aria-label="View case study" className="flex-1 px-4 py-2 bg-slate-700/50 border border-slate-600/50 text-gray-300 rounded-lg hover:bg-slate-600/50 hover:border-slate-500/50 transition-all duration-300 flex items-center justify-center gap-2">
+                    <ExternalLink className="w-4 h-4" />
+                    <span className="text-sm">View Case Study</span>
+                  </button>
+                )}
               </div>
             </motion.div>
           ))}
