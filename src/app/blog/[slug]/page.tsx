@@ -14,14 +14,15 @@ import CodeBlock from "@/components/ui/code-block";
 
 // CodeBlock moved to client component at @/components/ui/code-block
 
-type Props = { params: { slug: string } };
+type Props = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
   return posts.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: Props) {
-  const post = findPostBySlug(params.slug);
+  const { slug } = await params;
+  const post = findPostBySlug(slug);
   if (!post) return {} as { title: string; description: string };
   const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.umarmalik-dev.com').replace(/\/$/, '');
   return {
@@ -41,8 +42,9 @@ export async function generateMetadata({ params }: Props) {
   };
 }
 
-export default function BlogPostPage({ params }: Props) {
-  const post = findPostBySlug(params.slug);
+export default async function BlogPostPage({ params }: Props) {
+  const { slug } = await params;
+  const post = findPostBySlug(slug);
   if (!post) return notFound();
 
   // Create stable, URL-friendly IDs from heading children
@@ -77,6 +79,30 @@ export default function BlogPostPage({ params }: Props) {
   const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.umarmalik-dev.com').replace(/\/$/, '');
   const postUrl = `${siteUrl}/blog/${post.slug}`;
   const imageUrl = post.image ? (post.image.startsWith('http') ? post.image : `${siteUrl}${post.image}`) : `${siteUrl}/logo.png`;
+  const breadcrumbListJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteUrl
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: `${siteUrl}/blog`
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: post.title,
+        item: postUrl
+      }
+    ]
+  };
   const blogPostingJsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -459,6 +485,11 @@ export default function BlogPostPage({ params }: Props) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingJsonLd) }}
+      />
+      {/* Breadcrumbs JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbListJsonLd) }}
       />
       
       {/* Scripts for interactive elements */}

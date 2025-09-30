@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Geist, Geist_Mono } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 import { Footer } from "@/components/ui/footer";
 import { Header } from "@/components/ui/header";
 import { ScrollToTop } from "@/components/ui/scroll-to-top";
@@ -12,15 +13,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// Fonts provided by `geist/font` expose CSS variables directly
 
 export const metadata: Metadata = {
   title: {
@@ -108,6 +101,40 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
       <head>
+        {/* Preload hero image(s) */}
+        <link rel="preload" as="image" href="/logo.png" imageSrcSet="/logo.png 1x" />
+        {/* Preconnects for fonts */}
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        {/* Person / Organization JSON-LD */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "Muhammad Umar",
+              "url": (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.umarmalik-dev.com'),
+              "jobTitle": "Full Stack Developer & Designer",
+              "sameAs": [
+                "https://github.com/MuhammadUmarMalik",
+                "https://linkedin.com/in/muhammad-umar-malik786"
+              ]
+            })
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Muhammad Umar",
+              "url": (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.umarmalik-dev.com'),
+              "logo": (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.umarmalik-dev.com') + '/logo.png'
+            })
+          }}
+        />
         {/* Preconnects / DNS-Prefetch for performance */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
@@ -175,7 +202,7 @@ export default function RootLayout({
         )}
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased text-white min-h-screen overflow-x-hidden`}
+        className={`${GeistSans.variable} ${GeistMono.variable} antialiased text-white min-h-screen overflow-x-hidden`}
         suppressHydrationWarning
       >
         <a href="#main" className="skip-link">Skip to content</a>
