@@ -161,7 +161,7 @@ export const ServicesSection = () => {
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                 className={`w-full px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r ${service.color} text-white font-semibold rounded-lg sm:rounded-xl hover:shadow-lg transition-all duration-300 text-sm sm:text-base mt-auto`}
               >
-                Get a Proposal →
+                Get a Quote
               </motion.button>
             </motion.div>
           ))}
@@ -173,7 +173,7 @@ export const ServicesSection = () => {
             href="/services"
             className="px-6 sm:px-8 py-3 sm:py-3.5 bg-transparent hover:bg-slate-800/50 text-slate-300 hover:text-white border border-slate-700/50 hover:border-blue-500/30 font-medium rounded-lg transition-all duration-300"
           >
-            View all services →
+            View all services
           </a>
         </div>
 
@@ -196,7 +196,7 @@ export const ServicesSection = () => {
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             className="px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-indigo-700 transform hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl"
           >
-            Get a Proposal
+            Get a Quote
           </button>
         </motion.div>
       </div>

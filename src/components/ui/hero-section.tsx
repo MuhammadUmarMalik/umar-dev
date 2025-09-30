@@ -104,12 +104,12 @@ export const HeroSection = () => {
               >
                 Book a Free Consultation
               </button>
-              <button 
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="w-full sm:w-auto px-6 sm:px-8 md:px-10 py-3 sm:py-3.5 md:py-4 bg-slate-800/50 border border-slate-700/50 hover:bg-slate-800/70 hover:border-slate-600/60 text-slate-200 font-semibold rounded-xl transition-all duration-200 text-base sm:text-lg"
+              <a
+                href="/contact"
+                className="w-full sm:w-auto px-6 sm:px-8 md:px-10 py-3 sm:py-3.5 md:py-4 bg-slate-800/50 border border-slate-700/50 hover:bg-slate-800/70 hover:border-slate-600/60 text-slate-200 font-semibold rounded-xl transition-all duration-200 text-base sm:text-lg text-center"
               >
-                Get a Proposal
-              </button>
+                Get a Quote
+              </a>
             </div>
           </div>
 
