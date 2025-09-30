@@ -168,14 +168,7 @@ export const ServicesSection = () => {
         </div>
 
         {/* View all services button */}
-        <div className="flex justify-center mb-12 md:mb-16">
-          <a
-            href="/services"
-            className="px-6 sm:px-8 py-3 sm:py-3.5 bg-transparent hover:bg-slate-800/50 text-slate-300 hover:text-white border border-slate-700/50 hover:border-blue-500/30 font-medium rounded-lg transition-all duration-300"
-          >
-            View all services
-          </a>
-        </div>
+        
 
         {/* Call to Action */}
         <motion.div
