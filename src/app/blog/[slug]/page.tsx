@@ -478,6 +478,7 @@ export default function BlogPostPage({ params }: Props) {
                 src={post.image}
                 alt={post.title}
                 fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
                 className="object-cover opacity-30"
                 priority
               />
@@ -867,6 +868,7 @@ export default function BlogPostPage({ params }: Props) {
                                     src={relatedPost.image}
                                     alt={relatedPost.title}
                                     fill
+                                    sizes="(max-width: 768px) 100vw, 560px"
                                     className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
                                   />
                                 </div>

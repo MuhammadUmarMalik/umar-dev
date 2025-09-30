@@ -15,6 +15,11 @@ export const metadata: Metadata = {
     url: "/contact",
     type: "website",
   },
+  twitter: {
+    card: "summary",
+    title: "Contact Muhammad Umar",
+    description: "Project inquiries, collaborations, and consulting.",
+  },
 };
 
 export default function ContactPage() {

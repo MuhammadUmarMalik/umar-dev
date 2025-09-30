@@ -13,6 +13,12 @@ export const metadata: Metadata = {
     url: "/projects",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Muhammad Umar Projects",
+    description: "Case studies with measurable outcomes.",
+    images: ["/logo.png"],
+  },
 };
 
 export default function ProjectsPage() {
@@ -67,7 +73,7 @@ export default function ProjectsPage() {
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                   </svg>
-                  Contact Me
+                  Get a Proposal
                 </a>
               </div>
               
@@ -239,7 +245,7 @@ export default function ProjectsPage() {
                   href="/contact" 
                   className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-medium rounded-lg transition-all duration-300 shadow-lg hover:shadow-blue-900/30 border border-blue-500/30"
                 >
-                  Start a project
+                  Get a Proposal
                 </a>
                 <a 
                   href="https://calendly.com/umarmalik-cs711/30min"

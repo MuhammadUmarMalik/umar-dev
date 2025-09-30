@@ -8,9 +8,21 @@ import NewsletterForm from "@/components/ui/newsletter-form";
 const categories = ["All Posts", ...Array.from(new Set(posts.map(post => post.category)))];
 
 export const metadata = {
-  title: "Blog",
-  description: "Articles and resources by Muhammad Umar on web development and design.",
+  title: "Blog | Articles by Muhammad Umar",
+  description: "Guides, tutorials, and case studies on Next.js, React, performance, and UI/UX.",
   alternates: { canonical: "/blog" },
+  openGraph: {
+    title: "Blog | Muhammad Umar",
+    description: "Guides, tutorials, and case studies on web development and design.",
+    url: "/blog",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog | Muhammad Umar",
+    description: "Guides, tutorials, and case studies on web development and design.",
+    images: ["/logo.png"],
+  },
 };
 
 export default function BlogIndexPage() {

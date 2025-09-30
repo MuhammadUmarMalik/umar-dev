@@ -98,8 +98,7 @@ export const ServicesSection = () => {
           
           <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
             <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent block">
-              <span className="hidden sm:inline">Complete Digital</span>
-              <span className="sm:hidden">Digital</span>
+              Complete Digital
             </span>
             <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-blue-400 bg-clip-text text-transparent block">
               Solutions
@@ -162,8 +161,7 @@ export const ServicesSection = () => {
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                 className={`w-full px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r ${service.color} text-white font-semibold rounded-lg sm:rounded-xl hover:shadow-lg transition-all duration-300 text-sm sm:text-base mt-auto`}
               >
-                <span className="hidden sm:inline">Get Started →</span>
-                <span className="sm:hidden">Start →</span>
+                Get a Proposal →
               </motion.button>
             </motion.div>
           ))}
@@ -198,7 +196,7 @@ export const ServicesSection = () => {
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             className="px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-indigo-700 transform hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl"
           >
-            Start Your Project Today
+            Get a Proposal
           </button>
         </motion.div>
       </div>

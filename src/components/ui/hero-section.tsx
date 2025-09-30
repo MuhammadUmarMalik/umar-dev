@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { FlipWords } from "@/components/ui/flip-words";
 
 export const HeroSection = () => {
-  const words = ["Revenue-Focused", "Conversion-Driven", "Performance First", "Design-Led"];
+  const words = ["Revenue-Focused", "Conversion-Driven", "Performance First", "User-Centric"];
   const [showDecor, setShowDecor] = useState(false);
 
   useEffect(() => {

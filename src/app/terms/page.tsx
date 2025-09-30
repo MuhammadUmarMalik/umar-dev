@@ -4,8 +4,19 @@ import { Section } from "@/components/ui/section";
 
 export const metadata = {
   title: "Terms & Conditions",
-  description: "Terms of use and disclaimer for Muhammad Umar's portfolio website.",
+  description: "Terms of use and disclaimers for Muhammad Umar’s portfolio website.",
   alternates: { canonical: "/terms" },
+  openGraph: {
+    title: "Terms & Conditions",
+    description: "Website terms of use and disclaimers.",
+    url: "/terms",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Terms & Conditions",
+    description: "Website terms of use and disclaimers.",
+  },
 };
 
 export default function TermsPage() {

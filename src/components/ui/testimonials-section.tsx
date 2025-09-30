@@ -143,7 +143,7 @@ export const TestimonialsSection = () => {
             href="/contact"
             className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-purple-700 transform hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl inline-block"
           >
-            Start Your Project Today
+            Get a Proposal
           </a>
         </motion.div>
       </div>

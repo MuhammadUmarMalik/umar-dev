@@ -5,8 +5,19 @@ import { Section } from "@/components/ui/section";
 export const metadata = {
   title: "Privacy Policy",
   description:
-    "Privacy Policy for Muhammad Umar's portfolio website explaining cookies, data collection, and advertising disclosures.",
+    "How this site uses cookies, analytics, and handles your data, including AdSense disclosures.",
   alternates: { canonical: "/privacy-policy" },
+  openGraph: {
+    title: "Privacy Policy",
+    description: "Cookie usage, analytics, and data handling details.",
+    url: "/privacy-policy",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Privacy Policy",
+    description: "Cookie usage, analytics, and data handling details.",
+  },
 };
 
 export default function PrivacyPolicyPage() {

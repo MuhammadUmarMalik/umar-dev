@@ -42,10 +42,11 @@ export const Footer = () => {
                 <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-blue-500/30 shadow-lg shadow-blue-500/10">
                   <Image 
                     src="/favicon.png" 
-                    alt="Umar" 
+                    alt="Muhammad Umar logo"
                     width={40}
                     height={40}
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                 </div>
                 <h3 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent uppercase">
@@ -146,8 +147,8 @@ export const Footer = () => {
         <div className="py-6 border-t border-slate-800/50">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             <div className="flex flex-wrap items-center gap-3">
-              <a href="https://calendly.com/umarmalik-cs711/30min" target="_blank" rel="noopener noreferrer" className="px-4 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-medium transition-all duration-300 hover:from-blue-500 hover:to-purple-500 shadow-md hover:shadow-blue-900/20 hover:-translate-y-0.5">Schedule a Call</a>
-              <a href="/contact" className="px-4 py-2 rounded-lg border border-slate-700/50 text-slate-200 text-sm hover:bg-slate-800/50 hover:border-blue-500/30 transition-all duration-300 hover:-translate-y-0.5">Start a Project</a>
+              <a href="https://calendly.com/umarmalik-cs711/30min" target="_blank" rel="noopener noreferrer" className="px-4 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-medium transition-all duration-300 hover:from-blue-500 hover:to-purple-500 shadow-md hover:shadow-blue-900/20 hover:-translate-y-0.5">Book a Free Consultation</a>
+              <a href="/contact" className="px-4 py-2 rounded-lg border border-slate-700/50 text-slate-200 text-sm hover:bg-slate-800/50 hover:border-blue-500/30 transition-all duration-300 hover:-translate-y-0.5">Get a Proposal</a>
             </div>
             <p className="text-gray-400 text-xs sm:text-sm">
               © {currentYear} Muhammad Umar. All rights reserved.

@@ -14,6 +14,12 @@ export const metadata: Metadata = {
     url: "/services",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Services by Muhammad Umar",
+    description: "Full-stack development, WordPress, optimization, security & more.",
+    images: ["/logo.png"],
+  },
 };
 
 export default function ServicesPage() {

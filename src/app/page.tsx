@@ -6,6 +6,36 @@ import { TestimonialsSection } from "@/components/ui/testimonials-section";
 import { WorkProcessSection } from "@/components/ui/work-process-section";
 import { FAQSection } from "@/components/ui/faq-section";
 import { CTAAfterFAQ } from "@/components/ui/cta-after-faq";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Muhammad Umar - Full Stack Developer & Designer",
+  description:
+    "Build fast, accessible web and mobile apps with clean code and stunning design. Full‑stack development, UI/UX, performance, and scalability.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "Muhammad Umar - Full Stack Developer & Designer",
+    description:
+      "Full‑stack development, UI/UX, performance optimization, and scalable systems.",
+    type: "website",
+    url: "/",
+    images: [
+      {
+        url: "/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Muhammad Umar - Full Stack Developer",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Muhammad Umar - Full Stack Developer & Designer",
+    description:
+      "Full‑stack development, UI/UX, performance optimization, and scalable systems.",
+    images: ["/logo.png"],
+  },
+};
 
 export default function Home() {
   return (

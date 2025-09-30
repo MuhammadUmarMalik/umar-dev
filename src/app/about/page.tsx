@@ -18,6 +18,11 @@ export const metadata = {
     url: "/about",
     type: "website",
   },
+  twitter: {
+    card: "summary",
+    title: "About Muhammad Umar",
+    description: "Full Stack Developer & Designer. Skills, tools, and approach.",
+  },
 };
 
 export default function AboutPage() {
@@ -67,7 +72,7 @@ export default function AboutPage() {
                   href="/contact"
                   className="px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-500 hover:to-blue-700 text-sm sm:text-base text-white font-medium rounded-lg shadow-lg hover:shadow-blue-900/30 transition-all duration-300 flex items-center gap-2 group"
                 >
-                  Start a Project
+                  Get a Proposal
                   <svg 
                     className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-200 group-hover:translate-x-1" 
                     fill="none" 
